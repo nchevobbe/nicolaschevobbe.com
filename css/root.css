@@ -1,0 +1,140 @@
+@import url(http://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400,200,700italic);
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+html {
+	background-color: #2F3748;
+	color : #f9f9f9;
+	line-height: 1.5em;
+	font-size : 20px;
+
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+p {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 200;	
+	padding: 0.2rem 1rem 0.2rem 0;
+	max-width: 30em;
+}
+
+a {
+	color : #FF4163;
+}
+
+h1, h2 {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 700;		
+	font-style: italic;
+	margin: 0;
+	padding: 0;
+}
+
+h3,h4,h5,h6 {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 400;			
+	margin: 0;
+	padding: 0;
+}
+
+.main {
+	flex: 1;
+	background-color: #f9f9f9;
+	color: #222;
+	width: 100%;
+}
+
+header  {  
+	font-family: 'Abril Fatface', cursive;
+	font-size : 2.4em;
+	line-height: 0.9em;
+	padding : 1rem 0 0.5rem 0;
+	border-bottom : 0.5rem solid #c01e3b;
+	text-align: center;
+}
+
+.main section {
+	padding: 1rem;
+}
+
+footer {
+	color : #c01e3b;
+	width: 100%;
+}
+
+footer > h2:first-child {
+	padding-left : 1rem;
+	padding-bottom: 0;
+	line-height: 0.9rem;
+}
+
+ul.links {
+	background-color: #c01e3b;
+	padding: 0.5rem 1rem;
+	list-style: none;
+	margin: 0;
+	font-size: 0.9rem;
+}
+
+li.social {
+  padding: 0.1rem 0;	
+  text-align: center;
+}
+
+footer a {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 200;	
+	color : #f9f9f9;
+}
+
+@media screen and (min-width: 768px){
+	html{
+		font-size : 22px;
+	}
+
+	.links {
+		display: inline-table;
+		width: 100%;
+		text-align: center;
+	}
+
+	.links li.social {
+		display: inline-block;
+		padding : 0.5rem;
+	}
+}
+
+@media screen and (min-width: 1200px){
+	html{
+		font-size : 24px;
+	};
+}
+
+
+.a404 {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 10rem;
+	font-weight: bold;
+}
+
+.a404 a{
+	display: block;
+	font-size: 2rem;
+}
