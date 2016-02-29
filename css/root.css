@@ -10,6 +10,8 @@ html, body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	font-family: 'Signika';
+	font-weight: 300;
 }
 
 html {
@@ -30,13 +32,29 @@ body {
 
 .posts {
 	list-style: none;
+	text-align: center;
 }
 
-.posts .date {
-	font-size: 0.7em;
-	background-color: rgba(0,0,0,0.4);
-	padding: 0.2em 0.3em;
-	margin-right: 0.5em;
+.posts li + li {
+	margin-top: 2em;
+
+}
+
+.posts li .date {
+display: inline-block;
+	margin: 0 auto;
+	font-size: 0.8em;
+	text-decoration: none;
+	background-color: #C01E3B;
+	color: white;
+padding: 0.1em 0.5em;
+}
+
+.posts li .title {
+	font-size: 2em;
+		font-weight: 400;
+color: white;
+	display: block;
 }
 
 .container{
@@ -111,8 +129,16 @@ h3 {
 
 .previous {
   border-top: 1px solid rgba(255,255,255,0.3);
-  font-size: 0.8em;
+  font-size: 1em;
 }
+
+.previous ul {
+  list-style: none;
+	padding: 0;
+	text-align: center;
+}
+
+
 
 pre, code {
 	background-color: rgba(0,0,0,0.5);
@@ -120,6 +146,12 @@ pre, code {
 	font-size: 0.8em;
 	max-width: 100%;
 	overflow-x: scroll;
+	font-family: monospace;
+}
+
+pre > code {
+	background-color: transparent !important;
+	font-family: monospace;
 }
 
 img, iframe {
@@ -138,6 +170,13 @@ figcaption {
 
 .bio {
 	font-family: 'Signika';
+	background-color: #89172B;
+	text-align: center;
+	padding: 1em;
+}
+
+.bio a {
+	color: inherit;
 }
 
 .links ul {
@@ -146,7 +185,8 @@ figcaption {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin-top: 1em;
-	padding: 0;
+	padding: 1em 0;
+	border-top: 1px solid rgba(255,255,255,0.4);
 }
 
 .links li.blog {
@@ -156,7 +196,6 @@ figcaption {
 .links li {
 	display: block;
   flex: 1;
-	background-color: white;
 	margin: 0.2em;
 	padding: 0.2em;
 	text-align: center;

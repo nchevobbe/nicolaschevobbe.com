@@ -1,3 +1,6 @@
+---
+title: Nicolas Chevobbe's Blog
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,17 +17,15 @@
     </header>
     <section class="bio">Web Developper — Mozillian & Open Web lover — Avid learner — Works for <a href="http://www.atolcd.com" target="blank">Atol C&D</a>
     </section>
-    <section class="links">
-      <ul>
-        <li class="social blog"><a href="/blog">Blog</a></li>
-        <li class="social twitter"><a href="https://twitter.com/nicolaschevobbe">Twitter</a></li>
-        <li class="social codepen"><a href="http://codepen.io/nchevobbe/">CodePen</a></li>
-        <li class="social github"><a href="https://github.com/nchevobbe">Github</a></li>
-        <li class="social linkedin"><a href="http://www.linkedin.com/in/nicolaschevobbe">LinkedIn</a></li>
-        <li class="social pinterest"><a href="http://pinterest.com/nicolaschevobbe/">Pinterest</a></li>
-        <li class="social flickr"><a href="http://www.flickr.com/photos/nicolaschevobbe/">FlickR</a></li>
-      </ul>
-    </section>
+    <ul class="posts">
+      {% for post in site.posts %}
+        <li>
+          <a href="{{ post.url }}" title="{{ post.title }}"><span class="title">{{ post.title }}</span><span class="date">{{ post.date | date:"%Y-%m-%d" }}</span></a>
+        </li>
+
+      {% endfor %}
+    </ul>
   </main>
+  {% include footer.html %}
 </body>
 </html>
