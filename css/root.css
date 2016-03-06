@@ -110,6 +110,7 @@ header a {
 	align-items: start;
 	max-width: 100%;
 	justify-content: space-between;
+	padding: 0;
 }
 
 .posts li {
@@ -122,7 +123,7 @@ header a {
 
 .posts li a {
 	flex-direction: column;
-	display: flex; 
+	display: flex;
 	align-items: center;
 	justify-content: center;
   text-decoration: none !important;
@@ -223,6 +224,13 @@ pre > code {
 img, iframe {
 	max-width: 100%;
 	width: 100%;
+	margin: 0 auto;
+}
+
+figure {
+	border: 2px solid;
+	margin: 0;
+	padding: 0.5em;
 }
 
 figcaption {
