@@ -21,7 +21,6 @@ html {
 	color : #f9f9f9;
 	line-height: 1.5em;
 	font-size : 20px;
-
 }
 
 body {
@@ -38,7 +37,6 @@ h1 {
 	padding: 0.5em;
 	text-align: center;
   font-weight: 400;
-	/*! border-bottom : 0.5rem solid #c01e3b; */
   background-color: #89172b;
 }
 
@@ -107,7 +105,7 @@ header a {
 	text-align: center;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: start;
+	align-items: end;
 	max-width: 100%;
 	justify-content: space-between;
 	padding: 0;
