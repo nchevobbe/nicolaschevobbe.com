@@ -1,0 +1,136 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic);
+@import url(https://fonts.googleapis.com/css?family=Signika:700);
+
+.challenge-dashboard {
+  margin-top: 1em;
+}
+
+section.challenge-dashboard h1 {
+  font-size: 2em;
+  text-align: center;
+  background-color: #1976D2;
+}
+
+.challenge-dashboard .stats {
+  font-size: 0.9em;
+  color: #212121;
+  background-color: #FFC107;
+  display: flex;
+  height: 4em;
+  justify-content: center;
+  align-items: center;
+}
+
+.challenge-dashboard .stats .stat-item {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.challenge-dashboard .stats.ready .stat-item{
+  opacity: 1;
+}
+
+.challenge-dashboard .bug-title {
+  display: block;
+  text-align: center;
+  padding: 0 0.5em;
+  color: rgba(0,0,0,0.8);
+  font-family: 'Libre Baskerville', serif;
+  line-height: 1.3em;
+  display: none;
+  margin-right: auto;
+  font-size: 1.2em;
+}
+
+.challenge-dashboard .bug-title a, .bug-title a:visited {
+  color: rgba(0,0,0,0.8);
+}
+
+.challenge-dashboard .zoomed .bug-title {
+  display: block;
+  animation: .5s linear appears;
+}
+
+.challenge-dashboard .stats  .stat-item {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+  line-height: 1.0em;
+}
+
+.challenge-dashboard .stat-item .value {
+  font-family: 'Signika';
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding-top: 0.2em;
+}
+
+.challenge-dashboard svg {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 200px;
+  background-color: white;
+}
+
+.zoomed .bug-line:not(.detail),
+.zoomed .stat-item,
+.zoomed .weeks,
+.zoomed .holidays,
+.zoomed h2,
+.zoomed .posts {
+  display: none;
+}
+.bug-line.detail .resolved {
+  display:none;
+}
+
+.challenge-dashboard .bug-line {
+  cursor: pointer;
+  animation: .5s linear appears;
+}
+
+/* TOOLTIP */
+.tooltip {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  padding: 1em;
+  font-family: 'Signika';
+  font-weight: 400;
+  max-width: 200px;
+  width: 200px;
+  background-color: #1976D2;
+  color: black;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 0.75em;
+  line-height: 1em;
+}
+
+.tooltip.dark {
+  color: white;
+}
+
+.tooltip hr {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.tooltip.dark hr {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.removed {
+  text-decoration: line-through;
+}
+
+/* ANIMATIONS/KEYFRAMES */
+@keyframes appears {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

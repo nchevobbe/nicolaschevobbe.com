@@ -5,9 +5,10 @@ title: Nicolas Chevobbe's Blog
 <html>
 <head>
 	<title>Nicolas Chevobbe</title>
-	 <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/root.css" />
+  <link rel="stylesheet" type="text/css" href="css/challenge.css" />
 </head>
 
 <body>
@@ -16,6 +17,17 @@ title: Nicolas Chevobbe's Blog
       Nicolas Chevobbe
     </header>
     <section class="bio">Web Developper — Mozillian & Open Web lover — Avid learner — Works for <a href="http://www.atolcd.com" target="blank">Atol C&D</a>
+    </section>
+    <section class="challenge-dashboard">
+      <h1>2016 : One bug a week</h1>
+      <div class="stats">
+        <div class="stat-item">Current week<span class="value" id="currentWeek"></span></div>
+        <div class="stat-item">Failed weeks<span class="value" id="failedWeek"></span></div>
+        <div class="stat-item">Bugs fixed<span class="value" id="bugsFixed"></span></div>
+        <div class="stat-item">Overall success<span class="value" id="successPercentage"></span></div>
+      </div>
+      <svg viewBox="0 0 400 70" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 757.8 534.8" style="enable-background:new 0 0 757.8 534.8;" xml:space="preserve">
+      </svg>
     </section>
     <ul class="posts">
       {% for post in site.posts %}
@@ -27,5 +39,7 @@ title: Nicolas Chevobbe's Blog
     </ul>
   </main>
   {% include footer.html %}
+
+  <script type="text/javascript" src="javascript/challenge.js"></script>
 </body>
 </html>
