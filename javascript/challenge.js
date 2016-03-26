@@ -367,7 +367,11 @@ function updateDashboard(bugs){
   document.getElementById('failedWeek').textContent = missedWeeks.length;
   document.getElementById('failedWeek').setAttribute("title", missedWeeks.map((x) => `#${x}`).join(' - '));
   document.getElementById('bugsFixed').textContent = fixedBugs.length;
-  document.getElementById('successPercentage').textContent = Math.round((fixedBugs.length / weekNumber) * 100)+"%";
+  var percent = Math.round((fixedBugs.length / weekNumber) * 100);
+  if(percent > 100){
+    percent = ">100"
+  }
+  document.getElementById('successPercentage').textContent = `${percent}%`;
 
   document.querySelector('.stats').classList.toggle('ready');
 }
