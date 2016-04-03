@@ -36,9 +36,10 @@ const weekNumber = Math.ceil(((new Date()) - jan4)/MILLISECOND_A_DAY/7);
 const todayNumber = (((new Date()) - jan4)/MILLISECOND_A_DAY);
 
 var params = {
-  "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution, assigned_to,priority",
+  "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
   "email1": EMAIL,
   "status": "RESOLVED",
+  "resolution": "FIXED",
   "emailassigned_to1":1
 };
 if(window.URLSearchParams){
@@ -333,7 +334,7 @@ function getPositionFromDate(date, period){
 
 function findLane(start, end){
   var lane = 0;
-  var safe_space = 4;
+  var safe_space = 6;
   start = start - safe_space;
   end = end + safe_space;
   for(;lane < lanes.length;lane++){
