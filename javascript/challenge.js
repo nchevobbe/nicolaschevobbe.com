@@ -1,6 +1,7 @@
 const COLORS = ["rgb(244, 67, 54)","rgb(0, 150, 136)","rgb(96, 125, 139)","rgb(156, 39, 176)","rgb(103, 58, 183)","rgb(63, 81, 181)","rgb(33, 150, 243)","rgb(3, 169, 244)","rgb(0, 188, 212)","rgb(76, 175, 80)","rgb(139, 195, 74)","rgb(255, 193, 7)","rgb(255, 152, 0)","rgb(255, 87, 34)","rgb(233, 30, 99)","rgb(121, 85, 72)"];
 var userColor = {};
-var svg = document.querySelector('svg');
+var timelineSvg = document.querySelector('svg.timeline');
+var chartSvg = document.querySelector('svg.chart');
 
 let currentTooltipTarget;
 let tooltipEl = document.createElement("div");
@@ -29,7 +30,7 @@ var lanes = [];
 var bugs = [];
 
 
-svg.addEventListener('mousemove', onMouseMove, false);
+timelineSvg.addEventListener('mousemove', onMouseMove, false);
 
 
 const weekNumber = Math.ceil(((new Date()) - jan4)/MILLISECOND_A_DAY/7);
@@ -77,6 +78,8 @@ fetch(url, {
 
     return (new Date(x.cf_last_resolved) >= jan4);
   });
+
+  plotChart(bugs);
 
   bugs.sort(function(a, b){
 
@@ -254,8 +257,68 @@ function drawBug(bug){
       bugAssignedLine.setAttribute('stroke-linecap', "round");
       bugGroup.appendChild(bugAssignedLine);
 
-    svg.appendChild(bugGroup);
+    timelineSvg.appendChild(bugGroup);
     }
+}
+
+function plotChart(bugs){
+  var displayedSvg;
+  if(document.getElementById("input-timeline").checked) {
+    displayedSvg = timelineSvg;
+  } else {
+    displayedSvg = chartSvg;
+  }
+
+  var matrix = displayedSvg.getScreenCTM();
+  var inverseMatrix = matrix.inverse();
+
+  var rect = displayedSvg.getBoundingClientRect();
+  var position = displayedSvg.createSVGPoint();
+  position.x = 0;
+  position.y = rect.bottom;
+
+  var correctZeroPosition = position.matrixTransform(inverseMatrix);
+  var increment = correctZeroPosition.y / 52;
+
+  var goalLine = createSVGElement("line", {
+    x1: getPositionFromDate(jan4),
+    y1: correctZeroPosition.y,
+    x2: getPositionFromDate(new Date("2017-01-02")),
+    y2: 0,
+    stroke: "#F44336",
+    "stroke-width": 0.25
+  });
+
+  bugs.sort(function(bug1, bug2){
+    return bug1.cf_last_resolved < bug2.cf_last_resolved ? -1 : 1;
+  });
+  var path = createSVGElement('path', {
+    stroke: "#4CAF50",
+    "stroke-width": 0.5,
+    "fill": "#8BC34A",
+    opacity: 0.75
+  });
+  var dPath = [];
+  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
+  bugs.forEach(function(bug, index, arr){
+    var x = getPositionFromDate(new Date(bug.cf_last_resolved));
+    var y = correctZeroPosition.y - ((index + 1) * (increment));
+
+    dPath.push(`L ${x} ${y}`);
+    var circle = createSVGElement('circle', {
+      r: 1,
+      fill: "#8BC34A",
+      cx: x,
+      cy: y
+    });
+    chartSvg.appendChild(circle);
+    if(index === bugs.length - 1){
+      dPath.push(`L ${x} ${goalLine.getAttribute("y1")}`);
+    }
+  });
+  path.setAttribute("d", dPath.join(" "));
+  chartSvg.appendChild(path);
+  chartSvg.appendChild(goalLine);
 }
 
 function drawWeeks(bugs){
@@ -295,7 +358,8 @@ function drawWeeks(bugs){
       weekGroup.appendChild(weekStatus);
     }
   }
-  svg.insertBefore(weekGroup,svg.firstChild);
+  timelineSvg.insertBefore(weekGroup,timelineSvg.firstChild);
+  chartSvg.insertBefore(weekGroup.cloneNode(true),chartSvg.firstChild);
 }
 
 function drawHolidays(){
@@ -313,7 +377,15 @@ function drawHolidays(){
     holidaysGroup.appendChild(holidayRect);
   });
 
-  svg.appendChild(holidaysGroup);
+  timelineSvg.appendChild(holidaysGroup);
+}
+
+function createSVGElement(tagName, attributes){
+  let el = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+  for(let key in attributes){
+    el.setAttribute(key, attributes[key])
+  }
+  return el;
 }
 
 function getPositionFromDate(date, period){
@@ -334,7 +406,7 @@ function getPositionFromDate(date, period){
 
 function findLane(start, end){
   var lane = 0;
-  var safe_space = 6;
+  var safe_space = 5;
   start = start - safe_space;
   end = end + safe_space;
   for(;lane < lanes.length;lane++){
@@ -454,3 +526,5 @@ function onMouseMove(e){
     }
   }
 }
+
+

@@ -48,8 +48,16 @@ title: Nicolas Chevobbe's Blog
         <div class="stat-item">Bugs fixed<span class="value" id="bugsFixed"></span></div>
         <div class="stat-item">Overall success<span class="value" id="successPercentage"></span></div>
       </div>
-      <svg viewBox="0 0 400 70" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 757.8 534.8" style="enable-background:new 0 0 757.8 534.8;" xml:space="preserve">
+      <input type="radio" id="input-timeline" name="challenge" value="timeline" checked/>
+      <svg viewBox="0 0 400 70" class="timeline" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 757.8 534.8" style="enable-background:new 0 0 757.8 534.8;" xml:space="preserve">
       </svg>
+      <input type="radio" id="input-chart" name="challenge" value="chart" />
+      <svg viewBox="0 0 400 70" class="chart" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 757.8 534.8" style="enable-background:new 0 0 757.8 534.8;" xml:space="preserve">
+      </svg>
+      <nav class="tabs">
+        <label for="input-timeline">Timeline</label>
+        <label for="input-chart">Chart</label>
+      </nav>
     </section>
     <ul class="posts">
       {% for post in site.posts %}
