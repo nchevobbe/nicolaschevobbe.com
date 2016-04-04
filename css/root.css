@@ -3,192 +3,192 @@
 
 /* DEFAULTS */
 * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	font-family: 'Signika';
-	font-weight: 300;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Signika';
+  font-weight: 300;
 }
 
 html {
-	background-color: #2F3748;
-	color : #f9f9f9;
-	line-height: 1.5em;
-	font-size : 20px;
+  background-color: #2F3748;
+  color : #f9f9f9;
+  line-height: 1.5em;
+  font-size : 20px;
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	min-height: 100vh;
-	padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
 }
 
 h1 {
   font-family: 'Signika';
-	margin: 0;
-	padding: 0.5em;
-	text-align: center;
+  margin: 0;
+  padding: 0.5em;
+  text-align: center;
   font-weight: 400;
   background-color: #89172b;
 }
 
 h2 {
   font-family: 'Signika';
-	margin: 0;
-	padding: 0.5em;
-	text-align: center;
+  margin: 0;
+  padding: 0.5em;
+  text-align: center;
   font-weight: 400;
-	font-size: 2em;
+  font-size: 2em;
 }
 
 h3 {
   font-family: 'Signika';
-	margin: 0;
-	padding: 0.5em;
-	text-align: center;
+  margin: 0;
+  padding: 0.5em;
+  text-align: center;
   font-weight: 400;
-	font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 a {
-	color : #FF4163;
+  color : #FF4163;
 }
 
 @media screen and (min-width: 1200px){
-	html{
-		font-size : 24px;
-	};
+  html{
+    font-size : 24px;
+  };
 }
 
 @media screen and (max-width: 800px){
-	body{
-		padding: 0.25rem;
-	};
+  body{
+    padding: 0.25rem;
+  };
 }
 
 /* HOMEPAGE */
 header  {
-	font-family: 'Abril Fatface', cursive;
-	font-size : 2.4em;
-	line-height: 1em;
-	padding : 0.5rem 0;
-	border-bottom : 0.5rem solid #c01e3b;
-	text-align: center;
+  font-family: 'Abril Fatface', cursive;
+  font-size : 2.4em;
+  line-height: 1em;
+  padding : 0.5rem 0;
+  border-bottom : 0.5rem solid #c01e3b;
+  text-align: center;
 }
 
 header a {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .bio {
-	font-family: 'Signika';
-	background-color: #89172B;
-	text-align: center;
-	padding: 1em;
+  font-family: 'Signika';
+  background-color: #89172B;
+  text-align: center;
+  padding: 1em;
 }
 
 .bio a {
-	color: inherit;
+  color: inherit;
 }
 
 .posts {
-	list-style: none;
-	text-align: center;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: end;
-	max-width: 100%;
-	justify-content: space-between;
-	padding: 0;
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  max-width: 100%;
+  justify-content: space-between;
+  padding: 0;
 }
 
 .posts li {
   padding: 1em !important;
-	flex: 1;
-	display: flex;
-	min-height: 100px;
+  flex: 1 0 auto;
+  display: flex;
+  min-height: 100px;
   justify-content: center;
 }
 
 .posts li a {
-	flex-direction: column;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none !important;
 }
 
 .posts li .title {
-	font-size: 2em;
-	font-weight: 400;
+  font-size: 2em;
+  font-weight: 400;
   color: white;
-	line-height: 1em;
-	border-bottom: 1px solid;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  line-height: 1em;
+  border-bottom: 1px solid;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .posts li .date {
   display: inline-block;
-	font-size: 0.8em;
-	text-decoration: none;
-	background-color: #C01E3B;
-	color: white;
+  font-size: 0.8em;
+  text-decoration: none;
+  background-color: #C01E3B;
+  color: white;
   padding: 0.1em 0.5em;
   opacity: 0.75;
 }
 
 .links ul {
-	list-style: none;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	margin-top: 1em;
-	padding: 1em 0;
-	border-top: 1px solid rgba(255,255,255,0.4);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 1em;
+  padding: 1em 0;
+  border-top: 1px solid rgba(255,255,255,0.4);
 }
 
 .links li.blog {
-	min-width: 100%;
+  min-width: 100%;
 }
 
 .links li {
-	display: block;
+  display: block;
   flex: 1;
-	margin: 0.2em;
-	padding: 0.2em;
-	text-align: center;
+  margin: 0.2em;
+  padding: 0.2em;
+  text-align: center;
 }
 
 /* BLOG POSTS */
 
 .container{
-	width: 100%;
-	max-width: 30em;
+  width: 100%;
+  max-width: 30em;
 }
 
 p {
-	font-family: 'Signika', sans-serif;
-	font-weight: 300;
-	padding: 0.2rem 1rem 0.2rem 0;
+  font-family: 'Signika', sans-serif;
+  font-weight: 300;
+  padding: 0.2rem 1rem 0.2rem 0;
 }
 
 p.initial {
   text-align: center;
   padding: 0.5em;
   font-size: 0.9em;
-	min-width: 100%;
+  min-width: 100%;
   margin-bottom: 2em;
   border-top: 1px solid rgba(255,255,255,0.3);
   border-bottom: 1px solid rgba(255,255,255,0.3);
@@ -201,41 +201,41 @@ p.initial {
 
 .previous ul {
   list-style: none;
-	padding: 0;
-	text-align: center;
+  padding: 0;
+  text-align: center;
 }
 
 pre, code {
-	background-color: rgba(0,0,0,0.5);
-	padding: 0.2em 0.5em;
-	font-size: 0.8em;
-	max-width: 100%;
-	overflow-x: scroll;
-	font-family: monospace;
+  background-color: rgba(0,0,0,0.5);
+  padding: 0.2em 0.5em;
+  font-size: 0.8em;
+  max-width: 100%;
+  overflow-x: scroll;
+  font-family: monospace;
 }
 
 pre > code {
-	background-color: transparent !important;
-	font-family: monospace;
+  background-color: transparent !important;
+  font-family: monospace;
 }
 
 img, iframe {
-	max-width: 100%;
-	width: 100%;
-	margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 figure {
-	border: 2px solid;
-	margin: 0;
-	padding: 0.5em;
+  border: 2px solid;
+  margin: 0;
+  padding: 0.5em;
 }
 
 figcaption {
   font-family: 'Signika';
-	font-weight: 300;
-	text-align: center;
-	font-size: 0.8em;
-	line-height: 1.1em;
-	opacity: 0.75;
+  font-weight: 300;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.1em;
+  opacity: 0.75;
 }
