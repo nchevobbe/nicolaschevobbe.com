@@ -424,7 +424,7 @@ function plotChart(bugs){
     return d1 < d2 ? -1 : 1;
   });
   var overallPath = createSVGElement('path', {
-    "stroke": "#8BC34A",
+    "stroke":" #8BC34A",
     "stroke-width": 1,
     "fill": "transparent"
   });
