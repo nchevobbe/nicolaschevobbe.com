@@ -32,46 +32,15 @@ var bugs = [];
 
 timelineSvg.addEventListener('mousemove', onMouseMove, false);
 
-
 const weekNumber = Math.ceil(((new Date()) - jan4)/MILLISECOND_A_DAY/7);
 const todayNumber = (((new Date()) - jan4)/MILLISECOND_A_DAY);
 
-var params = {
-  "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
-  "email1": EMAIL,
-  "status": "RESOLVED",
-  "resolution": "FIXED",
-  "emailassigned_to1":1
-};
-if(window.URLSearchParams){
-  var searchParams = new URLSearchParams();
+var fetchSources = [fetchBugzilla(), fetchGithub()];
 
-  Object.keys(params).forEach(function(key){
-    searchParams.append(key, params[key]);
-  });
-  searchParams = searchParams.toString();
-} else {
-  var searchParams = [];
-  Object.keys(params).forEach(function(key){
-    searchParams.push(key+"="+params[key]);
-  });
-  searchParams = searchParams.join('&');
-}
+Promise.all(fetchSources).then(function(res){
+  var bugzillaData = res[0];
 
-
-var url = `${BUGZILLA_API_URL}bug?${searchParams}`;
-var myHeaders = new Headers();
-myHeaders.append('Accept', 'application/json');
-
-fetch(url, {
-  mode: 'cors',
-  method: 'GET',
-  headers: myHeaders
-})
-.then((response) => response.json())
-.then(function(data){
-
-  let bugs = data.bugs.filter(function(x){
+  let bzBugs = bugzillaData.filter(function(x){
     if(!x.cf_last_resolved){
       return true;
     }
@@ -79,10 +48,18 @@ fetch(url, {
     return (new Date(x.cf_last_resolved) >= jan4);
   });
 
+
+  let ghPR = res[1].filter(function(prData){
+    return prData.user.login === "nchevobbe";
+  });
+
+console.log("PR", ghPR);
+
+  let bugs = bzBugs.concat(ghPR);
+
   plotChart(bugs);
 
   bugs.sort(function(a, b){
-
     var priorityA = (PRIORITY_REGEX.test(a.priority)?a.priority:'P3');
     var priorityB = (PRIORITY_REGEX.test(b.priority)?b.priority:'P3');
     // "a" and "b" are in the same state ( both resolved, or both unresolved)
@@ -91,57 +68,63 @@ fetch(url, {
       return priorityA < priorityB ? -1:1;
     }
 
-    // "a" and "b" are in the same state (both resolved, or both unresolved)
-    // and have the same priority
+    // "a" and "b" have the same priority
     // We want to get the older bugs first
     return a.creation_time < b.creation_time ? -1 : 1;
   });
 
   return bugs.reduce(function(previousBugPromise, bug, idx){
     return new Promise(function(resolve, reject){
-      var historyPromise = getBugHistory(bug).then(function(history){
-        bug.history = history;
+      var historyPromise;
 
-        // A bug is being worked on by the user when :
-        // - creates the bug
-        // - changes the bug
-        // - is cc'ed on the bug
-        // - is assigned on the bug
-        bug.history.some(function(activity){
+      if(bug.bugType === "BZ"){
+        historyPromise = getBugHistory(bug).then(function(history){
+          bug.history = history;
 
-          var hasAssignement = (activity.who === EMAIL);
-          if(!hasAssignement){
-            activity.changes.some(function(change){
-              return (
-                (
-                  change.field_name === 'cc' ||
-                  change.field_name === 'assigned_to'
-                ) && change.added === EMAIL
-              );
-            });
+          // A bug is being worked on by the user when :
+          // - creates the bug
+          // - changes the bug
+          // - is cc'ed on the bug
+          // - is assigned on the bug
+          bug.history.some(function(activity){
+
+            var hasAssignement = (activity.who === EMAIL);
+            if(!hasAssignement){
+              activity.changes.some(function(change){
+                return (
+                  (
+                    change.field_name === 'cc' ||
+                    change.field_name === 'assigned_to'
+                  ) && change.added === EMAIL
+                );
+              });
+            }
+
+            if(hasAssignement === true){
+              bug.startDate = new Date(activity.when);
+              return true;
+            }
+          });
+
+          if(!bug.startDate && bug.assigned_to === EMAIL){
+            bug.startDate = new Date(bug.creation_time);
           }
 
-          if(hasAssignement === true){
-            bug.startDate = new Date(activity.when);
-            return true;
+
+          if(bug.cf_last_resolved){
+            bug.endDate = new Date(bug.cf_last_resolved);
+          } else {
+            bug.endDate = new Date();
           }
+
+          return Promise.resolve(bug);
         });
+      } else if( bug.bugType === "GH") {
+        historyPromise = Promise.resolve(bug);
+      }
 
-        if(!bug.startDate && bug.assigned_to === EMAIL){
-          bug.startDate = new Date(bug.creation_time);
-        }
 
-
-        if(bug.cf_last_resolved){
-          bug.endDate = new Date(bug.cf_last_resolved);
-        } else {
-          bug.endDate = new Date();
-        }
-
-        return Promise.resolve(bug);
-      });
-
-      var promises = [historyPromise,previousBugPromise];
+      var promises = [historyPromise, previousBugPromise];
       Promise.all(promises).then(function(data){
         let retrievedBugs = data[promises.indexOf(previousBugPromise)];
         let bug = data[promises.indexOf(historyPromise)];
@@ -150,7 +133,6 @@ fetch(url, {
           bugs[idx] = bug;
         }
         drawBug(bug);
-        bug.displayed = true;
         resolve(retrievedBugs.concat(bug));
       });
     });
@@ -165,7 +147,88 @@ fetch(url, {
 })
 .catch((e) => console.error(e));
 
+function getUrlParamsString(params) {
+  var str;
+
+  if(window.URLSearchParams){
+    var searchParams = new URLSearchParams();
+
+    Object.keys(params).forEach(function(key){
+      searchParams.append(key, params[key]);
+    });
+    str = searchParams.toString();
+  } else {
+    var searchParams = [];
+    Object.keys(params).forEach(function(key){
+      searchParams.push(key+"="+params[key]);
+    });
+    str = searchParams.join('&');
+  }
+
+  return str;
+}
+
+function fetchBugzilla(){
+
+  var searchParams = getUrlParamsString({
+    "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
+    "email1": EMAIL,
+    "status": "RESOLVED",
+    "resolution": "FIXED",
+    "emailassigned_to1":1
+  });
+
+  var url = `${BUGZILLA_API_URL}bug?${searchParams}`;
+  var myHeaders = new Headers();
+  myHeaders.append('Accept', 'application/json');
+
+  return fetch(url, {
+    mode: 'cors',
+    method: 'GET',
+    headers: myHeaders
+  })
+  .then((response) => response.json())
+  .then((json) => {
+    return json.bugs.map((item) => {
+      item.bugType = "BZ";
+      return item;
+    })
+  });
+}
+
+function fetchGithub(){
+
+  var searchParams = getUrlParamsString({
+    "state": "closed",
+    "base": "console-frontend",
+    "sort": "updated",
+    "per_page":100
+  });
+  var url = `https://api.github.com/repos/bgrins/gecko-dev/pulls?${searchParams}`;
+  var myHeaders = new Headers();
+  myHeaders.append('Accept', 'application/vnd.github.v3+json');
+
+  return fetch(url, {
+    mode: 'cors',
+    method: 'GET',
+    headers: myHeaders
+  })
+  .then((response) => response.json())
+  .then((json) => {
+    return json.map((item) => {
+      item.assign_time = item.created_at;
+      item.startDate = new Date(item.created_at);
+      item.endDate = new Date(item.merged_at);
+      item.id = "gh-" + item.id;
+      item.bugType = "GH";
+      return item;
+    })
+  });
+}
+
 function getBugHistory(bugData){
+  var myHeaders = new Headers();
+  myHeaders.append('Accept', 'application/json');
   var url = `${BUGZILLA_API_URL}bug/${bugData.id}/history`;
   return fetch(url, {
     mode: 'cors',
@@ -191,6 +254,7 @@ function getBugHistory(bugData){
 }
 
 function drawBug(bug){
+  console.log("bug ", bug.bugType, bug);
   if(bug.assign_time !== null ){
     var strokeWidth = 2;
     var endCircleR = 1.75;
@@ -203,15 +267,19 @@ function drawBug(bug){
       endCircleR = endCircleR * priorityRatio;
     }
 
-    var colorIndex = (bug.id % (COLORS.length - 1));
+    var id = bug.id;
+    if(id.startsWith && id.startsWith("gh")){
+      id = id.replace("gh-","");
+    }
+    var colorIndex = (id % (COLORS.length - 1));
     var bugColor = COLORS[colorIndex];
     var startDayNumber = 0;
     if(new Date(bug.assign_time) > jan4){
       startDayNumber = (new Date(bug.assign_time) - jan4)/MILLISECOND_A_DAY;
     }
 
-    var endDate = new Date();
-    if(bug.cf_last_resolved){
+    var endDate = bug.endDate;
+    if(!endDate){
       endDate = new Date(bug.cf_last_resolved);
     }
     var endDayNumber = ((endDate - jan4)/MILLISECOND_A_DAY);
@@ -231,34 +299,36 @@ function drawBug(bug){
         `Bug ${bug.id}
         ${PRIORITY_REGEX.test(bug.priority)?" [" + bug.priority + "]":""}
         <hr>
-        ${bug.summary}`);
+        ${bug.summary || bug.title}`);
     bugGroup.setAttribute('data-bug-id', bug.id);
 
-    if(bug.cf_last_resolved && bug.resolution == 'FIXED'){
+    if(bug.bugType === "GH" || (bug.bugType == "BZ" && bug.cf_last_resolved && bug.resolution == 'FIXED')){
       var endCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       endCircle.classList.add('resolved');
       endCircle.setAttribute('cx',endPoint);
       endCircle.setAttribute('cy', y);
       endCircle.setAttribute('r', endCircleR);
       endCircle.setAttribute('fill', bugColor);
+
       bugGroup.appendChild(endCircle);
     }
 
-      var assignStartDayNumber = ((new Date(bug.assign_time) - jan4)/MILLISECOND_A_DAY);
-      var assignStartPoint = X_PADDING + assignStartDayNumber;
+    var assignStartDayNumber = ((new Date(bug.assign_time) - jan4)/MILLISECOND_A_DAY);
+    var assignStartPoint = X_PADDING + assignStartDayNumber;
 
-      var bugAssignedLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      bugAssignedLine.setAttribute('x1', assignStartPoint);
-      bugAssignedLine.setAttribute('y1', y);
-      bugAssignedLine.setAttribute('x2', endPoint);
-      bugAssignedLine.setAttribute('y2', y);
-      bugAssignedLine.setAttribute('stroke', bugColor);
-      bugAssignedLine.setAttribute('stroke-width', strokeWidth);
-      bugAssignedLine.setAttribute('stroke-linecap', "round");
-      bugGroup.appendChild(bugAssignedLine);
+    var bugAssignedLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    bugAssignedLine.setAttribute('x1', assignStartPoint);
+    bugAssignedLine.setAttribute('y1', y);
+    bugAssignedLine.setAttribute('x2', endPoint);
+    bugAssignedLine.setAttribute('y2', y);
+    bugAssignedLine.setAttribute('stroke', bugColor);
+    bugAssignedLine.setAttribute('stroke-width', strokeWidth);
+    bugAssignedLine.setAttribute('stroke-linecap', "round");
+
+    bugGroup.appendChild(bugAssignedLine);
 
     timelineSvg.appendChild(bugGroup);
-    }
+  }
 }
 
 function plotChart(bugs){
@@ -289,35 +359,97 @@ function plotChart(bugs){
     "stroke-width": 0.25
   });
 
-  bugs.sort(function(bug1, bug2){
+  var ghPrs = bugs.filter((item) => {
+    return item.bugType === "GH";
+  });
+  ghPrs.sort(function(bug1, bug2){
+    return bug1.merged_at < bug2.merged_at ? -1 : 1;
+  });
+  var ghPath = createSVGElement('path', {
+    "fill": "#6E5494",
+    opacity: 0.75
+  });
+  var dPath = [];
+  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
+  ghPrs.forEach(function(bug, index, arr){
+    var endDate = bug.endDate;
+    if(!endDate){
+     endDate = new Date(bug.cf_last_resolved);
+    }
+    var x = getPositionFromDate(endDate);
+    var y = correctZeroPosition.y - ((index + 1) * (increment));
+    dPath.push(`L ${x} ${y}`);
+
+    if(index === ghPrs.length - 1){
+      var todayPos = getPositionFromDate(new Date());
+      dPath.push(`L ${todayPos} ${y}`);
+      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
+    }
+  });
+  ghPath.setAttribute("d", dPath.join(" "));
+
+  var bzBugs = bugs.filter((item) => {
+    return item.bugType === "BZ";
+  });
+  bzBugs.sort(function(bug1, bug2){
     return bug1.cf_last_resolved < bug2.cf_last_resolved ? -1 : 1;
   });
-  var path = createSVGElement('path', {
-    stroke: "#4CAF50",
-    "stroke-width": 0.5,
+  var bzPath = createSVGElement('path', {
     "fill": "#8BC34A",
     opacity: 0.75
   });
   var dPath = [];
   dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
-  bugs.forEach(function(bug, index, arr){
-    var x = getPositionFromDate(new Date(bug.cf_last_resolved));
+  bzBugs.forEach(function(bug, index, arr){
+    var endDate = bug.endDate;
+    if(!endDate){
+     endDate = new Date(bug.cf_last_resolved);
+    }
+    var x = getPositionFromDate(endDate);
     var y = correctZeroPosition.y - ((index + 1) * (increment));
-
     dPath.push(`L ${x} ${y}`);
-    var circle = createSVGElement('circle', {
-      r: 1,
-      fill: "#8BC34A",
-      cx: x,
-      cy: y
-    });
-    chartSvg.appendChild(circle);
-    if(index === bugs.length - 1){
-      dPath.push(`L ${x} ${goalLine.getAttribute("y1")}`);
+
+    if(index === bzBugs.length - 1){
+      var todayPos = getPositionFromDate(new Date());
+      dPath.push(`L ${todayPos} ${y}`);
+      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
     }
   });
-  path.setAttribute("d", dPath.join(" "));
-  chartSvg.appendChild(path);
+  bzPath.setAttribute("d", dPath.join(" "));
+
+
+  bugs.sort(function(bug1, bug2){
+    var d1 = bug1.cf_last_resolved || bug1.merged_at;
+    var d2 = bug2.cf_last_resolved || bug2.merged_at;
+    return d1 < d2 ? -1 : 1;
+  });
+  var overallPath = createSVGElement('path', {
+    "stroke": "#8BC34A",
+    "stroke-width": 1,
+    "fill": "transparent"
+  });
+  var dPath = [];
+  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
+  bugs.forEach(function(bug, index, arr){
+    var endDate = bug.endDate;
+    if(!endDate){
+     endDate = new Date(bug.cf_last_resolved);
+    }
+    var x = getPositionFromDate(endDate);
+    var y = correctZeroPosition.y - ((index + 1) * (increment));
+    dPath.push(`L ${x} ${y}`);
+
+    if(index === bugs.length - 1){
+      var todayPos = getPositionFromDate(new Date());
+      dPath.push(`L ${todayPos} ${y}`);
+    }
+  });
+  overallPath.setAttribute("d", dPath.join(" "));
+
+
+  chartSvg.appendChild(overallPath);
+  chartSvg.appendChild(bzPath);
+  chartSvg.appendChild(ghPath);
   chartSvg.appendChild(goalLine);
 }
 
@@ -425,8 +557,13 @@ function findLane(start, end){
 
 function updateDashboard(bugs){
   var fixedBugs = bugs.filter(function(bug){
-    return (bug.resolution === "FIXED");
+    return (bug.bugType === "BZ" && bug.resolution === "FIXED");
   });
+
+  var mergedPR = bugs.filter(function(bug){
+    return (bug.bugType === "GH" && bug.merged_at);
+  });
+
   var resolutionWeeks = fixedBugs.map((bug) => Math.ceil(((new Date(bug.cf_last_resolved)) - jan4)/MILLISECOND_A_DAY/7));
 
   var missedWeeks = [];
@@ -440,6 +577,7 @@ function updateDashboard(bugs){
   document.getElementById('failedWeek').textContent = missedWeeks.length;
   document.getElementById('failedWeek').setAttribute("title", missedWeeks.map((x) => `#${x}`).join(' - '));
   document.getElementById('bugsFixed').textContent = fixedBugs.length;
+  document.getElementById('prsMerged').textContent = mergedPR.length;
   var percent = Math.round((fixedBugs.length / weekNumber) * 100);
   if(percent > 100){
     percent = ">100"
