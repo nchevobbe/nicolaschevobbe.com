@@ -11,7 +11,7 @@ let tooltipHideId;
 
 const jan4 = new Date('2016-01-04');
 const X_PADDING = 17;
-const LINE_HEIGHT = 10;
+const LINE_HEIGHT = 9;
 const MILLISECOND_A_DAY = (1000*60*60*24);
 const BUGZILLA_API_URL = 'https://bugzilla.mozilla.org/rest/';
 const EMAIL = 'chevobbe.nicolas@gmail.com';
@@ -366,8 +366,9 @@ function plotChart(bugs){
     return bug1.merged_at < bug2.merged_at ? -1 : 1;
   });
   var ghPath = createSVGElement('path', {
-    "fill": "#6E5494",
-    opacity: 0.75
+    "stroke": "#6E5494",
+    "stroke-width": 1,
+    "fill": "transparent"
   });
   var dPath = [];
   dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
@@ -383,7 +384,6 @@ function plotChart(bugs){
     if(index === ghPrs.length - 1){
       var todayPos = getPositionFromDate(new Date());
       dPath.push(`L ${todayPos} ${y}`);
-      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
     }
   });
   ghPath.setAttribute("d", dPath.join(" "));
@@ -395,8 +395,9 @@ function plotChart(bugs){
     return bug1.cf_last_resolved < bug2.cf_last_resolved ? -1 : 1;
   });
   var bzPath = createSVGElement('path', {
-    "fill": "#8BC34A",
-    opacity: 0.75
+    "stroke": "#2196F3",
+    "stroke-width": 1,
+    "fill": "transparent"
   });
   var dPath = [];
   dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
@@ -412,7 +413,6 @@ function plotChart(bugs){
     if(index === bzBugs.length - 1){
       var todayPos = getPositionFromDate(new Date());
       dPath.push(`L ${todayPos} ${y}`);
-      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
     }
   });
   bzPath.setAttribute("d", dPath.join(" "));
@@ -424,9 +424,11 @@ function plotChart(bugs){
     return d1 < d2 ? -1 : 1;
   });
   var overallPath = createSVGElement('path', {
-    "stroke":" #8BC34A",
-    "stroke-width": 1,
-    "fill": "transparent"
+    //"stroke":" #8BC34A",
+    //"stroke-width": 1,
+    //"fill": "transparent",
+    "fill": "#8BC34A",
+    "opacity": 0.5,
   });
   var dPath = [];
   dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
@@ -442,6 +444,7 @@ function plotChart(bugs){
     if(index === bugs.length - 1){
       var todayPos = getPositionFromDate(new Date());
       dPath.push(`L ${todayPos} ${y}`);
+      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
     }
   });
   overallPath.setAttribute("d", dPath.join(" "));
