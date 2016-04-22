@@ -53,8 +53,6 @@ Promise.all(fetchSources).then(function(res){
     return prData.user.login === "nchevobbe";
   });
 
-console.log("PR", ghPR);
-
   let bugs = bzBugs.concat(ghPR);
 
   plotChart(bugs);
@@ -254,7 +252,6 @@ function getBugHistory(bugData){
 }
 
 function drawBug(bug){
-  console.log("bug ", bug.bugType, bug);
   if(bug.assign_time !== null ){
     var strokeWidth = 2;
     var endCircleR = 1.75;
@@ -359,100 +356,50 @@ function plotChart(bugs){
     "stroke-width": 0.25
   });
 
-  var ghPrs = bugs.filter((item) => {
-    return item.bugType === "GH";
-  });
-  ghPrs.sort(function(bug1, bug2){
-    return bug1.merged_at < bug2.merged_at ? -1 : 1;
-  });
-  var ghPath = createSVGElement('path', {
-    "stroke": "#6E5494",
-    "stroke-width": 1,
-    "fill": "transparent"
-  });
-  var dPath = [];
-  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
-  ghPrs.forEach(function(bug, index, arr){
-    var endDate = bug.endDate;
-    if(!endDate){
-     endDate = new Date(bug.cf_last_resolved);
-    }
-    var x = getPositionFromDate(endDate);
-    var y = correctZeroPosition.y - ((index + 1) * (increment));
-    dPath.push(`L ${x} ${y}`);
-
-    if(index === ghPrs.length - 1){
-      var todayPos = getPositionFromDate(new Date());
-      dPath.push(`L ${todayPos} ${y}`);
-    }
-  });
-  ghPath.setAttribute("d", dPath.join(" "));
-
-  var bzBugs = bugs.filter((item) => {
-    return item.bugType === "BZ";
-  });
-  bzBugs.sort(function(bug1, bug2){
-    return bug1.cf_last_resolved < bug2.cf_last_resolved ? -1 : 1;
-  });
-  var bzPath = createSVGElement('path', {
-    "stroke": "#2196F3",
-    "stroke-width": 1,
-    "fill": "transparent"
-  });
-  var dPath = [];
-  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
-  bzBugs.forEach(function(bug, index, arr){
-    var endDate = bug.endDate;
-    if(!endDate){
-     endDate = new Date(bug.cf_last_resolved);
-    }
-    var x = getPositionFromDate(endDate);
-    var y = correctZeroPosition.y - ((index + 1) * (increment));
-    dPath.push(`L ${x} ${y}`);
-
-    if(index === bzBugs.length - 1){
-      var todayPos = getPositionFromDate(new Date());
-      dPath.push(`L ${todayPos} ${y}`);
-    }
-  });
-  bzPath.setAttribute("d", dPath.join(" "));
-
-
   bugs.sort(function(bug1, bug2){
     var d1 = bug1.cf_last_resolved || bug1.merged_at;
     var d2 = bug2.cf_last_resolved || bug2.merged_at;
     return d1 < d2 ? -1 : 1;
   });
-  var overallPath = createSVGElement('path', {
-    //"stroke":" #8BC34A",
-    //"stroke-width": 1,
-    //"fill": "transparent",
-    "fill": "#8BC34A",
-    "opacity": 0.5,
-  });
-  var dPath = [];
-  dPath.push(`M ${goalLine.getAttribute("x1")} ${goalLine.getAttribute("y1")}`);
-  bugs.forEach(function(bug, index, arr){
-    var endDate = bug.endDate;
-    if(!endDate){
-     endDate = new Date(bug.cf_last_resolved);
+
+  for(var i = 0; i<= todayNumber; i++){
+    var resolved = bugs.filter(function(item){
+      var resolvedDate = item.cf_last_resolved || item.merged_at;
+      return Math.floor(((new Date(resolvedDate)).getTime() - jan4.getTime()) / MILLISECOND_A_DAY) <= i
+    });
+
+    if(resolved.length > 0){
+      var bzs = resolved.filter(function(item){
+        return item.bugType === "BZ";
+      });
+      var x = getPositionFromDate(jan4.getTime() + (i * MILLISECOND_A_DAY));
+
+      if(bzs.length > 0){
+        var bzLine = createSVGElement("line", {
+          x1: x,
+          y1: correctZeroPosition.y,
+          x2: x,
+          y2: correctZeroPosition.y - (bzs.length * increment),
+          stroke: "#8BC34A",
+          "stroke-width": 0.75
+        });
+        chartSvg.appendChild(bzLine);
+      }
+
+      if((resolved.length - bzs.length) > 0){
+        var prLine = createSVGElement("line", {
+          x1: x,
+          y1: correctZeroPosition.y - (bzs.length * increment),
+          x2: x,
+          y2: correctZeroPosition.y - (resolved.length * increment),
+          stroke: "#6E5494",
+          "stroke-width": 0.5
+        });
+        chartSvg.appendChild(prLine);
+      }
+
     }
-    var x = getPositionFromDate(endDate);
-    var y = correctZeroPosition.y - ((index + 1) * (increment));
-    dPath.push(`L ${x} ${y}`);
-
-    if(index === bugs.length - 1){
-      var todayPos = getPositionFromDate(new Date());
-      dPath.push(`L ${todayPos} ${y}`);
-      dPath.push(`L ${todayPos} ${goalLine.getAttribute("y1")}`);
-    }
-  });
-  overallPath.setAttribute("d", dPath.join(" "));
-
-
-  chartSvg.appendChild(overallPath);
-  chartSvg.appendChild(bzPath);
-  chartSvg.appendChild(ghPath);
+  }
   chartSvg.appendChild(goalLine);
 }
 
