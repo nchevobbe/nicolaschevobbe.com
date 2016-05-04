@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BackgroundSync Test</title>
+</head>
+  <body>
+    <button>Request BackgroundSync</button>
+    <ul class="logs">
+    </ul>
+  </body>
+
+  <script type="text/javascript">
+  var logContainer = document.querySelector(".logs");
+  function log(msg){
+    var li = document.createElement("li");
+    var today = new Date();
+    li.textContent = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()} : ${msg}`;
+    logContainer.insertBefore(li, logContainer.firstChild);
+  }
+
+  document.querySelector("button").addEventListener("click", function(){
+    log("Sync requested");
+    navigator.serviceWorker.ready.then(function(swRegistration) {
+      return swRegistration.sync.register('sync');
+    });
+  });
+
+  navigator.serviceWorker.register('sw.js').then(function(swRegistration) {
+    log("SW registered");
+  }, function(e) {
+    console.warn(e);
+    log("SW register failed");
+  });
+
+  navigator.serviceWorker.addEventListener('message', function(e){
+    if(e.data.tag === "log"){
+      log(e.data.message);
+    }
+  });
+
+
+  </script>
+</html>
