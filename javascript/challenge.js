@@ -426,11 +426,13 @@ function drawWeeks(bugs){
       weekStatus.setAttribute('height', 2);
 
       var hasResolved = bugs.some(function(bug){
-        if(bug.cf_last_resolved){
-          var resolvedDayNumber = (new Date(bug.cf_last_resolved) - jan4)/MILLISECOND_A_DAY;
+        if(bug.cf_last_resolved || bug.merged_at){
+          var resDate = new Date(bug.cf_last_resolved ? bug.cf_last_resolved :  bug.merged_at);
+          var resolvedDayNumber = (resDate - jan4)/MILLISECOND_A_DAY;
           return (Math.floor(resolvedDayNumber /7) == i);
         }
       });
+
       var fillColor = hasResolved?'#8BC34A':'#F44336';
       if(!hasResolved && i + 1 === weekNumber){
          fillColor = '#607D8B';
@@ -514,7 +516,11 @@ function updateDashboard(bugs){
     return (bug.bugType === "GH" && bug.merged_at);
   });
 
-  var resolutionWeeks = fixedBugs.map((bug) => Math.ceil(((new Date(bug.cf_last_resolved)) - jan4)/MILLISECOND_A_DAY/7));
+  var resolutionWeeks = fixedBugs.concat(mergedPR).map((bug) => {
+    var resDate = new Date(bug.cf_last_resolved ? bug.cf_last_resolved :  bug.merged_at);
+    var resolvedDayNumber = (resDate - jan4)/MILLISECOND_A_DAY;
+    return Math.ceil(resolvedDayNumber/7);
+  });
 
   var missedWeeks = [];
   for(var i = 1; i <=weekNumber; i++){
