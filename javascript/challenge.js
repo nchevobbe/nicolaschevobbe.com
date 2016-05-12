@@ -200,7 +200,7 @@ function fetchGithub(){
     "state": "closed",
     "base": "console-frontend",
     "sort": "updated",
-    "per_page":100
+    "per_page":200
   });
   var url = `https://api.github.com/repos/bgrins/gecko-dev/pulls?${searchParams}`;
   var myHeaders = new Headers();
@@ -221,6 +221,9 @@ function fetchGithub(){
       item.bugType = "GH";
       return item;
     })
+    .filter((item) => {
+      return (item.merged_at !== null);
+    });
   });
 }
 
@@ -345,13 +348,23 @@ function plotChart(bugs){
   position.y = rect.bottom;
 
   var correctZeroPosition = position.matrixTransform(inverseMatrix);
-  var increment = correctZeroPosition.y / 52;
+  var increment = correctZeroPosition.y / 100;
+
+  var extraGoalLine = createSVGElement("line", {
+    x1: getPositionFromDate(jan4),
+    y1: correctZeroPosition.y,
+    x2: getPositionFromDate(new Date("2017-01-02")),
+    y2: 0,
+    stroke: "#36f475",
+    opacity: 0.5,
+    "stroke-width": 0.25
+  });
 
   var goalLine = createSVGElement("line", {
     x1: getPositionFromDate(jan4),
     y1: correctZeroPosition.y,
     x2: getPositionFromDate(new Date("2017-01-02")),
-    y2: 0,
+    y2: correctZeroPosition.y - (52 * increment),
     stroke: "#F44336",
     "stroke-width": 0.25
   });
@@ -401,6 +414,7 @@ function plotChart(bugs){
     }
   }
   chartSvg.appendChild(goalLine);
+  chartSvg.appendChild(extraGoalLine);
 }
 
 function drawWeeks(bugs){
