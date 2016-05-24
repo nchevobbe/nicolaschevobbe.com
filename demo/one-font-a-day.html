@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nicolas Chevobbe - One font a day</title>
+    <meta charset="UTF-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Playfair+Display+SC:900,400|Fauna+One|Fugaz+One|Unica+One|Megrim|Open+Sans:700,800|Old+Standard+TT:700|Vast+Shadow|Ovo|Oswald:700|Playfair+Display:400,900|Quattrocento:700|Quando|Volkhov:700|Stint+Ultra+Expanded|Alfa+Slab+One|Philosopher:700);
+
+      * {
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-size: 32px;
+        min-height: 100vh;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      blockquote {
+        max-width: 800px;
+        line-height: 1.1em;
+        padding: 0.5em;
+        margin: 0;
+      }
+
+      .initial {
+        opacity: 0;
+      }
+
+      .space {
+        padding-left: 0.25em;
+      }
+      .word {
+        white-space:nowrap;
+      }
+
+      blockquote footer {
+        font-family: 'Playfair Display SC', serif;
+        font-size: 0.75rem;
+        text-align: right;
+        color: rgba(0,0,0,0.7);
+        line-height: 0.75em;
+      }
+
+      button {
+        background: #FFC107;
+        border: none;
+        color: white;
+        font-size: 0.75rem;
+        font-family: Fugaz One;
+        padding: 0.01em 0.5em;
+        font-size: 1.1em;
+        transform: rotate(-2deg);
+        margin-bottom: 0.5em;
+      }
+
+      footer {
+        font-size: 0.5rem;
+        text-align: center;
+        margin-top: auto;
+        color: rgba(0,0,0,0.5);
+      }
+
+      footer a {
+        color: #03A9F4;
+      }
+    </style>
+  </head>
+  <body>
+  <main>
+  <blockquote>
+      <p></p>
+      <footer>
+          <p></p>
+      </footer>
+  </blockquote>
+    <div>
+      <button class="reload">Hit me</button>
+    </div>
+  </main>
+  <footer>Powered by <a href="http://quotesondesign.com">http://quotesondesign.com</a></footer>
+  <script type="text/javascript">
+    "use strict";
+
+    const COLORS = ["rgb(244, 67, 54)","rgb(0, 150, 136)","rgb(96, 125, 139)","rgb(156, 39, 176)","rgb(103, 58, 183)","rgb(63, 81, 181)","rgb(33, 150, 243)","rgb(3, 169, 244)","rgb(0, 188, 212)","rgb(76, 175, 80)","rgb(139, 195, 74)","rgb(255, 193, 7)","rgb(255, 152, 0)","rgb(255, 87, 34)","rgb(233, 30, 99)","rgb(121, 85, 72)"];
+
+    const FONTS = [
+      "'Playfair Display SC', serif",
+      "'Fauna One', serif",
+      "'Fugaz One', cursive",
+      "'Unica One', cursive",
+      "'Open Sans', sans-serif",
+      "'Old Standard TT', serif",
+      "'Vast Shadow', cursive",
+      "'Ovo', serif",
+      "'Oswald', sans-serif",
+      "'Playfair Display', serif",
+      "'Quattrocento', serif",
+      "'Quando', serif",
+      "'Volkhov', serif",
+      "'Stint Ultra Expanded', cursive",
+      "'Alfa Slab One', cursive",
+      "'Philosopher', sans-serif"
+    ];
+
+    var myHeaders = new Headers({
+      'Accept': 'application/json'
+    });
+
+    function fetchQuote() {
+      return fetch("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&"+(new Date()).getTime(), {
+        mode: 'cors',
+        cache: 'no-cache',
+        method: 'GET',
+        headers: myHeaders
+      })
+      .then((response) => response.json())
+      .then((json) => json[0])
+      .catch((e) => console.error(e))
+    }
+
+    var blockquote = document.querySelector("blockquote");
+    var pQuote = document.querySelector("blockquote > p");
+    var pQuoteAuthor = document.querySelector("footer > p");
+
+    function displayQuote() {
+      fetchQuote().then((quote) => {
+        pQuote.innerHTML = quote.content;
+        var s = document.createElement("span");
+        s.innerHTML = quote.content;
+        var words = s.textContent.split(" ");
+        var html = words.map(function(word){
+            var wordSpans = Array.from(word).map(function(char){
+              var styles = {
+                "font-size": `${0.9 + Math.random() * 1.2}rem`,
+                "line-height": "100%",
+                color: "white",
+                "font-family": FONTS[Math.floor(Math.random() * FONTS.length)],
+                display: "inline-block",
+                "text-shadow" : "0 0 3px rgba(0,0,0,0.1)",
+                transform: `rotate(${(Math.random() > 0.5?-1:1) * Math.random() * 5}deg) translateY(${(Math.random() > 0.5?-1:1) * Math.random() * 0.06}em)`
+              };
+              var color = COLORS[Math.floor(Math.random() * COLORS.length)];
+              var key = Math.random() > 0.1 ? "color":"background-color";
+              styles[key] = color;
+
+              var styleStr = Object.keys(styles).map((k) => `${k} : ${styles[k]};`).join("");
+             return `<span style="${styleStr}">${char}</span>` ;
+          }).join("");
+          return `<span class="word">${wordSpans}</span>`;
+        }).join("<span><span class=space> </span></span>");
+        pQuote.innerHTML = html;
+        pQuoteAuthor.innerHTML = quote.title;
+      });
+    }
+
+    document.querySelector("button").addEventListener("click", displayQuote)
+
+    displayQuote();
+  </script>
+  </body>
+</html>
