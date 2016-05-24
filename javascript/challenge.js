@@ -32,8 +32,9 @@ var bugs = [];
 
 timelineSvg.addEventListener('mousemove', onMouseMove, false);
 
-const weekNumber = Math.ceil(((new Date()) - jan4)/MILLISECOND_A_DAY/7);
-const todayNumber = (((new Date()) - jan4)/MILLISECOND_A_DAY);
+const today = new Date();
+const weekNumber = Math.ceil((today - jan4)/MILLISECOND_A_DAY/7);
+const todayNumber = ((today - jan4)/MILLISECOND_A_DAY);
 
 var fetchSources = [fetchBugzilla(), fetchGithub()];
 
