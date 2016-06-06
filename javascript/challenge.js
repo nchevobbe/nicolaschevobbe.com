@@ -168,7 +168,7 @@ function getUrlParamsString(params) {
 }
 
 function fetchBugzilla(){
-
+  var ignoredBugs = [1272460, 1270166, 1272452, 1272456];
   var searchParams = getUrlParamsString({
     "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
     "email1": EMAIL,
@@ -191,7 +191,7 @@ function fetchBugzilla(){
     return json.bugs.map((item) => {
       item.bugType = "BZ";
       return item;
-    })
+    }).filter((item) => ignoredBugs.indexOf(item.id) === -1)
   });
 }
 
