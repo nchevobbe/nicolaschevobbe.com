@@ -172,7 +172,6 @@ function fetchBugzilla(){
   var searchParams = getUrlParamsString({
     "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
     "email1": EMAIL,
-    "status": "RESOLVED",
     "resolution": "FIXED",
     "emailassigned_to1":1
   });
