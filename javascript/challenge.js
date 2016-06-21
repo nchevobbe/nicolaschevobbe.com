@@ -202,7 +202,7 @@ function fetchGithub(){
     "sort": "updated",
     "per_page":200
   });
-  var url = `https://api.github.com/repos/bgrins/gecko-dev/pulls?${searchParams}`;
+  var url = `https://api.github.com/repos/devtools-html/gecko-dev/pulls?${searchParams}`;
   var myHeaders = new Headers();
   myHeaders.append('Accept', 'application/vnd.github.v3+json');
 
