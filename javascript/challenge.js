@@ -22,6 +22,10 @@ const HOLIDAYS = [{
   name: 'Skiing',
   start : new Date('2016-01-16'),
   end: new Date('2016-01-23')
+},{
+  name: '#MozLondon',
+  start : new Date('2016-06-13'),
+  end: new Date('2016-06-18')
 }];
 
 drawHolidays();
