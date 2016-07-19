@@ -172,7 +172,7 @@ function getUrlParamsString(params) {
 }
 
 function fetchBugzilla(){
-  var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672];
+  var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508];
   var searchParams = getUrlParamsString({
     "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
     "email1": EMAIL,
