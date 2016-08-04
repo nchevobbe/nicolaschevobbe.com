@@ -171,8 +171,9 @@ function getUrlParamsString(params) {
   return str;
 }
 
+var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508];
+
 function fetchBugzilla(){
-  var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508];
   var searchParams = getUrlParamsString({
     "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
     "email1": EMAIL,
@@ -198,8 +199,10 @@ function fetchBugzilla(){
   });
 }
 
-function fetchGithub(){
+// Arrays of PR's id which have been commited but not merged
+var closedCommitedPRs = [184];
 
+function fetchGithub(){
   var searchParams = getUrlParamsString({
     "state": "closed",
     "base": "console-frontend",
@@ -220,13 +223,13 @@ function fetchGithub(){
     return json.map((item) => {
       item.assign_time = item.created_at;
       item.startDate = new Date(item.created_at);
-      item.endDate = new Date(item.merged_at);
+      item.endDate = new Date(item.merged_at || item.closed_at);
       item.id = "gh-" + item.id;
       item.bugType = "GH";
       return item;
     })
     .filter((item) => {
-      return (item.merged_at !== null);
+      return (item.merged_at !== null || closedCommitedPRs.includes(item.number));
     });
   });
 }
@@ -374,15 +377,15 @@ function plotChart(bugs){
   });
 
   bugs.sort(function(bug1, bug2){
-    var d1 = bug1.cf_last_resolved || bug1.merged_at;
-    var d2 = bug2.cf_last_resolved || bug2.merged_at;
+    var d1 = bug1.cf_last_resolved || bug1.endDate;
+    var d2 = bug2.cf_last_resolved || bug2.endDate;
     return d1 < d2 ? -1 : 1;
   });
 
   for(var i = 0; i<= todayNumber; i++){
     var resolved = bugs.filter(function(item){
-      var resolvedDate = item.cf_last_resolved || item.merged_at;
-      return Math.floor(((new Date(resolvedDate)).getTime() - jan4.getTime()) / MILLISECOND_A_DAY) <= i
+      var resolvedDate = item.cf_last_resolved ? new Date(item.cf_last_resolved) : item.endDate;
+      return Math.floor((resolvedDate.getTime() - jan4.getTime()) / MILLISECOND_A_DAY) <= i
     });
 
     if(resolved.length > 0){
@@ -531,11 +534,11 @@ function updateDashboard(bugs){
   });
 
   var mergedPR = bugs.filter(function(bug){
-    return (bug.bugType === "GH" && bug.merged_at);
+    return (bug.bugType === "GH");
   });
 
   var resolutionWeeks = fixedBugs.concat(mergedPR).map((bug) => {
-    var resDate = new Date(bug.cf_last_resolved ? bug.cf_last_resolved :  bug.merged_at);
+    var resDate = bug.cf_last_resolved ? new Date(bug.cf_last_resolved) :  bug.endDate;
     var resolvedDayNumber = (resDate - jan4)/MILLISECOND_A_DAY;
     return Math.ceil(resolvedDayNumber/7);
   });
