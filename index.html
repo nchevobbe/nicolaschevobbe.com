@@ -60,6 +60,8 @@ title: Nicolas Chevobbe's Blog
         <label for="input-chart">Chart</label>
       </nav>
     </section>
+
+    <h1>Blog posts</h1>
     <ul class="posts">
       {% for post in site.posts %}
         <li>
@@ -67,6 +69,11 @@ title: Nicolas Chevobbe's Blog
         </li>
 
       {% endfor %}
+    </ul>
+
+    <h1>Demos</h1>
+    <ul>
+      <li><a href="/demo/one-font-a-day.html">One font a day</a></li>
     </ul>
   </main>
   {% include footer.html %}
