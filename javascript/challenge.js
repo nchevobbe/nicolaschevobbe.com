@@ -42,8 +42,7 @@ const todayNumber = ((today - jan4)/MILLISECOND_A_DAY);
 
 var fetchSources = [fetchBugzilla(), fetchGithub()];
 
-Promise.all(fetchSources).then(function(res){
-  var bugzillaData = res[0];
+Promise.all(fetchSources).then(function([bugzillaData, ghData]){
 
   let bzBugs = bugzillaData.filter(function(x){
     if(!x.cf_last_resolved){
@@ -53,12 +52,7 @@ Promise.all(fetchSources).then(function(res){
     return (new Date(x.cf_last_resolved) >= jan4);
   });
 
-
-  let ghPR = res[1].filter(function(prData){
-    return prData.user.login === "nchevobbe";
-  });
-
-  let bugs = bzBugs.concat(ghPR);
+  let bugs = bzBugs.concat(ghData);
 
   plotChart(bugs);
 
@@ -207,30 +201,54 @@ function fetchGithub(){
     "state": "closed",
     "base": "console-frontend",
     "sort": "updated",
-    "per_page":200
+    "per_page": 100
   });
-  var url = `https://api.github.com/repos/devtools-html/gecko-dev/pulls?${searchParams}`;
+  var rootUrl = `https://api.github.com/repos/devtools-html/gecko-dev/pulls?${searchParams}`;
   var myHeaders = new Headers();
   myHeaders.append('Accept', 'application/vnd.github.v3+json');
 
-  return fetch(url, {
-    mode: 'cors',
-    method: 'GET',
-    headers: myHeaders
-  })
-  .then((response) => response.json())
-  .then((json) => {
-    return json.map((item) => {
-      item.assign_time = item.created_at;
-      item.startDate = new Date(item.created_at);
-      item.endDate = new Date(item.merged_at || item.closed_at);
-      item.id = "gh-" + item.id;
-      item.bugType = "GH";
-      return item;
+  var jsonResponses = [];
+  var fetchPage = function(url) {
+    return fetch(url, {
+      mode: 'cors',
+      method: 'GET',
+      headers: myHeaders
     })
-    .filter((item) => {
-      return (item.merged_at !== null || closedCommitedPRs.includes(item.number));
-    });
+    .then(function(response) {
+      jsonResponses.push(response.json());
+
+      var links = response.headers.get('link').split(", ").map(x => {
+        var [url, rel] = x.split("; ");
+        url = url.replace(/^</,"").replace(/>$/,"");
+        rel = rel.replace(/^rel=\"/,"").replace('"','');
+        return {rel, url}
+      });
+      var next = links.find((x) => x.rel === "next");
+      if(next) {
+        return fetchPage(next.url);
+      }
+      return Promise.all(jsonResponses);
+    })
+    .then(responses => [].concat(...responses))
+  }
+
+  return fetchPage(rootUrl)
+  .then((json) => {
+    return json
+      .filter((item) => {
+        return item.user.login === "nchevobbe" && (
+          item.merged_at !== null ||
+          closedCommitedPRs.includes(item.number)
+        );
+      })
+      .map((item) => {
+        item.assign_time = item.created_at;
+        item.startDate = new Date(item.created_at);
+        item.endDate = new Date(item.merged_at || item.closed_at);
+        item.id = "gh-" + item.id;
+        item.bugType = "GH";
+        return item;
+      });
   });
 }
 
