@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nicolas Chevobbe - Wave</title>
+  <meta charset="UTF-8">
+  <!--FAVICON-->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/favicon/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/favicon/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/favicon/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/favicon/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/images/favicon/apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/images/favicon/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/images/favicon/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/images/favicon/apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-196x196.png" sizes="196x196" />
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-128.png" sizes="128x128" />
+  <meta name="application-name" content="Nicolas Chevobbe"/>
+  <meta name="msapplication-TileColor" content="#2F374" />
+  <meta name="msapplication-TileImage" content="/images/favicon/mstile-144x144.png" />
+  <meta name="msapplication-square70x70logo" content="/images/favicon/mstile-70x70.png" />
+  <meta name="msapplication-square150x150logo" content="/images/favicon/mstile-150x150.png" />
+  <meta name="msapplication-wide310x150logo" content="/images/favicon/mstile-310x150.png" />
+  <meta name="msapplication-square310x310logo" content="/images/favicon/mstile-310x310.png" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/root.css" />
+
+    <style>
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      svg {
+        width: 75vmin;
+      }
+
+      svg path {
+        fill: transparent;
+      }
+
+      figcaption {
+        color: white;
+        text-align: center;
+      }
+
+      figcaption a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+  <main>
+
+    <header>
+      Nicolas Chevobbe
+    </header>
+    <section class="bio">Web Developper — Mozillian & Open Web lover — Avid learner — Works for <a href="http://www.atolcd.com" target="blank">Atol C&D</a>
+    </section>
+    <figure>
+      <svg viewBox="0 0 100 60">
+        <defs>
+        <linearGradient id='grad'>
+          <stop stop-color='#005A66'/>
+          <stop offset='100%' stop-color='#D7E1E1'/>
+        </linearGradient>
+        </defs>
+      </svg>
+      <figcaption>Based on <a href="https://twitter.com/archillect/status/767501558649061376">@archillect's  gif</a></ficaption>
+    </figure>
+  </main>
+  <footer class="links">
+    <ul>
+      <li class="social twitter"><a href="https://twitter.com/nicolaschevobbe">Twitter</a></li>
+      <li class="social codepen"><a href="http://codepen.io/nchevobbe/">CodePen</a></li>
+      <li class="social github"><a href="https://github.com/nchevobbe">Github</a></li>
+      <li class="social linkedin"><a href="http://www.linkedin.com/in/nicolaschevobbe">LinkedIn</a></li>
+      <li class="social pinterest"><a href="http://pinterest.com/nicolaschevobbe/">Pinterest</a></li>
+      <li class="social flickr"><a href="http://www.flickr.com/photos/nicolaschevobbe/">FlickR</a></li>
+    </ul>
+  </footer>
+  <script type="text/javascript" version="1.7">
+    "use strict";
+    function createSVGElement(tagName, attributes){
+      let el = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+      for(let key in attributes){
+        el.setAttribute(key, attributes[key])
+      }
+      return el;
+    }
+
+    var svg = document.querySelector('svg');
+
+    let y = 50;
+    let arcNumber = 21;
+    let width = 100;
+    let padding = 5;// so the most outer arc doesn't get cutoff
+    let increment = width / arcNumber / 2;
+    for(let i=0; i < arcNumber; i ++) {
+      let x1 = (padding / 2) + (i * increment);
+      let x2 = width - x1;
+      let size = (x1 -x2) / 2;
+      let pathCommands = [
+        `M ${x1},${y}`,//start point
+        `A ${size},${size}`,//size
+        "0",//angle
+        "0", //large arc flag
+        "1",//sweep flag
+        `${x2},${y}`,//end point
+      ];
+
+      let arc = createSVGElement("path", {
+        d: pathCommands.join(" "),
+        stroke: "url(#grad)",
+        "stroke-linecap": "round"
+      });
+
+      let length = arc.getTotalLength();
+
+      arc.setAttribute("stroke-dasharray",length);
+      svg.appendChild(arc);
+
+      var anim = arc.animate([{
+          "strokeDashoffset" : length
+        },{
+          "strokeDashoffset" : 0
+        }], {
+        duration: 1500,
+        delay: i * 100,
+        fill: 'forwards',
+        direction: 'alternate-reverse',
+        easing: 'ease-in',
+        iterations: 'Infinity'
+      });
+
+    }
+  </script>
+  </body>
+</html>
