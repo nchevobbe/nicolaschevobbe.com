@@ -469,11 +469,8 @@ function drawWeeks(bugs){
       weekStatus.setAttribute('height', 2);
 
       var hasResolved = bugs.some(function(bug){
-        if(bug.cf_last_resolved || bug.merged_at){
-          var resDate = new Date(bug.cf_last_resolved ? bug.cf_last_resolved :  bug.merged_at);
-          var resolvedDayNumber = (resDate - jan4)/MILLISECOND_A_DAY;
-          return (Math.floor(resolvedDayNumber /7) == i);
-        }
+        var resolvedDayNumber = (bug.endDate - jan4)/MILLISECOND_A_DAY;
+        return (Math.floor(resolvedDayNumber /7) == i);
       });
 
       var fillColor = hasResolved?'#8BC34A':'#F44336';
