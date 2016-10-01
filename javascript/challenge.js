@@ -169,7 +169,7 @@ function getUrlParamsString(params) {
   return str;
 }
 
-var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508, 1299668, 1304900];
+var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508, 1299668, 1304900, 1305499];
 
 function fetchBugzilla(){
   var searchParams = getUrlParamsString({
@@ -197,8 +197,8 @@ function fetchBugzilla(){
   });
 }
 
-// Arrays of PR's id which have been commited but not merged
-var closedCommitedPRs = [184, 272, 304];
+// Arrays of PR's ids which have been commited but not merged
+var closedCommitedPRs = [184, 272, 304, 342];
 
 function fetchGithub(){
   var searchParams = getUrlParamsString({
