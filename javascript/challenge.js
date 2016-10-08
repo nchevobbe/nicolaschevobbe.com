@@ -169,7 +169,7 @@ function getUrlParamsString(params) {
   return str;
 }
 
-var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508, 1299668, 1304900, 1305499];
+var ignoredBugs = [1272460, 1270166, 1272452, 1272456, 1285672, 1287508, 1299668, 1304900, 1305499, 1307873];
 
 function fetchBugzilla(){
   var searchParams = getUrlParamsString({
