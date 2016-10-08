@@ -79,6 +79,7 @@ Promise.all(fetchSources).then(function([bugzillaData, ghData]){
       var historyPromise;
 
       if(bug.bugType === "BZ"){
+        historyPromise = Promise.resolve(bug);
         historyPromise = getBugHistory(bug).then(function(history){
           bug.history = history;
 
@@ -111,12 +112,7 @@ Promise.all(fetchSources).then(function([bugzillaData, ghData]){
             bug.startDate = new Date(bug.creation_time);
           }
 
-
-          if(bug.cf_last_resolved){
-            bug.endDate = new Date(bug.cf_last_resolved);
-          } else {
-            bug.endDate = new Date();
-          }
+          bug.endDate = new Date(bug.cf_last_resolved);
 
           return Promise.resolve(bug);
         });
@@ -201,56 +197,19 @@ function fetchBugzilla(){
 var closedCommitedPRs = [184, 272, 304, 342];
 
 function fetchGithub(){
-  var searchParams = getUrlParamsString({
-    "state": "closed",
-    "base": "console-frontend",
-    "sort": "updated",
-    "per_page": 100
-  });
-  var rootUrl = `https://api.github.com/repos/devtools-html/gecko-dev/pulls?${searchParams}`;
   var myHeaders = new Headers();
-  myHeaders.append('Accept', 'application/vnd.github.v3+json');
+  myHeaders.append('Accept', 'application/json');
 
-  var jsonResponses = [];
-  var fetchPage = function(url) {
-    return fetch(url, {
-      mode: 'cors',
-      method: 'GET',
-      headers: myHeaders
-    })
-    .then(function(response) {
-      jsonResponses.push(response.json());
-
-      var links = response.headers.get('link').split(", ").map(x => {
-        var [url, rel] = x.split("; ");
-        url = url.replace(/^</,"").replace(/>$/,"");
-        rel = rel.replace(/^rel=\"/,"").replace('"','');
-        return {rel, url}
-      });
-      var next = links.find((x) => x.rel === "next");
-      if(next) {
-        return fetchPage(next.url);
-      }
-      return Promise.all(jsonResponses);
-    })
-    .then(responses => [].concat(...responses))
-  }
-
-  return fetchPage(rootUrl)
+  return fetch("data/prs.json",{
+    method: 'GET',
+    headers: myHeaders
+  })
+  .then(response => response.json())
   .then((json) => {
     return json
-      .filter((item) => {
-        return item.user.login === "nchevobbe" && (
-          item.merged_at !== null ||
-          closedCommitedPRs.includes(item.number)
-        );
-      })
       .map((item) => {
-        item.assign_time = item.created_at;
         item.startDate = new Date(item.created_at);
         item.endDate = new Date(item.merged_at || item.closed_at);
-        item.id = "gh-" + item.id;
-        item.bugType = "GH";
         return item;
       });
   });
