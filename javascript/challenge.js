@@ -48,9 +48,13 @@ const today = new Date();
 const weekNumber = Math.ceil((today - jan4)/MILLISECOND_A_DAY/7);
 const todayNumber = ((today - jan4)/MILLISECOND_A_DAY);
 
-var fetchSources = [fetchBugzilla(), fetchGithub()];
+var fetchSources = [
+  fetchBugzilla(),
+  fetchGithubConsole(),
+  ...fetchGithubRepos()
+];
 
-Promise.all(fetchSources).then(function([bugzillaData, ghData]){
+Promise.all(fetchSources).then(function([bugzillaData, ...ghData]){
 
   let bzBugs = bugzillaData.filter(function(x){
     if(!x.cf_last_resolved){
@@ -60,7 +64,7 @@ Promise.all(fetchSources).then(function([bugzillaData, ghData]){
     return (new Date(x.cf_last_resolved) >= jan4);
   });
 
-  let bugs = bzBugs.concat(ghData);
+  let bugs = bzBugs.concat(...ghData);
 
   plotChart(bugs);
 
@@ -197,10 +201,76 @@ function fetchBugzilla(){
   });
 }
 
-// Arrays of PR's ids which have been commited but not merged
-var closedCommitedPRs = [184, 272, 304, 342];
+function fetchGithubRepos() {
+  const repos = [
+    "jasonLaster/devtools-reps",
+  ];
+  return repos.map(fetchGithubRepo);
+}
 
-function fetchGithub(){
+function fetchGithubRepo(repo) {
+  var searchParams = getUrlParamsString({
+    "state": "closed",
+    "base": "master",
+    "sort": "updated",
+    "per_page": 100
+  });
+  var rootUrl = `https://api.github.com/repos/${repo}/pulls?${searchParams}`;
+  var myHeaders = new Headers();
+  myHeaders.append('Accept', 'application/vnd.github.v3+json');
+
+  var jsonResponses = [];
+  var fetchPage = function(url) {
+    return fetch(url, {
+      mode: 'cors',
+      method: 'GET',
+      headers: myHeaders
+    })
+    .then(function(response) {
+      jsonResponses.push(response.json());
+
+      let linkHeader = response.headers.get('link');
+      let next;
+      if (linkHeader) {
+        let links = linkHeader.split(", ").map(x => {
+          var [url, rel] = x.split("; ");
+          url = url.replace(/^</,"").replace(/>$/,"");
+          rel = rel.replace(/^rel=\"/,"").replace('"','');
+          return {rel, url}
+        });
+        next = links.find((x) => x.rel === "next");
+      }
+
+      if (next) {
+        return fetchPage(next.url);
+      }
+      return Promise.all(jsonResponses);
+    })
+    .then(responses => [].concat(...responses))
+  }
+
+  return fetchPage(rootUrl)
+    .then((json) => {
+      return json
+        .filter((item) => {
+          return item.user.login === "nchevobbe" && (
+            item.merged_at !== null
+          );
+        })
+        .map((item) => {
+          return Object.assign({
+            assign_time: item.created_at,
+            startDate: new Date(item.created_at),
+            endDate: new Date(item.merged_at || item.closed_at),
+            id: "gh-" + item.id,
+            bugType: "GH",
+            repo: repo,
+          }, item);
+        });
+  });
+}
+
+function fetchGithubConsole(){
   var myHeaders = new Headers();
   myHeaders.append('Accept', 'application/json');
 
@@ -288,7 +358,7 @@ function drawBug(bug){
     var bugGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
     bugGroup.classList.add('bug-line');
     bugGroup.setAttribute('data-tooltip',
-        `Bug ${bug.id}
+        `Bug ${bug.id} ${bug.repo ? "[" + bug.repo + "]" :""}
         ${PRIORITY_REGEX.test(bug.priority)?" [" + bug.priority + "]":""}
         <hr>
         ${bug.summary || bug.title}`);
