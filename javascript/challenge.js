@@ -30,6 +30,10 @@ const HOLIDAYS = [{
   name: 'Summer Holidays',
   start : new Date('2016-08-29'),
   end: new Date('2016-09-19')
+},{
+  name: '#MozAloha',
+  start : new Date('2016-12-04'),
+  end: new Date('2016-12-12')
 }];
 
 drawHolidays();
@@ -357,6 +361,8 @@ function plotChart(bugs){
     "stroke-width": 0.25
   });
 
+  var linesGroup = createSVGElement("g");
+
   bugs.sort(function(bug1, bug2){
     var d1 = bug1.cf_last_resolved || bug1.endDate;
     var d2 = bug2.cf_last_resolved || bug2.endDate;
@@ -369,11 +375,11 @@ function plotChart(bugs){
       return Math.floor((resolvedDate.getTime() - jan4.getTime()) / MILLISECOND_A_DAY) <= i
     });
 
+    var x = getPositionFromDate(jan4.getTime() + (i * MILLISECOND_A_DAY));
     if(resolved.length > 0){
       var bzs = resolved.filter(function(item){
         return item.bugType === "BZ";
       });
-      var x = getPositionFromDate(jan4.getTime() + (i * MILLISECOND_A_DAY));
 
       if(bzs.length > 0){
         var bzLine = createSVGElement("line", {
@@ -384,7 +390,7 @@ function plotChart(bugs){
           stroke: "#8BC34A",
           "stroke-width": 0.75
         });
-        chartSvg.appendChild(bzLine);
+        linesGroup.appendChild(bzLine);
       }
 
       if((resolved.length - bzs.length) > 0){
@@ -396,11 +402,11 @@ function plotChart(bugs){
           stroke: "#6E5494",
           "stroke-width": 0.5
         });
-        chartSvg.appendChild(prLine);
+        linesGroup.appendChild(prLine);
       }
-
     }
   }
+  chartSvg.appendChild(linesGroup);
   chartSvg.appendChild(goalLine);
   chartSvg.appendChild(extraGoalLine);
 }
