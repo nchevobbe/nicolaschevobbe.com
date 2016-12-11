@@ -394,39 +394,33 @@ function drawBug(bug){
 }
 
 function plotChart(bugs){
-  var displayedSvg;
-  if(document.getElementById("input-timeline").checked) {
-    displayedSvg = timelineSvg;
-  } else {
-    displayedSvg = chartSvg;
-  }
-
-  var matrix = displayedSvg.getScreenCTM();
+  var matrix = chartSvg.getScreenCTM();
   var inverseMatrix = matrix.inverse();
 
-  var rect = displayedSvg.getBoundingClientRect();
-  var position = displayedSvg.createSVGPoint();
+  var rect = chartSvg.getBoundingClientRect();
+  var position = chartSvg.createSVGPoint();
   position.x = 0;
   position.y = rect.bottom;
 
   var correctZeroPosition = position.matrixTransform(inverseMatrix);
-  var increment = correctZeroPosition.y / 100;
+  var increment = correctZeroPosition.y / bugs.length;
 
+  const extraGoal = 100;
   var extraGoalLine = createSVGElement("line", {
     x1: getPositionFromDate(jan4),
     y1: correctZeroPosition.y,
     x2: getPositionFromDate(new Date("2017-01-02")),
-    y2: 0,
-    stroke: "#36f475",
-    opacity: 0.5,
+    y2: correctZeroPosition.y - (extraGoal * increment),
+    stroke: "#1976D2",
     "stroke-width": 0.25
   });
 
+  const goal = 52;
   var goalLine = createSVGElement("line", {
     x1: getPositionFromDate(jan4),
     y1: correctZeroPosition.y,
     x2: getPositionFromDate(new Date("2017-01-02")),
-    y2: correctZeroPosition.y - (52 * increment),
+    y2: correctZeroPosition.y - (goal * increment),
     stroke: "#F44336",
     "stroke-width": 0.25
   });
@@ -451,6 +445,7 @@ function plotChart(bugs){
         return item.bugType === "BZ";
       });
 
+      let lineWidth = 0.75;
       if(bzs.length > 0){
         var bzLine = createSVGElement("line", {
           x1: x,
@@ -458,7 +453,7 @@ function plotChart(bugs){
           x2: x,
           y2: correctZeroPosition.y - (bzs.length * increment),
           stroke: "#8BC34A",
-          "stroke-width": 0.75
+          "stroke-width": lineWidth
         });
         linesGroup.appendChild(bzLine);
       }
@@ -470,7 +465,7 @@ function plotChart(bugs){
           x2: x,
           y2: correctZeroPosition.y - (resolved.length * increment),
           stroke: "#6E5494",
-          "stroke-width": 0.5
+          "stroke-width": lineWidth
         });
         linesGroup.appendChild(prLine);
       }
@@ -518,7 +513,6 @@ function drawWeeks(bugs){
     }
   }
   timelineSvg.insertBefore(weekGroup,timelineSvg.firstChild);
-  chartSvg.insertBefore(weekGroup.cloneNode(true),chartSvg.firstChild);
 }
 
 function drawHolidays(){
