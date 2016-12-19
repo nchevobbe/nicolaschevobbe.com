@@ -41,7 +41,7 @@ drawHolidays();
 var lanes = [];
 var bugs = [];
 
-
+window.addEventListener("resize", resizeSvgElements);
 timelineSvg.addEventListener('mousemove', onMouseMove, false);
 
 const today = new Date();
@@ -66,7 +66,7 @@ Promise.all(fetchSources).then(function([bugzillaData, ...ghData]){
 
   let bugs = bzBugs.concat(...ghData);
 
-  plotChart(bugs);
+  // plotChart(bugs);
 
   bugs.sort(function(a, b){
     var priorityA = (PRIORITY_REGEX.test(a.priority)?a.priority:'P3');
@@ -203,7 +203,7 @@ function fetchBugzilla(){
 
 function fetchGithubRepos() {
   const repos = [
-    "jasonLaster/devtools-reps",
+    "devtools-html/devtools-reps",
   ];
   return repos.map(fetchGithubRepo);
 }
@@ -608,8 +608,9 @@ function updateDashboard(bugs){
     percent = ">100"
   }
   document.getElementById('successPercentage').textContent = `${percent}%`;
-
   document.querySelector('.stats').classList.toggle('ready');
+
+  resizeSvgElements();
 }
 
 function needWhiteText(rgb){
@@ -690,4 +691,19 @@ function onMouseMove(e){
   }
 }
 
+function resizeSvgElements() {
+  let totalSize = (lanes.length + 1) * LINE_HEIGHT;
+  console.log("totalSize", totalSize);
+
+  let circle = createSVGElement("circle", {
+    cx: 0,
+    cy: totalSize,
+  });
+  timelineSvg.appendChild(circle);
+  let rect = circle.getBoundingClientRect();
+  console.log(circle, "getBoundingClientRect", rect);
+  let timelineSvgRect = timelineSvg.getBoundingClientRect();
+  timelineSvg.style.height = `${rect.top - timelineSvgRect.top}px`;
+  circle.remove();
+}
 
