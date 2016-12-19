@@ -70,8 +70,15 @@ section.challenge-dashboard h1 {
 .challenge-dashboard svg {
   width: 100%;
   max-width: 100vw;
-  min-height: 300px;
+  height: 300px;
   background-color: white;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.challenge-dashboard svg.chart {
+  display: none;
 }
 
 .zoomed .bug-line:not(.detail),
@@ -123,39 +130,6 @@ section.challenge-dashboard h1 {
 
 .removed {
   text-decoration: line-through;
-}
-
-nav.tabs {
-  display: flex;
-  margin: 0;
-  color: #FFF;
-  border: 1px solid white;
-}
-
-.tabs label {
-  flex: 1;
-  text-align: center;
-  opacity: 0.5;
-}
-
-.challenge-dashboard svg{
-  display: none;
-}
-
-.challenge-dashboard input[name=challenge] {
-  display: none;
-}
-
-.challenge-dashboard input[name=challenge]:checked + svg {
-  display: block;
-}
-
-.challenge-dashboard #input-timeline:checked ~ nav label[for=input-timeline],
-.challenge-dashboard #input-chart:checked ~ nav label[for=input-chart] {
-  font-weight: 800;
-  opacity: 1;
-  background-color: #FFF;
-  color: #212121;
 }
 
 /* ANIMATIONS/KEYFRAMES */
