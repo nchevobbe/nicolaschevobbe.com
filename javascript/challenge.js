@@ -204,6 +204,7 @@ function fetchBugzilla(){
 function fetchGithubRepos() {
   const repos = [
     "devtools-html/devtools-reps",
+    "devtools-html/devtools-core",
   ];
   return repos.map(fetchGithubRepo);
 }
