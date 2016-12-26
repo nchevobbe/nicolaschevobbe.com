@@ -34,6 +34,10 @@ const HOLIDAYS = [{
   name: '#MozAloha',
   start : new Date('2016-12-04'),
   end: new Date('2016-12-12')
+},{
+  name: 'Christmas Holidays',
+  start : new Date('2016-12-23'),
+  end: new Date('2017-01-02')
 }];
 
 drawHolidays();
