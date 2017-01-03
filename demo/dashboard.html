@@ -1,0 +1,544 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            @import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic);
+            @import url(https://fonts.googleapis.com/css?family=Signika:700);
+
+            * {
+                box-sizing: border-box;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #2F3748;
+                color : #f9f9f9;
+                padding: 2em;
+            }
+
+            svg {
+                display: block;
+                padding: 0 1em;
+                max-width: 100%;
+                background-color: #f9f9f9;
+            }
+
+            /* TOOLTIP */
+            .tooltip {
+              position: fixed;
+              left: -9999px;
+              top: 0;
+              padding: 1em;
+              font-family: 'Signika';
+              font-weight: 400;
+              max-width: 200px;
+              width: 200px;
+              background-color: #1976D2;
+              color: black;
+              text-align: center;
+              word-wrap: break-word;
+              font-size: 1rem;
+              line-height: 1.25rem;
+            }
+
+            .tooltip.dark {
+              color: white;
+            }
+
+            .tooltip hr {
+              border: 1px solid rgba(0, 0, 0, 0.8);
+            }
+
+            .tooltip.dark hr {
+              border-color: rgba(255, 255, 255, 0.8);
+            }
+
+            /* ANIMATIONS/KEYFRAMES */
+            @keyframes appears {
+              0% {
+                opacity: 0;
+              }
+              100% {
+                opacity: 1;
+              }
+            }
+
+        </style>
+    </head>
+<body>
+    <svg viewBox="0 0 365 150" class="timeline" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"><g class="weeks"><line x1="0" y1="0" x2="0" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="0" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="7" y1="0" x2="7" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="7" y="0" width="7" height="2" fill="#F44336"></rect><line x1="14" y1="0" x2="14" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="14" y="0" width="7" height="2" fill="#F44336"></rect><line x1="21" y1="0" x2="21" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="21" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="28" y1="0" x2="28" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="28" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="35" y1="0" x2="35" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="35" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="42" y1="0" x2="42" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="42" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="49" y1="0" x2="49" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="49" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="56" y1="0" x2="56" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="56" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="63" y1="0" x2="63" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="63" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="70" y1="0" x2="70" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="70" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="77" y1="0" x2="77" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="77" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="84" y1="0" x2="84" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="84" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="91" y1="0" x2="91" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="91" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="98" y1="0" x2="98" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="98" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="105" y1="0" x2="105" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="105" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="112" y1="0" x2="112" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="112" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="119" y1="0" x2="119" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="119" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="126" y1="0" x2="126" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="126" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="133" y1="0" x2="133" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="133" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="140" y1="0" x2="140" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="140" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="147" y1="0" x2="147" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="147" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="154" y1="0" x2="154" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="154" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="161" y1="0" x2="161" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="161" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="168" y1="0" x2="168" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="168" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="175" y1="0" x2="175" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="175" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="182" y1="0" x2="182" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="182" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="189" y1="0" x2="189" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="189" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="196" y1="0" x2="196" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="196" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="203" y1="0" x2="203" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="203" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="210" y1="0" x2="210" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="210" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="217" y1="0" x2="217" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="217" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="224" y1="0" x2="224" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="224" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="231" y1="0" x2="231" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="231" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="238" y1="0" x2="238" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="238" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="245" y1="0" x2="245" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="245" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="252" y1="0" x2="252" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="252" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="259" y1="0" x2="259" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="259" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="266" y1="0" x2="266" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="266" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="273" y1="0" x2="273" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="273" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="280" y1="0" x2="280" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="280" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="287" y1="0" x2="287" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="287" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="294" y1="0" x2="294" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="294" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="301" y1="0" x2="301" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="301" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="308" y1="0" x2="308" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="308" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="315" y1="0" x2="315" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="315" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="322" y1="0" x2="322" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="322" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="329" y1="0" x2="329" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="329" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="336" y1="0" x2="336" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="336" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="343" y1="0" x2="343" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="343" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="350" y1="0" x2="350" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="350" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="357" y1="0" x2="357" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line><rect x="357" y="0" width="7" height="2" fill="#8BC34A"></rect><line x1="364" y1="0" x2="364" y2="10000" stroke="rgba(0,0,0,0.3)" stroke-width="0.1"></line></g>
+  <polyline class="holidays"><rect title="Skiing" x="12" y="2" width="7" height="100" fill="#77B6EC" fill-opacity="0.3"></rect><rect title="#MozLondon" x="161" y="2" width="5" height="100" fill="#77B6EC" fill-opacity="0.3"></rect><rect title="Summer Holidays" x="238" y="2" width="21" height="100" fill="#77B6EC" fill-opacity="0.3"></rect><rect title="#MozAloha" x="335" y="2" width="8" height="100" fill="#77B6EC" fill-opacity="0.3"></rect><rect title="Christmas Holidays" x="354" y="2" width="10" height="100" fill="#77B6EC" fill-opacity="0.3"></rect></polyline><g class="bug-line" data-tooltip="Bug 1247243
+         [P1]
+        <hr>
+        Animations are shown only every 2 reloads" data-bug-id="1247243"><circle class="resolved" cx="57.47099537037037" cy="12" r="3.0625" fill="rgb(0, 188, 212)"></circle><line x1="37.57019675925926" y1="12" x2="57.47099537037037" y2="12" stroke="rgb(0, 188, 212)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1257874
+         [P1]
+        <hr>
+        Stop using getFrames and use the new chrome-only getProperties to get animated properties and their keyframes in the timeline" data-bug-id="1257874"><circle class="resolved" cx="82.0872337962963" cy="12" r="3.0625" fill="rgb(103, 58, 183)"></circle><line x1="74.64282407407407" y1="12" x2="82.0872337962963" y2="12" stroke="rgb(103, 58, 183)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1261714
+         [P1]
+        <hr>
+        Intermittent browser_toolbox_options_disable_js.js | A promise chain failed to handle a rejection: - Error: operation not possible on dead CPOW" data-bug-id="1261714"><circle class="resolved" cx="185.40671296296296" cy="12" r="3.0625" fill="rgb(103, 58, 183)"></circle><line x1="183.6688425925926" y1="12" x2="185.40671296296296" y2="12" stroke="rgb(103, 58, 183)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1263439
+         [P1]
+        <hr>
+        CSS rules inspector not showing rules when stylesheet has a data-uri sourcemap and link href is generated with `URL.createObjectURL`" data-bug-id="1263439"><circle class="resolved" cx="102.44130787037037" cy="12" r="3.0625" fill="rgb(103, 58, 183)"></circle><line x1="97.54979166666666" y1="12" x2="102.44130787037037" y2="12" stroke="rgb(103, 58, 183)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1283123
+         [P1]
+        <hr>
+        Reps: make it possible to pass in a component to handle object links" data-bug-id="1283123"><circle class="resolved" cx="190.97626157407407" cy="24" r="3.0625" fill="rgb(0, 188, 212)"></circle><line x1="178.56572916666667" y1="24" x2="190.97626157407407" y2="24" stroke="rgb(0, 188, 212)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1286700
+         [P1]
+        <hr>
+        Reps: text-node.js cropMultipleLines is undefined" data-bug-id="1286700"><circle class="resolved" cx="195.32288194444445" cy="12" r="3.0625" fill="rgb(244, 67, 54)"></circle><line x1="191.94947916666666" y1="12" x2="195.32288194444445" y2="12" stroke="rgb(244, 67, 54)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1303612
+         [P1]
+        <hr>
+        New console frontend: pageErrors should include the location" data-bug-id="1303612"><circle class="resolved" cx="261.4222569444444" cy="12" r="3.0625" fill="rgb(3, 169, 244)"></circle><line x1="261.3879513888889" y1="12" x2="261.4222569444444" y2="12" stroke="rgb(3, 169, 244)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1308840
+         [P1]
+        <hr>
+        An error is thrown when trying to open the callstack of an error message" data-bug-id="1308840"><circle class="resolved" cx="281.45872685185185" cy="12" r="3.0625" fill="rgb(244, 67, 54)"></circle><line x1="280.23782407407407" y1="12" x2="281.45872685185185" y2="12" stroke="rgb(244, 67, 54)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1321518
+         [P1]
+        <hr>
+        Mocha tests are failing due to React update" data-bug-id="1321518"><circle class="resolved" cx="333.3517708333333" cy="12" r="3.0625" fill="rgb(156, 39, 176)"></circle><line x1="332.4805324074074" y1="12" x2="333.3517708333333" y2="12" stroke="rgb(156, 39, 176)" stroke-width="3.5" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 820926
+         [P2]
+        <hr>
+        [markup view] don't close self-closing tags (br, img, …) if the page is an HTML page (not X(HT)ML)" data-bug-id="820926"><circle class="resolved" cx="115.59488425925926" cy="24" r="2.40625" fill="rgb(33, 150, 243)"></circle><line x1="105.28542824074074" y1="24" x2="115.59488425925926" y2="24" stroke="rgb(33, 150, 243)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1224504
+         [P2]
+        <hr>
+        [devtools] Editing in Box Model view does not get applied immediately to Rules view" data-bug-id="1224504"><circle class="resolved" cx="169.7162847222222" cy="12" r="2.40625" fill="rgb(76, 175, 80)"></circle><line x1="157.68872685185184" y1="12" x2="169.7162847222222" y2="12" stroke="rgb(76, 175, 80)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1232806
+         [P2]
+        <hr>
+        It's possible to accidentally end up dragging several nodes in markup at once" data-bug-id="1232806"><circle class="resolved" cx="123.42456018518519" cy="36" r="2.40625" fill="rgb(0, 150, 136)"></circle><line x1="100.24802083333333" y1="36" x2="123.42456018518519" y2="36" stroke="rgb(0, 150, 136)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1240038
+         [P2]
+        <hr>
+        a new rule added in the style editor doesn't show up in the inspector" data-bug-id="1240038"><circle class="resolved" cx="160.39556712962963" cy="24" r="2.40625" fill="rgb(156, 39, 176)"></circle><line x1="143.74255787037038" y1="24" x2="160.39556712962963" y2="24" stroke="rgb(156, 39, 176)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1245365
+         [P2]
+        <hr>
+        searching attribute values through CSS selectors override the search terms" data-bug-id="1245365"><circle class="resolved" cx="121.4101388888889" cy="12" r="2.40625" fill="rgb(63, 81, 181)"></circle><line x1="108.8260763888889" y1="12" x2="121.4101388888889" y2="12" stroke="rgb(63, 81, 181)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1248274
+         [P2]
+        <hr>
+        Clicking property values placed right after filter/color circle fails if I was editing corresponding property name" data-bug-id="1248274"><circle class="resolved" cx="154.4160185185185" cy="48" r="2.40625" fill="rgb(103, 58, 183)"></circle><line x1="115.84024305555556" y1="48" x2="154.4160185185185" y2="48" stroke="rgb(103, 58, 183)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1253869
+         [P2]
+        <hr>
+        Inactive properties with !important; created in ruleview make other rules look not applied" data-bug-id="1253869"><circle class="resolved" cx="148.43466435185186" cy="12" r="2.40625" fill="rgb(103, 58, 183)"></circle><line x1="126.83961805555556" y1="12" x2="148.43466435185186" y2="12" stroke="rgb(103, 58, 183)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1259559
+         [P2]
+        <hr>
+        Units cycling with shift+click should persists  and change the value in Style editor" data-bug-id="1259559"><circle class="resolved" cx="88.94987268518518" cy="24" r="2.40625" fill="rgb(76, 175, 80)"></circle><line x1="80.83049768518518" y1="24" x2="88.94987268518518" y2="24" stroke="rgb(76, 175, 80)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1259777
+         [P2]
+        <hr>
+        DOMUtils is (lazy) loaded but not used in css-angle.js" data-bug-id="1259777"><circle class="resolved" cx="82.0875462962963" cy="36" r="2.40625" fill="rgb(96, 125, 139)"></circle><line x1="81.69435185185185" y1="36" x2="82.0875462962963" y2="36" stroke="rgb(96, 125, 139)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1260711
+         [P2]
+        <hr>
+        Error &quot;IndexSizeError: Index or size is negative or greater than the allowed amount&quot; when using the animation inspector" data-bug-id="1260711"><circle class="resolved" cx="88.95011574074074" cy="48" r="2.40625" fill="rgb(33, 150, 243)"></circle><line x1="86.54555555555555" y1="48" x2="88.95011574074074" y2="48" stroke="rgb(33, 150, 243)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1276465
+         [P2]
+        <hr>
+        &quot; autocompleteMap.get(...) is undefined&quot; error in jsconsole when creating a new stylesheet in the StyleEditor" data-bug-id="1276465"><circle class="resolved" cx="151.44431712962964" cy="36" r="2.40625" fill="rgb(139, 195, 74)"></circle><line x1="145.69864583333333" y1="36" x2="151.44431712962964" y2="36" stroke="rgb(139, 195, 74)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1276468
+         [P2]
+        <hr>
+        &quot; Error: Unknown sheet source&quot; error in jsconsole when creating a new stylesheet in the StyleEditor" data-bug-id="1276468"><circle class="resolved" cx="157.00552083333332" cy="60" r="2.40625" fill="rgb(255, 87, 34)"></circle><line x1="145.73864583333332" y1="60" x2="157.00552083333332" y2="60" stroke="rgb(255, 87, 34)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1297043
+         [P2]
+        <hr>
+        TableWidget selection does not work when clicking on a cell text content" data-bug-id="1297043"><circle class="resolved" cx="234.51586805555556" cy="12" r="2.40625" fill="rgb(0, 188, 212)"></circle><line x1="231.48820601851853" y1="12" x2="234.51586805555556" y2="12" stroke="rgb(0, 188, 212)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1302982
+         [P2]
+        <hr>
+        Reps does not handle long strings" data-bug-id="1302982"><circle class="resolved" cx="311.67155092592594" cy="24" r="2.40625" fill="rgb(3, 169, 244)"></circle><line x1="255.45560185185184" y1="24" x2="311.67155092592594" y2="24" stroke="rgb(3, 169, 244)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1303126
+         [P2]
+        <hr>
+        Add a rep for Symbols" data-bug-id="1303126"><circle class="resolved" cx="261.42234953703706" cy="36" r="2.40625" fill="rgb(0, 150, 136)"></circle><line x1="255.80157407407407" y1="36" x2="261.42234953703706" y2="36" stroke="rgb(0, 150, 136)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1304352
+         [P2]
+        <hr>
+        Add a rep for Map" data-bug-id="1304352"><circle class="resolved" cx="271.2715509259259" cy="48" r="2.40625" fill="rgb(255, 152, 0)"></circle><line x1="261.46680555555554" y1="48" x2="271.2715509259259" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1305981
+         [P2]
+        <hr>
+        Reps with a more link sometimes show &quot;-N more&quot;" data-bug-id="1305981"><circle class="resolved" cx="281.09435185185185" cy="36" r="2.40625" fill="rgb(33, 150, 243)"></circle><line x1="274.70229166666667" y1="36" x2="281.09435185185185" y2="36" stroke="rgb(33, 150, 243)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307905
+         [P2]
+        <hr>
+        Ignore irrelevant properties in stub generation" data-bug-id="1307905"><circle class="resolved" cx="309.9009837962963" cy="12" r="2.40625" fill="rgb(139, 195, 74)"></circle><line x1="295.4961574074074" y1="12" x2="309.9009837962963" y2="12" stroke="rgb(139, 195, 74)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307907
+         [P2]
+        <hr>
+        Add support for console.dirxml()" data-bug-id="1307907"><circle class="resolved" cx="278.9940972222222" cy="48" r="2.40625" fill="rgb(255, 152, 0)"></circle><line x1="276.4704861111111" y1="48" x2="278.9940972222222" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307908
+         [P2]
+        <hr>
+        Implement custom styles" data-bug-id="1307908"><circle class="resolved" cx="293.72341435185183" cy="60" r="2.40625" fill="rgb(255, 87, 34)"></circle><line x1="278.565787037037" y1="60" x2="293.72341435185183" y2="60" stroke="rgb(255, 87, 34)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307919
+         [P2]
+        <hr>
+        Add learn more link" data-bug-id="1307919"><circle class="resolved" cx="289.6297222222222" cy="72" r="2.40625" fill="rgb(76, 175, 80)"></circle><line x1="282.82413194444445" y1="72" x2="289.6297222222222" y2="72" stroke="rgb(76, 175, 80)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307938
+         [P2]
+        <hr>
+        Display DOMNodes in a more user friendly way (i.e. not HTMLBodyElement but <body>)" data-bug-id="1307938"><circle class="resolved" cx="305.10564814814813" cy="36" r="2.40625" fill="rgb(255, 87, 34)"></circle><line x1="287.73209490740743" y1="36" x2="305.10564814814813" y2="36" stroke="rgb(255, 87, 34)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1307941
+         [P2]
+        <hr>
+        DOM nodes aren't being highlighted in the page on hover" data-bug-id="1307941"><circle class="resolved" cx="316.4845138888889" cy="48" r="2.40625" fill="rgb(0, 150, 136)"></circle><line x1="305.94296296296295" y1="48" x2="316.4845138888889" y2="48" stroke="rgb(0, 150, 136)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1309749
+         [P2]
+        <hr>
+        Console doesn't display NaN or Infinity" data-bug-id="1309749"><circle class="resolved" cx="290.0636689814815" cy="48" r="2.40625" fill="rgb(76, 175, 80)"></circle><line x1="284.9668634259259" y1="48" x2="290.0636689814815" y2="48" stroke="rgb(76, 175, 80)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1310408
+         [P2]
+        <hr>
+        Strengthen test coverage for batched console calls" data-bug-id="1310408"><circle class="resolved" cx="289.10761574074075" cy="84" r="2.40625" fill="rgb(0, 188, 212)"></circle><line x1="285.4164930555556" y1="84" x2="289.10761574074075" y2="84" stroke="rgb(0, 188, 212)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1311168
+         [P2]
+        <hr>
+        Handle DocumentFragment in Reps" data-bug-id="1311168"><circle class="resolved" cx="310.65291666666667" cy="96" r="2.40625" fill="rgb(156, 39, 176)"></circle><line x1="288.8600925925926" y1="96" x2="310.65291666666667" y2="96" stroke="rgb(156, 39, 176)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1311266
+         [P2]
+        <hr>
+        Add a rep for comment node" data-bug-id="1311266"><circle class="resolved" cx="293.7236111111111" cy="108" r="2.40625" fill="rgb(255, 193, 7)"></circle><line x1="289.23912037037036" y1="108" x2="293.7236111111111" y2="108" stroke="rgb(255, 193, 7)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1312097
+         [P2]
+        <hr>
+        When window is narrow, filter bar doesn't wrap properly" data-bug-id="1312097"><circle class="resolved" cx="295.36532407407407" cy="120" r="2.40625" fill="rgb(96, 125, 139)"></circle><line x1="291.9748726851852" y1="120" x2="295.36532407407407" y2="120" stroke="rgb(96, 125, 139)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1318796
+         [P2]
+        <hr>
+        Web Console CSS links should open the Style Editor" data-bug-id="1318796"><circle class="resolved" cx="360.83318287037036" cy="24" r="2.40625" fill="rgb(255, 193, 7)"></circle><line x1="332.2814583333333" y1="24" x2="360.83318287037036" y2="24" stroke="rgb(255, 193, 7)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1320359
+         [P2]
+        <hr>
+        EventRep should show the target property" data-bug-id="1320359"><circle class="resolved" cx="332.1431597222222" cy="36" r="2.40625" fill="rgb(233, 30, 99)"></circle><line x1="326.7449074074074" y1="36" x2="332.1431597222222" y2="36" stroke="rgb(233, 30, 99)" stroke-width="2.75" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99287704 [devtools-html/devtools-core]
+
+        <hr>
+        Better styling on the landing page" data-bug-id="99287704"><circle class="resolved" cx="355.50355324074076" cy="12" r="1.75" fill="rgb(103, 58, 183)"></circle><line x1="354.96568287037036" y1="12" x2="355.50355324074076" y2="12" stroke="rgb(103, 58, 183)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99582103 [devtools-html/devtools-core]
+
+        <hr>
+        Better keyboard navigation" data-bug-id="99582103"><circle class="resolved" cx="359.8063310185185" cy="36" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="359.79574074074077" y1="36" x2="359.8063310185185" y2="36" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99535397 [devtools-html/devtools-core]
+
+        <hr>
+        Fix tab click in launchpad storybook" data-bug-id="99535397"><circle class="resolved" cx="359.72606481481483" cy="48" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="359.4538425925926" y1="48" x2="359.72606481481483" y2="48" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99434265 [devtools-html/devtools-core]
+
+        <hr>
+        Add a tab filter input" data-bug-id="99434265"><circle class="resolved" cx="358.94262731481484" cy="60" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="358.47341435185183" y1="60" x2="358.94262731481484" y2="60" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99330243 [devtools-html/devtools-core]
+
+        <hr>
+        Fix styling issues" data-bug-id="99330243"><circle class="resolved" cx="357.3598958333333" cy="72" r="1.75" fill="rgb(156, 39, 176)"></circle><line x1="356.9205324074074" y1="72" x2="357.3598958333333" y2="72" stroke="rgb(156, 39, 176)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99698995 [devtools-html/devtools-reps]
+
+        <hr>
+        Switch launchpad app to redux" data-bug-id="99698995"><circle class="resolved" cx="362.48881944444446" cy="12" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="360.88334490740743" y1="12" x2="362.48881944444446" y2="12" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99457112 [devtools-html/devtools-reps]
+
+        <hr>
+        Refactor quick links" data-bug-id="99457112"><circle class="resolved" cx="359.43549768518517" cy="84" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="358.6554513888889" y1="84" x2="359.43549768518517" y2="84" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99456899 [devtools-html/devtools-reps]
+
+        <hr>
+        Fix Attribute rep" data-bug-id="99456899"><circle class="resolved" cx="358.69703703703703" cy="96" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="358.65396990740743" y1="96" x2="358.69703703703703" y2="96" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 99456648 [devtools-html/devtools-reps]
+
+        <hr>
+        Add a button to clear the results list" data-bug-id="99456648"><circle class="resolved" cx="358.68539351851854" cy="108" r="1.75" fill="rgb(156, 39, 176)"></circle><line x1="358.652337962963" y1="108" x2="358.68539351851854" y2="108" stroke="rgb(156, 39, 176)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 97469396 [devtools-html/devtools-reps]
+
+        <hr>
+        Changes to the test page" data-bug-id="97469396"><circle class="resolved" cx="343.8190162037037" cy="12" r="1.75" fill="rgb(255, 193, 7)"></circle><line x1="342.8115162037037" y1="12" x2="343.8190162037037" y2="12" stroke="rgb(255, 193, 7)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 98989487 [devtools-html/devtools-reps]
+
+        <hr>
+        Add a way to display and copy packet" data-bug-id="98989487"><circle class="resolved" cx="353.6753356481481" cy="36" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="352.80565972222223" y1="36" x2="353.6753356481481" y2="36" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 97464695 [devtools-html/devtools-reps]
+
+        <hr>
+        Merge latest Reps from m-c" data-bug-id="97464695"><circle class="resolved" cx="342.7147337962963" cy="36" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="342.70166666666665" y1="36" x2="342.7147337962963" y2="36" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 97362526 [devtools-html/devtools-reps]
+
+        <hr>
+        Fix errors due to AMD removal" data-bug-id="97362526"><circle class="resolved" cx="341.8072337962963" cy="48" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="340.7953935185185" y1="48" x2="341.8072337962963" y2="48" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-87540047
+
+        <hr>
+        Add console.group support" data-bug-id="gh-87540047"><circle class="resolved" cx="277.5942708333333" cy="72" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="270.7571296296296" y1="72" x2="277.5942708333333" y2="72" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-87567466
+
+        <hr>
+        Add title on repeat element" data-bug-id="gh-87567466"><circle class="resolved" cx="270.98597222222224" cy="12" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="270.8853587962963" y1="12" x2="270.98597222222224" y2="12" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-87558358
+
+        <hr>
+        Add test for the location in consoleApiCall" data-bug-id="gh-87558358"><circle class="resolved" cx="270.85918981481484" cy="60" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="270.83986111111113" y1="60" x2="270.85918981481484" y2="60" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-85109436
+
+        <hr>
+        Add console.table support" data-bug-id="gh-85109436"><circle class="resolved" cx="266.8037962962963" cy="84" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="253.80916666666667" y1="84" x2="266.8037962962963" y2="84" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-86283687
+
+        <hr>
+        Add network messages filtering in the filter bar. r=linclark" data-bug-id="gh-86283687"><circle class="resolved" cx="262.9444907407407" cy="60" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="262.2584259259259" y1="60" x2="262.9444907407407" y2="60" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-85274747
+
+        <hr>
+        Match against stacktrace in text filter" data-bug-id="gh-85274747"><circle class="resolved" cx="255.73714120370371" cy="12" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="254.7452662037037" y1="12" x2="255.73714120370371" y2="12" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-83890652
+
+        <hr>
+        Add a default value for the open prop in ConsoleApiCall and MessageContainer" data-bug-id="gh-83890652"><circle class="resolved" cx="245.4239699074074" cy="12" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="243.37902777777776" y1="12" x2="245.4239699074074" y2="12" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-83237957
+
+        <hr>
+        Clear all messages data in state when clearing messagesById" data-bug-id="gh-83237957"><circle class="resolved" cx="240.96070601851852" cy="24" r="1.75" fill="rgb(96, 125, 139)"></circle><line x1="239.3991898148148" y1="24" x2="240.96070601851852" y2="24" stroke="rgb(96, 125, 139)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-80864481
+
+        <hr>
+        Add support for console.time(). r=linclark" data-bug-id="gh-80864481"><circle class="resolved" cx="228.94891203703705" cy="24" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="219.86525462962962" y1="24" x2="228.94891203703705" y2="24" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-81890195
+
+        <hr>
+        Remove the URL tooltip when hovering VariableViewLink" data-bug-id="gh-81890195"><circle class="resolved" cx="228.79824074074074" cy="36" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="227.8883101851852" y1="36" x2="228.79824074074074" y2="36" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-80510474
+
+        <hr>
+        Add collapsible stacktrace for console.error/trace messages. r=linclark" data-bug-id="gh-80510474"><circle class="resolved" cx="220.87177083333333" cy="12" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="217.82650462962962" y1="12" x2="220.87177083333333" y2="12" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-79418705
+
+        <hr>
+        Add support for console.trace()" data-bug-id="gh-79418705"><circle class="resolved" cx="211.94861111111112" cy="12" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="207.85064814814814" y1="12" x2="211.94861111111112" y2="12" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-78889328
+
+        <hr>
+        Fix CSS rules and classes for the FilterBar" data-bug-id="gh-78889328"><circle class="resolved" cx="210.62376157407408" cy="24" r="1.75" fill="rgb(0, 188, 212)"></circle><line x1="204.7144675925926" y1="24" x2="210.62376157407408" y2="24" stroke="rgb(0, 188, 212)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-78666213
+
+        <hr>
+        Change [category] and [severity] attribute to classes" data-bug-id="gh-78666213"><circle class="resolved" cx="205.6231712962963" cy="36" r="1.75" fill="rgb(156, 39, 176)"></circle><line x1="203.4814236111111" y1="36" x2="205.6231712962963" y2="36" stroke="rgb(156, 39, 176)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-78202842
+
+        <hr>
+        Fix CSS for the FilterBar. r=@linclark, @ntim, @helenvholmes" data-bug-id="gh-78202842"><circle class="resolved" cx="200.95917824074073" cy="48" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="198.80137731481483" y1="48" x2="200.95917824074073" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-78022341
+
+        <hr>
+        Handle `console.count`calls without label. r=linclark" data-bug-id="gh-78022341"><circle class="resolved" cx="199.86375" cy="60" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="197.75559027777777" y1="60" x2="199.86375" y2="60" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-77371275
+
+        <hr>
+        Add filtering bar" data-bug-id="gh-77371275"><circle class="resolved" cx="196.70994212962964" cy="36" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="191.92858796296295" y1="36" x2="196.70994212962964" y2="36" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-77863363
+
+        <hr>
+        Define state default in the reducers" data-bug-id="gh-77863363"><circle class="resolved" cx="197.8348611111111" cy="24" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="196.80601851851853" y1="24" x2="197.8348611111111" y2="24" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-75865781
+
+        <hr>
+        Introduce message limit in the new console frontend. r=linclark" data-bug-id="gh-75865781"><circle class="resolved" cx="186.9277662037037" cy="36" r="1.75" fill="rgb(255, 193, 7)"></circle><line x1="178.76097222222222" y1="36" x2="186.9277662037037" y2="36" stroke="rgb(255, 193, 7)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-69055950
+
+        <hr>
+        Use Immutable data structures in messages reducer." data-bug-id="gh-69055950"><circle class="resolved" cx="127.92061342592592" cy="24" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="122.806875" y1="24" x2="127.92061342592592" y2="24" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-69706700
+
+        <hr>
+        Make the new console take the full width of the window" data-bug-id="gh-69706700"><circle class="resolved" cx="129.7275462962963" cy="36" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="128.70716435185184" y1="36" x2="129.7275462962963" y2="36" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-68425853
+
+        <hr>
+        Create getAllMessages reducer function and use it in mapStateToProps" data-bug-id="gh-68425853"><circle class="resolved" cx="121.65724537037038" cy="60" r="1.75" fill="rgb(0, 188, 212)"></circle><line x1="116.83509259259259" y1="60" x2="121.65724537037038" y2="60" stroke="rgb(0, 188, 212)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-69217330
+
+        <hr>
+        Add support for console.clear" data-bug-id="gh-69217330"><circle class="resolved" cx="129.72523148148147" cy="72" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="123.92331018518519" y1="72" x2="129.72523148148147" y2="72" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-66627565
+
+        <hr>
+        Adds a test for PageError component" data-bug-id="gh-66627565"><circle class="resolved" cx="102.61628472222222" cy="48" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="102.4745138888889" y1="48" x2="102.61628472222222" y2="48" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-66546910
+
+        <hr>
+        Wire up a PageError message type. r=linclark" data-bug-id="gh-66546910"><circle class="resolved" cx="101.84965277777778" cy="60" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="101.84565972222222" y1="60" x2="101.84965277777778" y2="60" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-67563715
+
+        <hr>
+        Issue #57 - Rename temporary variables and components with better names" data-bug-id="gh-67563715"><circle class="resolved" cx="113.82081018518518" cy="72" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="109.82768518518519" y1="72" x2="113.82081018518518" y2="72" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-67567799
+
+        <hr>
+        Issue #60 - Remove useless package.json file" data-bug-id="gh-67567799"><circle class="resolved" cx="113.65265046296297" cy="84" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="109.85037037037037" y1="84" x2="113.65265046296297" y2="84" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-67131315
+
+        <hr>
+        Add a MessageIcon component - For issue #52" data-bug-id="gh-67131315"><circle class="resolved" cx="107.8942824074074" cy="60" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="107.23833333333333" y1="60" x2="107.8942824074074" y2="60" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-67388532
+
+        <hr>
+        Issue #53 - Standardize component imports across the new console code" data-bug-id="gh-67388532"><circle class="resolved" cx="109.69496527777778" cy="48" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="108.70900462962963" y1="48" x2="109.69496527777778" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-67560006
+
+        <hr>
+        Issue #72 - Fix eslint errors and console warnings" data-bug-id="gh-67560006"><circle class="resolved" cx="109.93895833333333" cy="96" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="109.80622685185185" y1="96" x2="109.93895833333333" y2="96" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-66698296
+
+        <hr>
+        Adds a pref to enable the new console front-end" data-bug-id="gh-66698296"><circle class="resolved" cx="104.66409722222222" cy="72" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="102.84280092592593" y1="72" x2="104.66409722222222" y2="72" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug gh-66750224
+
+        <hr>
+        Modify message component's root element to add category and severity attributes" data-bug-id="gh-66750224"><circle class="resolved" cx="106.81725694444444" cy="108" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="103.88865740740741" y1="108" x2="106.81725694444444" y2="108" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 958167
+         [P3]
+        <hr>
+        Inspector actor should use DevToolsUtils.makeInfallible instead of reinventing its own" data-bug-id="958167"><circle class="resolved" cx="127.42634259259259" cy="84" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="125.4271875" y1="84" x2="127.42634259259259" y2="84" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1088360
+         [P3]
+        <hr>
+        Implement `console.groupCollapsed`" data-bug-id="1088360"><circle class="resolved" cx="278.36952546296294" cy="120" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="66.62975694444444" y1="120" x2="278.36952546296294" y2="120" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1177324
+
+        <hr>
+        Intermittent browser_webconsole_live_filtering_of_message_types.js | A promise chain failed to handle a rejection: - Error: operation not possible on dead CPOW, | Test timed out" data-bug-id="1177324"><circle class="resolved" cx="157.42539351851852" cy="72" r="1.75" fill="rgb(103, 58, 183)"></circle><line x1="155.835625" y1="72" x2="157.42539351851852" y2="72" stroke="rgb(103, 58, 183)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1181839
+
+        <hr>
+        Migrate browser/devtools/animationinspector tests to shared-head.js" data-bug-id="1181839"><circle class="resolved" cx="67.6633449074074" cy="12" r="1.75" fill="rgb(103, 58, 183)"></circle><line x1="64.65082175925926" y1="12" x2="67.6633449074074" y2="12" stroke="rgb(103, 58, 183)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1208204
+
+        <hr>
+        Pressing space in the animation inspector should toggle play/pause" data-bug-id="1208204"><circle class="resolved" cx="52.466631944444444" cy="24" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="39.57314814814815" y1="24" x2="52.466631944444444" y2="24" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1218089
+
+        <hr>
+        Different falsy values being incorrectly set as repeated messages in console.log()" data-bug-id="1218089"><circle class="resolved" cx="30.47685185185185" cy="12" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="25.67119212962963" y1="12" x2="30.47685185185185" y2="12" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1219611
+
+        <hr>
+        When animations end in the timeline, make sure the time-label shows the right time" data-bug-id="1219611"><circle class="resolved" cx="28.627789351851852" cy="24" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="24.67730324074074" y1="24" x2="28.627789351851852" y2="24" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1227477
+
+        <hr>
+        Polish the way the timeline time graduations are calculated" data-bug-id="1227477"><circle class="resolved" cx="25.903622685185184" cy="36" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="3.7700347222222224" y1="36" x2="25.903622685185184" y2="36" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1228080
+
+        <hr>
+        Split the animation-inspector's components into multiple files" data-bug-id="1228080"><circle class="resolved" cx="4.0256134259259255" cy="12" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="1.1769097222222222" y1="12" x2="4.0256134259259255" y2="12" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1228978
+
+        <hr>
+        Add a drop-mark to the playback-rate selector in the animation-inspector's toolbar" data-bug-id="1228978"><circle class="resolved" cx="36.51023148148148" cy="48" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="29.342453703703704" y1="48" x2="36.51023148148148" y2="48" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1232681
+
+        <hr>
+        Display script-generated animations correctly" data-bug-id="1232681"><circle class="resolved" cx="39.551631944444445" cy="60" r="1.75" fill="rgb(255, 193, 7)"></circle><line x1="29.344722222222224" y1="60" x2="39.551631944444445" y2="60" stroke="rgb(255, 193, 7)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1235964
+         [P3]
+        <hr>
+        Intermittent e10s browser_webconsole_bug_601177_log_levels.js | Uncaught exception - at :0 - Error: operation not possible on dead CPOW" data-bug-id="1235964"><circle class="resolved" cx="151.44006944444445" cy="84" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="147.25243055555555" y1="84" x2="151.44006944444445" y2="84" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1243259
+         [P3]
+        <hr>
+        Intermittent e10s browser_webconsole_console_trace_duplicates.js | Test timed out" data-bug-id="1243259"><circle class="resolved" cx="151.44012731481482" cy="96" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="145.82307870370371" y1="96" x2="151.44012731481482" y2="96" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1246514
+         [P3]
+        <hr>
+        Switch toolbox-options.xul to HTML" data-bug-id="1246514"><circle class="resolved" cx="74.63100694444445" cy="36" r="1.75" fill="rgb(233, 30, 99)"></circle><line x1="52.89546296296297" y1="36" x2="74.63100694444445" y2="36" stroke="rgb(233, 30, 99)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1248381
+
+        <hr>
+        Inspector panel should display properly capitalized node name" data-bug-id="1248381"><circle class="resolved" cx="46.4633912037037" cy="36" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="42.56362268518519" y1="36" x2="46.4633912037037" y2="36" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1250835
+         [P3]
+        <hr>
+        Shift-click on angles should cycle through angle units" data-bug-id="1250835"><circle class="resolved" cx="81.65619212962963" cy="60" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="51.43309027777778" y1="60" x2="81.65619212962963" y2="60" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1258501
+         [P3]
+        <hr>
+        Color swatches are misaligned with the value it represents" data-bug-id="1258501"><circle class="resolved" cx="82.08732638888888" cy="72" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="77.85108796296296" y1="72" x2="82.08732638888888" y2="72" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1260714
+         [P3]
+        <hr>
+        Intermittent browser_computed_search-filter_clear.js | This test exceeded the timeout threshold. It should be rewritten or split up. If that's not possible, use requestLongerTimeout(N), but only as a last resort. -" data-bug-id="1260714"><circle class="resolved" cx="91.07232638888888" cy="12" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="87.5758449074074" y1="12" x2="91.07232638888888" y2="12" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1262919
+
+        <hr>
+        Original source file doesn't load in the Style Editor when the sourcemap is in a <style> tag" data-bug-id="1262919"><circle class="resolved" cx="100.88168981481482" cy="84" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="94.7591550925926" y1="84" x2="100.88168981481482" y2="84" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1269034
+         [P3]
+        <hr>
+        Markup view &quot;body #&quot; search show suggestion &quot;body #&quot;" data-bug-id="1269034"><circle class="resolved" cx="121.41135416666667" cy="96" r="1.75" fill="rgb(103, 58, 183)"></circle><line x1="116.93608796296296" y1="96" x2="121.41135416666667" y2="96" stroke="rgb(103, 58, 183)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1270215
+         [P3]
+        <hr>
+        NodeActor should have a property for properly cased nodeName" data-bug-id="1270215"><circle class="resolved" cx="137.8853587962963" cy="108" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="121.75920138888888" y1="108" x2="137.8853587962963" y2="108" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1271184
+         [P3]
+        <hr>
+        Intermittent browser_webconsole_bug_613642_prune_scroll.js | Uncaught exception - at :0 - Error: operation not possible on dead CPOW" data-bug-id="1271184"><circle class="resolved" cx="163.2278472222222" cy="36" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="158.8754976851852" y1="36" x2="163.2278472222222" y2="36" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1271191
+
+        <hr>
+        Support CSS #rgba and #rrggbbaa color syntax in the inspector" data-bug-id="1271191"><circle class="resolved" cx="135.66747685185186" cy="60" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="127.33916666666667" y1="60" x2="135.66747685185186" y2="60" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1273323
+
+        <hr>
+        Add integration tests for namespaced elements" data-bug-id="1273323"><circle class="resolved" cx="143.64462962962963" cy="132" r="1.75" fill="rgb(156, 39, 176)"></circle><line x1="134.24061342592591" y1="132" x2="143.64462962962963" y2="132" stroke="rgb(156, 39, 176)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1280520
+         [P3]
+        <hr>
+        Intermittent browser_webconsole_bug_613642_prune_scroll.js | Uncaught exception - at :0 - Error: operation not possible on dead CPOW" data-bug-id="1280520"><circle class="resolved" cx="169.41532407407408" cy="48" r="1.75" fill="rgb(244, 67, 54)"></circle><line x1="165.00864583333333" y1="48" x2="169.41532407407408" y2="48" stroke="rgb(244, 67, 54)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1283247
+
+        <hr>
+        New console frontend: Add support for console.count()" data-bug-id="1283247"><circle class="resolved" cx="179.3907638888889" cy="48" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="177.85109953703704" y1="48" x2="179.3907638888889" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1286710
+
+        <hr>
+        Reps: Use the correct ellipsis character &quot;…&quot;" data-bug-id="1286710"><circle class="resolved" cx="196.63194444444446" cy="72" r="1.75" fill="rgb(139, 195, 74)"></circle><line x1="191.97877314814815" y1="72" x2="196.63194444444446" y2="72" stroke="rgb(139, 195, 74)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1310608
+
+        <hr>
+        Add rep for Promises" data-bug-id="1310608"><circle class="resolved" cx="299.5576736111111" cy="72" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="294.6415856481481" y1="72" x2="299.5576736111111" y2="72" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1311426
+
+        <hr>
+        Add rep for Boolean, Number and String" data-bug-id="1311426"><circle class="resolved" cx="299.5577314814815" cy="132" r="1.75" fill="rgb(33, 150, 243)"></circle><line x1="289.6654976851852" y1="132" x2="299.5577314814815" y2="132" stroke="rgb(33, 150, 243)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1312178
+         [P3]
+        <hr>
+        Reps modes should be constants" data-bug-id="1312178"><circle class="resolved" cx="323.6227314814815" cy="12" r="1.75" fill="rgb(0, 188, 212)"></circle><line x1="319.9660185185185" y1="12" x2="323.6227314814815" y2="12" stroke="rgb(0, 188, 212)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1313765
+
+        <hr>
+        Make Reps work with Proxy" data-bug-id="1313765"><circle class="resolved" cx="305.10618055555557" cy="60" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="298.8912962962963" y1="60" x2="305.10618055555557" y2="60" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1314573
+
+        <hr>
+        Logged Object-like and Array-like grip should show the first 10 items" data-bug-id="1314573"><circle class="resolved" cx="319.86829861111113" cy="84" r="1.75" fill="rgb(156, 39, 176)"></circle><line x1="303.44564814814817" y1="84" x2="319.86829861111113" y2="84" stroke="rgb(156, 39, 176)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1314590
+
+        <hr>
+        Add Mozilla license header in devtools/client/shared/components/test/mochitest/ files" data-bug-id="1314590"><circle class="resolved" cx="309.19430555555556" cy="108" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="303.5254861111111" y1="108" x2="309.19430555555556" y2="108" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1316225
+
+        <hr>
+        Add rep for Errors" data-bug-id="1316225"><circle class="resolved" cx="316.485" cy="36" r="1.75" fill="rgb(63, 81, 181)"></circle><line x1="310.1850347222222" y1="36" x2="316.485" y2="36" stroke="rgb(63, 81, 181)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1316266
+         [P3]
+        <hr>
+        Display ArrayBuffer objects like old console" data-bug-id="1316266"><circle class="resolved" cx="312.6572685185185" cy="60" r="1.75" fill="rgb(0, 150, 136)"></circle><line x1="310.3766087962963" y1="60" x2="312.6572685185185" y2="60" stroke="rgb(0, 150, 136)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1317069
+         [P3]
+        <hr>
+        Fix eslint for new console output" data-bug-id="1317069"><circle class="resolved" cx="341.6874305555556" cy="60" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="339.3421875" y1="60" x2="341.6874305555556" y2="60" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1319247
+         [P3]
+        <hr>
+        Intermittent devtools/client/webconsole/new-console-output/test/mochitest/browser_webconsole_batching.js | This test exceeded the timeout threshold. It should be rewritten or split up." data-bug-id="1319247"><circle class="resolved" cx="331.15342592592594" cy="48" r="1.75" fill="rgb(255, 152, 0)"></circle><line x1="324.7281712962963" y1="48" x2="331.15342592592594" y2="48" stroke="rgb(255, 152, 0)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1320161
+
+        <hr>
+        Attribute Rep does not handle `objectLink` as it should" data-bug-id="1320161"><circle class="resolved" cx="327.22783564814813" cy="24" r="1.75" fill="rgb(255, 193, 7)"></circle><line x1="325.7630208333333" y1="24" x2="327.22783564814813" y2="24" stroke="rgb(255, 193, 7)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1320173
+
+        <hr>
+        EvaluationResult component mocha test fails" data-bug-id="1320173"><circle class="resolved" cx="326.61350694444445" cy="60" r="1.75" fill="rgb(0, 188, 212)"></circle><line x1="325.7738078703704" y1="60" x2="326.61350694444445" y2="60" stroke="rgb(0, 188, 212)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1320399
+         [P3]
+        <hr>
+        TypeError: can't convert undefined to object Stack trace: [object Object] grip.js:49:9, when openinng DevTools DOM" data-bug-id="1320399"><circle class="resolved" cx="329.6538425925926" cy="72" r="1.75" fill="rgb(76, 175, 80)"></circle><line x1="327.92315972222224" y1="72" x2="329.6538425925926" y2="72" stroke="rgb(76, 175, 80)" stroke-width="2" stroke-linecap="round"></line></g><g class="bug-line" data-tooltip="Bug 1322083
+
+        <hr>
+        Reps with a more link shows -3 more..." data-bug-id="1322083"><circle class="resolved" cx="350.62950231481483" cy="72" r="1.75" fill="rgb(255, 87, 34)"></circle><line x1="344.7034027777778" y1="72" x2="350.62950231481483" y2="72" stroke="rgb(255, 87, 34)" stroke-width="2" stroke-linecap="round"></line></g></svg>
+
+    <script type="text/javascript">
+
+function needWhiteText(rgb){
+  let values = rgb.replace("rgb(","").replace(")","").replace(" ","").split(",");
+  var r = parseInt(values[0],10);
+  var g = parseInt(values[1],10);
+  var b = parseInt(values[2],10);
+  var yiq = ((r*299)+(g*587)+(b*114))/1000;
+  return (yiq < 120);
+}
+
+function hideTooltip(){
+  if(tooltipEl.innerHTML === ""){
+    return;
+  }
+  tooltipHideId = setTimeout(function(){
+    tooltipHideId = null;
+    tooltipEl.style.left = `-9999px`;
+    tooltipEl.style.top = `0`;
+    tooltipEl.style.backgroundColor = "";
+    tooltipEl.textContent = "";
+    tooltipEl.classList.remove("dark");
+  },200);
+  return tooltipHideId;
+}
+
+function onMouseMove(e){
+  if(
+    e.target.getAttribute('data-tooltip') ||
+    (
+      e.target.parentNode.tagName === 'g' &&
+      e.target.parentNode.getAttribute('data-tooltip')
+    )
+  ){
+    let newTarget = e.target.getAttribute('data-tooltip')?e.target:e.target.parentNode;
+
+    if(currentTooltipTarget === null || currentTooltipTarget != newTarget){
+      if(tooltipHideId){
+        clearTimeout(tooltipHideId);
+        tooltipHideId = null;
+      }
+
+      currentTooltipTarget = newTarget;
+
+      tooltipEl.innerHTML = e.target.getAttribute('data-tooltip') || e.target.parentNode.getAttribute('data-tooltip');
+
+      let left = e.clientX + (2 *DETAIL_PADDING);
+      let top = e.clientY;
+      if(left < 0){
+        left = DETAIL_PADDING;
+      } else if(left + tooltipEl.clientWidth > document.body.clientWidth){
+        left = document.body.clientWidth - tooltipEl.clientWidth - DETAIL_PADDING;
+      }
+
+      if(top + tooltipEl.clientHeight > document.body.clientHeight){
+        top = e.clientY - tooltipEl.clientHeight - DETAIL_PADDING;
+      }
+
+      tooltipEl.style.left = `${left}px`;
+      tooltipEl.style.top = `${top}px`;
+      if(e.target.getAttribute('stroke')){
+        tooltipEl.style.backgroundColor = e.target.getAttribute('stroke');
+      }
+      if(e.target.getAttribute('fill')){
+        tooltipEl.style.backgroundColor = e.target.getAttribute('fill');
+      }
+      if(needWhiteText(tooltipEl.style.backgroundColor)){
+        tooltipEl.classList.add("dark");
+      } else {
+        tooltipEl.classList.remove("dark");
+      }
+    }
+  } else {
+    currentTooltipTarget = null;
+    if(!tooltipHideId){
+      hideTooltip();
+    }
+  }
+}
+const DETAIL_PADDING = 15;
+let currentTooltipTarget;
+let tooltipEl = document.createElement("div");
+tooltipEl.classList.add("tooltip");
+document.body.appendChild(tooltipEl);
+let tooltipHideId;
+window.addEventListener('mousemove', onMouseMove, false);
+
+    </script>
+</body>
+</html>
