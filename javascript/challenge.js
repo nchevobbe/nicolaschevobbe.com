@@ -14,7 +14,7 @@ const X_PADDING = 17;
 const LINE_HEIGHT = 9;
 const MILLISECOND_A_DAY = (1000*60*60*24);
 const BUGZILLA_API_URL = 'https://bugzilla.mozilla.org/rest/';
-const EMAIL = 'chevobbe.nicolas@gmail.com';
+const EMAIL = 'nchevobbe@mozilla.com';
 const PRIORITY_REGEX = /^P[1-5]$/;
 const DETAIL_PADDING = 15;
 
@@ -49,7 +49,7 @@ window.addEventListener("resize", resizeSvgElements);
 timelineSvg.addEventListener('mousemove', onMouseMove, false);
 
 const today = new Date();
-const weekNumber = Math.ceil((today - jan4)/MILLISECOND_A_DAY/7);
+const weekNumber = 52;
 const todayNumber = ((today - jan4)/MILLISECOND_A_DAY);
 
 var fetchSources = [
@@ -69,8 +69,6 @@ Promise.all(fetchSources).then(function([bugzillaData, ...ghData]){
   });
 
   let bugs = bzBugs.concat(...ghData);
-
-  // plotChart(bugs);
 
   bugs.sort(function(a, b){
     var priorityA = (PRIORITY_REGEX.test(a.priority)?a.priority:'P3');
@@ -184,7 +182,7 @@ function fetchBugzilla(){
     "include_fields": "id,summary,status,cf_last_resolved,target_milestone,creation_time,resolution,assigned_to,priority,resolution",
     "email1": EMAIL,
     "resolution": "FIXED",
-    "emailassigned_to1":1
+    "emailassigned_to1": 1
   });
 
   var url = `${BUGZILLA_API_URL}bug?${searchParams}`;
@@ -201,7 +199,10 @@ function fetchBugzilla(){
     return json.bugs.map((item) => {
       item.bugType = "BZ";
       return item;
-    }).filter((item) => ignoredBugs.indexOf(item.id) === -1)
+    }).filter((item) => {
+      return ignoredBugs.indexOf(item.id) === -1
+        && item.cf_last_resolved < "2016-12-31T23:59:59Z"
+    })
   });
 }
 
@@ -259,7 +260,7 @@ function fetchGithubRepo(repo) {
       return json
         .filter((item) => {
           return item.user.login === "nchevobbe" && (
-            item.merged_at !== null
+            item.merged_at < "2016-12-31T23:59:59Z"
           );
         })
         .map((item) => {
@@ -485,7 +486,7 @@ function drawWeeks(bugs){
 
   var weekGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
   weekGroup.classList.add('weeks');
-  for(var i = 0; i <= 52; i++){
+  for(var i = 0; i < 52; i++){
     var weekLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
     var x = X_PADDING + (i * 7);
     weekLine.setAttribute('x1', x);
@@ -603,7 +604,6 @@ function updateDashboard(bugs){
     }
   }
 
-  document.getElementById('currentWeek').textContent = weekNumber;
   document.getElementById('failedWeek').textContent = missedWeeks.length;
   document.getElementById('failedWeek').setAttribute("title", missedWeeks.map((x) => `#${x}`).join(' - '));
   document.getElementById('bugsFixed').textContent = fixedBugs.length;
@@ -698,7 +698,6 @@ function onMouseMove(e){
 
 function resizeSvgElements() {
   let totalSize = (lanes.length + 1) * LINE_HEIGHT;
-  console.log("totalSize", totalSize);
 
   let circle = createSVGElement("circle", {
     cx: 0,
@@ -706,7 +705,6 @@ function resizeSvgElements() {
   });
   timelineSvg.appendChild(circle);
   let rect = circle.getBoundingClientRect();
-  console.log(circle, "getBoundingClientRect", rect);
   let timelineSvgRect = timelineSvg.getBoundingClientRect();
   timelineSvg.style.height = `${rect.top - timelineSvgRect.top}px`;
   circle.remove();
