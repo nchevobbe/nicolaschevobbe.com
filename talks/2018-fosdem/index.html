@@ -14,7 +14,15 @@
 		<link rel="stylesheet" href="css/reveal.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+		<link rel="stylesheet" href="./css/theme/night.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style>
+			.split {
+				display: grid !important;
+				grid-template-columns: 1fr 1fr;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -24,8 +32,219 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>A tour with Firefox DevTools</h1>
+					A tour with Firefox DevTools
 					<img src="./assets/firefox-logo-developer-edition.svg">
+				</section>
+
+				<section>
+					Team of ~15 people in Europe & North America
+				</section>
+
+				<section>
+					<span>What we've been up to in 2017&nbsp;?</span>
+				</section>
+
+				<section>
+					Contributor aimed-website
+					<img src="./assets/bug-finder-before.png">
+					Let's revamp it using the Firefox DevTools
+				</section>
+
+				<section>
+					Photon Colors
+					<img src="./assets/inspector-colors.png">
+					See hidden nodes
+				</section>
+
+				<section>
+					Tip: Toggle node visibility with <kbd>⌘/Ctrl + H</kbd>
+					<video src="./assets/inspector-toggle-visibility.mp4"></video>
+				</section>
+
+				<section>
+					Whitespace only text node
+					<img src="./assets/inspector-whitespace-only-text-node.png">
+				</section>
+
+				<section>
+					Why ?
+					<pre><code>
+  <ul class="links">
+    <li><a>How to contribute?</a></li>
+    <li><a>Browse the code</a></li>
+    <li><a>File a bug</a></li>
+    <li><a>Twitter</a></li>
+  </ul>
+					</code></pre>
+					See <a href="https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33">Patrick's Brosset's post on whitespace only nodes</a>
+				</section>
+
+				<section>
+					Animations
+					Loading bugs
+					<video src="./assets/inspector-animation-too-short.mp4"></video>
+				</section>
+
+				<section>
+					Issue: When bugs are loaded the animation stops abrutly
+				</section>
+
+				<section>
+					Fire the animation more easily
+					<video src="./assets/inspector-toggle-class-loading.mp4"></video>
+				</section>
+
+				<section>
+					Multiple toggles
+					<video src="./assets/inspector-toggle-class-loading-dark.mp4"></video>
+				</section>
+
+				<section>
+					Back to the animation
+					<video src="./assets/inspector-animation-slow-motion.mp4"></video>
+				</section>
+
+				<section>
+					More in-brand easing and motion
+					<a href="https://design.firefox.com/photon/">design.firefox.com/photon/</a>
+					<img src="./assets/photon-design-system.png">
+				</section>
+
+				<section>
+					Duration & Easing
+					<img src="./assets/photon-design-system-motion.png">
+				</section>
+
+				<section>
+					Select the node
+					<video src="./assets/inspector-animation-select-node.mp4"></video>
+				</section>
+
+				<section>
+					Apply Photon Design System recommendations
+					<video src="./assets/inspector-animation-change-easing-duration.mp4"></video>
+				</section>
+
+				<section>
+					Multiple animated nodes
+					<video src="./assets/inspector-animation-multiple-nodes.mp4"></video>
+				</section>
+
+				<section>
+					Landing page
+					<img src="./assets/inspector-intro-blank.png">
+				</section>
+
+				<section>
+					Landing page
+					Using CSS variable
+					<pre><code>
+:root {
+	--blue-50: #0a84ff;
+	--blue-50-alpha20: rgba(10, 132, 255, 0.2);
+	--blue-60: #0060df;
+	--blue-70: #003eaa;
+	--blue-80: #002275;
+	--grey-30: #d7d7db;
+	--grey-90: #0c0c0d;
+	--white: #ffffff;
+}
+					</code></pre>
+				</section>
+
+				<section>
+					Autocompletion on CSS custom properties
+					<img src="./assets/inspector-rule-autocomplete-css-variable.png">
+				</section>
+
+				<section>
+					Preview CSS custom property value
+					<img src="./assets/inspector-rule-variable-value.png">
+				</section>
+
+				<section>
+					Show which font is applied
+					<img src="./assets/inspector-rule-font.png">
+				</section>
+
+				<section>
+					Font panel
+					Local font
+					<img src="./assets/inspector-font-panel-local.png">
+				</section>
+
+				<section>
+					Font panel
+					Remote font
+					<img src="./assets/inspector-font-panel-remote.png">
+				</section>
+
+				<section>
+					CSS Grid
+					<ul>
+						<li><a href="">Jen Simmon</a></li>
+						<li><a href="">Rachel Andrew</a></li>
+						<li><a href="">Wes Bos' free course - Sponsored by Firefox DevTools</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<video src="./assets/inspector-grid-1.mp4"></video>
+				</section>
+
+				<section>
+					Quite unusable here
+					<video src="./assets/inspector-grid-color.mp4"></video>
+				</section>
+
+				<section class="experimental">
+					Split rules panel
+					<video src="./assets/inspector-split-rule.mp4"></video>
+					<ul>
+						<li>Go to about:config</li>
+						<li>Search for <code>devtools.inspector.split-sidebar-toggle</code> & <code>devtools.inspector.split-rule-enabled</code></code></li>
+						<li>Set to <code>true</code></li>
+					</ul>
+				</section>
+
+				<section>
+					Grid template
+					<video src="./assets/inspector-grid-2.mp4"></video>
+				</section>
+
+				<section>
+					title takes the whole width
+					<video src="./assets/inspector-grid-3.mp4"></video>
+				</section>
+
+				<section>
+					Logo starts at column 2
+					<video src="./assets/inspector-grid-4.mp4"></video>
+				</section>
+
+				<section>
+					Links at the bottom
+					<video src="./assets/inspector-grid-5.mp4"></video>
+				</section>
+
+				<section>
+					Flexbox inspector coming soon
+					<img src="./assets/inspector-flex.png">
+				</section>
+
+				<section>
+					Future-proof naming
+					<img src="./assets/inspector-grid-template.png">
+				</section>
+
+				<section>
+					Shape path tool
+					<video src="./assets/inspector-shape-circle.mp4">
+				</section>
+
+				<section>
+					Shape path tool
+					<video src="./assets/inspector-shape-polygon.mp4">
 				</section>
 			</div>
 
@@ -56,6 +275,20 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
+			let video;
+			Reveal.addEventListener( 'slidechanged', function( {currentSlide} ) {
+				if (video) {
+					video.pause();
+				}
+
+				video = currentSlide.querySelector("video");
+				if (video) {
+					video.setAttribute("loop", true);
+					video.classList.add("focused");
+					video.play();
+				}
+			} );
 
 		</script>
 
