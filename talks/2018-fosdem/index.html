@@ -14,13 +14,110 @@
 		<link rel="stylesheet" href="css/reveal.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="./css/theme/night.css">
+		<!-- <link rel="stylesheet" href="./css/theme/night.css"> -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
 		<style>
-			.split {
+			body {
+				background-color: #22293B;
+				color: white;
+			}
+
+			.reveal section h1 {
+				font-family: 'Zilla Slab';
+				font-weight: bold;
+				font-size: 5em;
+			}
+
+			.reveal section h2 {
+				font-family: 'Zilla Slab';
+				font-size: 3em;
+				grid-column: -2 / -1;
+				grid-row: 1 / 2;
+				text-align: right;
+				text-decoration: underline;
+			}
+
+			.reveal a ,.reveal a:visited {
+				color: currentColor;
+			}
+
+			.reveal ul li {
+				text-align: left;
+			}
+
+			.reveal section .content {
+				grid-row: 2 / 3;
+				grid-column: -2 / -1;
+				font-size: 2em;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			section[data-panel] {
 				display: grid !important;
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: auto 1fr minmax(auto, 250px);
+				grid-template-rows: auto 1fr;
+				grid-gap: 1em;
+			}
+
+			section[data-panel]::before {
+				display: block;
+				text-align: center;
+				font-family: 'Zilla Slab';
+				font-weight: bold;
+				font-size: 5em;
+				color: white;
+				text-shadow: 3px 3px #22293B, 4px 4px #02C2E9;
+				writing-mode: sideways-lr;
+				grid-column: 1 / 2;
+				grid-row: 1 / 3;
+				text-align: end;
+				padding-inline-end: 0.75em;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center top;
+			}
+
+			section[data-panel="inspector"]::before {
+				content: "INSPECTOR";
+				background-image: url("./assets/feature-inspector.svg");
+			}
+			section[data-panel="storage"]::before {
+				content: "STORAGE";
+				background-image: url("./assets/feature-storage.svg");
+			}
+			section[data-panel="network"]::before {
+				content: "NETWORK";
+				background-image: url("./assets/feature-network.svg");
+			}
+			section[data-panel="console"]::before {
+				content: "CONSOLE";
+				background-image: url("./assets/feature-console.svg");
+			}
+			section[data-panel="debugger"]::before {
+				content: "DEBUGGER";
+				background-image: url("./assets/feature-debugger.svg");
+			}
+
+			section img, section video {
+				max-width: 100%;
+				max-height: 100%;
+				grid-column: 2 / 3;
+				grid-row: 1 / 3;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			section video {
+				filter: grayscale(50%);
+				border: 5px solid transparent;
+				transition: all 0.2s linear;
+			}
+
+			section video.playing {
+				filter: grayscale(0);
+				border-color: #02C2E9;
 			}
 		</style>
 	</head>
@@ -32,116 +129,89 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					A tour with Firefox DevTools
+					<h1>A tour with Firefox DevTools</h1>
 					<img src="./assets/firefox-logo-developer-edition.svg">
 				</section>
 
 				<section>
-					Team of ~15 people in Europe & North America
+					<h1>What we've been up to in 2017&nbsp;?</h1>
 				</section>
 
-				<section>
-					<span>What we've been up to in 2017&nbsp;?</span>
-				</section>
-
-				<section>
-					Contributor aimed-website
+				<section data-panel>
+					<h2>bugs.firefox-dev.tools</h2>
 					<img src="./assets/bug-finder-before.png">
-					Let's revamp it using the Firefox DevTools
+					<p class="content">Let's revamp it using the Firefox DevTools</p>
 				</section>
 
 				<section>
-					Photon Colors
+					<img src="./assets/feature-inspector.svg">
+					<h1>INSPECTOR</h1>
+				</section>
+
+				<section data-panel=inspector>
+					<h2>Photon Colors</h2>
+					<p class="content">See hidden nodes</p>
 					<img src="./assets/inspector-colors.png">
-					See hidden nodes
 				</section>
 
-				<section>
-					Tip: Toggle node visibility with <kbd>⌘/Ctrl + H</kbd>
+				<section data-panel=inspector>
+					<h2>Toggle node visibility</h2>
+					<p class="content"><kbd>⌘/Ctrl + H</kbd></p>
 					<video src="./assets/inspector-toggle-visibility.mp4"></video>
 				</section>
 
-				<section>
-					Whitespace only text node
+				<section data-panel=inspector>
+					<h2>Whitespace only text node</h2>
+					<p class="content"><a href="https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33">Patrick's Brosset's post on whitespace only nodes</a></p>
 					<img src="./assets/inspector-whitespace-only-text-node.png">
 				</section>
 
-				<section>
-					Why ?
-					<pre><code>
-  <ul class="links">
-    <li><a>How to contribute?</a></li>
-    <li><a>Browse the code</a></li>
-    <li><a>File a bug</a></li>
-    <li><a>Twitter</a></li>
-  </ul>
-					</code></pre>
-					See <a href="https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33">Patrick's Brosset's post on whitespace only nodes</a>
-				</section>
-
-				<section>
-					Animations
-					Loading bugs
+				<section data-panel=inspector>
+					<h2>Animations</h2>
+					<p class="content">Easing curve</p>
 					<video src="./assets/inspector-animation-too-short.mp4"></video>
 				</section>
 
-				<section>
-					Issue: When bugs are loaded the animation stops abrutly
-				</section>
-
-				<section>
-					Fire the animation more easily
+				<section data-panel=inspector>
+					<h2>Toggle classes</h2>
+					<p class="content">Easier to trigger the animation</p>
 					<video src="./assets/inspector-toggle-class-loading.mp4"></video>
-				</section>
+				</section data-panel=inspector>
 
-				<section>
-					Multiple toggles
+				<section data-panel=inspector>
+					<h2>Toggle classes</h2>
+					<p class="content">Multiple toggles</p>
 					<video src="./assets/inspector-toggle-class-loading-dark.mp4"></video>
 				</section>
 
-				<section>
-					Back to the animation
+				<section data-panel=inspector>
+					<h1>Animations</h1>
+					<p class=content>Slow down</p>
 					<video src="./assets/inspector-animation-slow-motion.mp4"></video>
 				</section>
 
-				<section>
-					More in-brand easing and motion
-					<a href="https://design.firefox.com/photon/">design.firefox.com/photon/</a>
-					<img src="./assets/photon-design-system.png">
-				</section>
-
-				<section>
-					Duration & Easing
-					<img src="./assets/photon-design-system-motion.png">
-				</section>
-
-				<section>
-					Select the node
+				<section data-panel=inspector>
+					<h1>Animations</h1>
+					<p class=content>Select the node</p>
 					<video src="./assets/inspector-animation-select-node.mp4"></video>
 				</section>
 
-				<section>
-					Apply Photon Design System recommendations
-					<video src="./assets/inspector-animation-change-easing-duration.mp4"></video>
-				</section>
-
-				<section>
-					Multiple animated nodes
+				<section data-panel=inspector>
+					<h2>Animations</h2>
+					<p class=content>Multiple animation</p>
 					<video src="./assets/inspector-animation-multiple-nodes.mp4"></video>
 				</section>
 
-				<section>
-					Landing page
+				<section data-panel=inspector>
+					<h2>Landing page</h2>
 					<img src="./assets/inspector-intro-blank.png">
 				</section>
 
-				<section>
-					Landing page
-					Using CSS variable
-					<pre><code>
+				<section data-panel=inspector>
+					<h2>CSS custom properties</h2>
+					<pre class=content><code>
 :root {
 	--blue-50: #0a84ff;
-	--blue-50-alpha20: rgba(10, 132, 255, 0.2);
 	--blue-60: #0060df;
 	--blue-70: #003eaa;
 	--blue-80: #002275;
@@ -150,102 +220,341 @@
 	--white: #ffffff;
 }
 					</code></pre>
-				</section>
-
-				<section>
-					Autocompletion on CSS custom properties
 					<img src="./assets/inspector-rule-autocomplete-css-variable.png">
 				</section>
 
-				<section>
-					Preview CSS custom property value
+				<section data-panel=inspector>
+					<h2>CSS custom properties</h2>
+					<p class=content>Preview value</p>
 					<img src="./assets/inspector-rule-variable-value.png">
 				</section>
 
-				<section>
-					Show which font is applied
+				<section data-panel=inspector>
+					<h2>Font</h2>
+					<p class=content>Fonts applied is underlined</p>
 					<img src="./assets/inspector-rule-font.png">
 				</section>
 
-				<section>
-					Font panel
-					Local font
+				<section data-panel=inspector>
+					<h2>Font panel - system</h2>
 					<img src="./assets/inspector-font-panel-local.png">
 				</section>
 
-				<section>
-					Font panel
-					Remote font
+				<section data-panel=inspector>
+					<h2>Font panel - remote</h2>
 					<img src="./assets/inspector-font-panel-remote.png">
 				</section>
 
-				<section>
-					CSS Grid
-					<ul>
+				<section data-panel=inspector>
+					<h2>CSS Grid</h2>
+					<ul class=content>
 						<li><a href="">Jen Simmon</a></li>
 						<li><a href="">Rachel Andrew</a></li>
 						<li><a href="">Wes Bos' free course - Sponsored by Firefox DevTools</a></li>
 					</ul>
 				</section>
 
-				<section>
-					<video src="./assets/inspector-grid-1.mp4"></video>
+				<section data-panel=inspector>
+					<h2>Grid Inspector</h2>
+					<p class="content">Set up a grid</p>
+					<video src="./assets/inspector-grid-display.mp4"></video>
 				</section>
 
-				<section>
-					Quite unusable here
-					<video src="./assets/inspector-grid-color.mp4"></video>
-				</section>
-
-				<section class="experimental">
-					Split rules panel
-					<video src="./assets/inspector-split-rule.mp4"></video>
-					<ul>
+				<section class="experimental" data-panel=inspector>
+					<h2>Split rules panel</h2>
+					<ul class=content>
 						<li>Go to about:config</li>
 						<li>Search for <code>devtools.inspector.split-sidebar-toggle</code> & <code>devtools.inspector.split-rule-enabled</code></code></li>
 						<li>Set to <code>true</code></li>
 					</ul>
+					<video src="./assets/inspector-split-rule.mp4"></video>
 				</section>
 
-				<section>
-					Grid template
-					<video src="./assets/inspector-grid-2.mp4"></video>
+				<section data-panel=inspector>
+					<h2>Grid Inspector</h2>
+					<p class=content>Declare a grid template</p>
+					<video src="./assets/inspector-grid-template-columns.mp4"></video>
 				</section>
 
-				<section>
-					title takes the whole width
-					<video src="./assets/inspector-grid-3.mp4"></video>
+				<section data-panel=inspector>
+					<h2>Grid Inspector</h2>
+					<p class=content>Title at the top</p>
+					<video src="./assets/inspector-grid-title.mp4"></video>
 				</section>
 
-				<section>
-					Logo starts at column 2
-					<video src="./assets/inspector-grid-4.mp4"></video>
+				<section data-panel=inspector>
+					<h2>Grid Inspector</h2>
+					<p class=content>Logo</p>
+					<video src="./assets/inspector-grid-logo.mp4"></video>
 				</section>
 
-				<section>
-					Links at the bottom
-					<video src="./assets/inspector-grid-5.mp4"></video>
+				<section data-panel=inspector>
+					<h2>Grid Inspector</h2>
+					<p class=content>Links</p>
+					<video src="./assets/inspector-grid-links.mp4"></video>
 				</section>
 
-				<section>
-					Flexbox inspector coming soon
+				<section data-panel=inspector>
+					<h2>Flexbox inspector coming soon</h2>
 					<img src="./assets/inspector-flex.png">
 				</section>
 
-				<section>
-					Future-proof naming
+				<section data-panel=inspector>
+					<h2>Named areas</h2>
+					<pre class=content><code>
+grid-template-areas:
+	"header              header     header      header"
+	"left-margin         main-left  main-right  right-margin"
+	"footer              footer     footer      footer"</code></pre>
 					<img src="./assets/inspector-grid-template.png">
 				</section>
 
-				<section>
-					Shape path tool
+				<section data-panel=inspector>
+					<h2>Shape path tool</h2>
 					<video src="./assets/inspector-shape-circle.mp4">
 				</section>
 
-				<section>
-					Shape path tool
+				<section data-panel=inspector>
+					<h2>Shape path tool</h2>
 					<video src="./assets/inspector-shape-polygon.mp4">
 				</section>
+
+				<section>
+					<img src="./assets/feature-storage.svg">
+					<h1>STORAGE</h1>
+				</section>
+
+				<section data-panel=storage>
+					Delete entry
+				</section>
+
+				<section data-panel=storage>
+					Add entry
+				</section>
+
+				<section data-panel=storage>
+					Edit entry
+				</section>
+
+				<section>
+					<img src="./assets/feature-network.svg">
+					<h1>NETWORK</h1>
+				</section>
+
+				<section data-panel=network>
+					Rewritten in React & Redux - Photon design
+				</section>
+
+				<section data-panel=network>
+					MDN Links
+				</section>
+
+				<section data-panel=network>
+					Stacktrace
+				</section>
+
+				<section data-panel=network>
+					Pause network recording
+				</section>
+
+				<section data-panel=network>
+					Disable cache + Persist log
+				</section>
+
+				<section data-panel=network>
+					Filter autocomplete
+				</section>
+
+				<section data-panel=network>
+					Toggle column visibility
+				</section>
+
+				<section data-panel=network>
+					Transferred size
+				</section>
+
+				<section data-panel=network>
+					Parameters
+				</section>
+
+				<section data-panel=network>
+					Edit and resend
+				</section>
+
+				<section data-panel=network>
+ 					JSON Viewer
+				</section>
+
+				<section>
+					<img src="./assets/feature-console.svg">
+					<h1>CONSOLE</h1>
+				</section>
+
+				<section data-panel=console>
+ 					Rewritten in React & Redux - Photon design
+				</section>
+
+
+				<section data-panel=console>
+ 					Network logs - shared component with network panel
+				</section>
+
+				<section data-panel=console>
+ 					Network logs - MDN links
+				</section>
+
+				<section data-panel=console>
+ 					Error - MDN links
+				</section>
+
+				<section data-panel=console>
+ 					Inline object inspection
+				</section>
+
+				<section class="experimental" data-panel=console>
+ 					Put object in a sidebar
+				</section>
+
+				<section data-panel=console>
+ 					Persist logs
+				</section>
+
+				<section data-panel=console>
+ 					Number of hidden messages
+				</section>
+
+				<section data-panel=console>
+ 					Copy object:
+					 <ul>
+						 <li><code>copy()</code> helper</li>
+						 <li>Context menu</li>
+					 </ul>
+				</section>
+
+				<section data-panel=console>
+ 					Sourcemaps
+				</section>
+
+				<section data-panel=console>
+ 					Jump to definition
+				</section>
+
+				<section data-panel=console>
+ 					Collapsible group + console.groupCollapsed()
+				</section>
+
+				<section data-panel=console>
+ 					Styled group + message
+				</section>
+
+				<section data-panel=console>
+ 					Better console.table
+				</section>
+
+				<section data-panel=console>
+ 					console API cheat sheet
+					 <ul>
+						 <li>console.error</li>
+						 <li>console.warn</li>
+						 <li>console.log</li>
+						 <li>console.info</li>
+						 <li>console.debug</li>
+						 <hr>
+						 <li>console.group / console.groupEnd</li>
+						 <li>console.time / console.timeEnd</li>
+						 <li>console.count</li>
+						 <li>console.dir</li>
+						 <li>console.assert</li>
+						 <li>console.clear</li>
+					 </ul>
+				</section>
+
+				<section>
+					<img src="./assets/feature-debugger.svg">
+					<h1>DEBUGGER</h1>
+				</section>
+
+				<section data-panel=debugger>
+ 					Rewritten React + Redux - New design
+				</section>
+
+				<section data-panel=debugger>
+ 					Source Tree - Folders
+				</section>
+
+				<section data-panel=debugger>
+ 					Source Tree - Webpack
+				</section>
+
+				<section data-panel=debugger>
+ 					Source Tree - Expand all
+				</section>
+
+				<section data-panel=debugger>
+ 					Outline view - React components & regular functions
+				</section>
+
+				<section data-panel=debugger>
+ 					Project search - Symbol modals
+				</section>
+
+				<section data-panel=debugger>
+ 					Blackbox source
+				</section>
+
+				<section data-panel=debugger>
+ 					Sourcemap support - link to original file
+				</section>
+
+				<section data-panel=debugger>
+ 					Variable remapped
+				</section>
+
+				<section data-panel=debugger>
+ 					Copy function
+				</section>
+
+				<section data-panel=debugger>
+ 					Highlighting JSX
+				</section>
+
+				<section data-panel=debugger>
+ 					Grouped frames by library in Stacktrace + Icons
+				</section>
+
+				<section data-panel=debugger>
+ 					Immutable / React variable inspection
+				</section>
+
+				<section data-panel=debugger>
+ 					Async stepping
+				</section>
+
+				<section data-panel=debugger>
+ 					Continue to here
+				</section>
+
+				<section data-panel=debugger>
+ 					AST breakpoints
+				</section>
+
+				<section data-panel=debugger class=experimental>
+ 					Stepping back
+				</section>
+
+				<section data-panel=debugger>
+ 					Wasm debugging
+				</section>
+
+				<section>
+ 					Misc:
+					 <ul>
+						 <li>WebExtensions (React, Redux, Angular, …) support</li>
+						 <li>Firefox screenshot</li>
+						 <li>Containers</li>
+					 </ul>
+				</section>
+
 			</div>
 
 		</div>
@@ -284,9 +593,9 @@
 
 				video = currentSlide.querySelector("video");
 				if (video) {
-					video.setAttribute("loop", true);
-					video.classList.add("focused");
+					video.classList.add("playing");
 					video.play();
+					video.addEventListener("ended", e => video.classList.remove("playing"))
 				}
 			} );
 
