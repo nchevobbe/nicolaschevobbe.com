@@ -21,12 +21,19 @@
 			body {
 				background-color: #22293B;
 				color: white;
+				--accent-color: #02C2E9;
+			}
+
+			.reveal .controls button {
+				color: var(--accent-color);
 			}
 
 			.reveal section h1 {
 				font-family: 'Zilla Slab';
 				font-weight: bold;
 				font-size: 5em;
+				color: white;
+				text-shadow: 3px 3px #22293B, 4px 4px var(--accent-color);
 			}
 
 			.reveal section h2 {
@@ -67,7 +74,7 @@
 				font-weight: bold;
 				font-size: 5em;
 				color: white;
-				text-shadow: 3px 3px #22293B, 4px 4px #02C2E9;
+				text-shadow: 3px 3px #22293B, 4px 4px var(--accent-color);
 				writing-mode: sideways-lr;
 				grid-column: 1 / 2;
 				grid-row: 1 / 3;
@@ -98,6 +105,12 @@
 				content: "DEBUGGER";
 				background-image: url("./assets/feature-debugger.svg");
 			}
+			section[data-panel="json"]::before {
+				content: "JSON VIEWER";
+			}
+			section[data-panel="misc"]::before {
+				content: "MISC";
+			}
 
 			section img, section video {
 				max-width: 100%;
@@ -111,13 +124,15 @@
 
 			section video {
 				filter: grayscale(50%);
-				border: 5px solid transparent;
+				border-width: 5px !important;
+				border-style: solid !important;
+				border-color: transparent;
 				transition: all 0.2s linear;
 			}
 
 			section video.playing {
 				filter: grayscale(0);
-				border-color: #02C2E9;
+				border-color: var(--accent-color);
 			}
 		</style>
 	</head>
@@ -140,7 +155,7 @@
 				<section data-panel>
 					<h2>bugs.firefox-dev.tools</h2>
 					<img src="./assets/bug-finder-before.png">
-					<p class="content">Let's revamp it using the Firefox DevTools</p>
+					<p class="content">Let's debug it using the Firefox DevTools</p>
 				</section>
 
 				<section>
@@ -150,8 +165,7 @@
 
 				<section data-panel=inspector>
 					<h2>Photon Colors</h2>
-					<p class="content">See hidden nodes</p>
-					<img src="./assets/inspector-colors.png">
+					<img src="./assets/inspector-design.png">
 				</section>
 
 				<section data-panel=inspector>
@@ -337,145 +351,13 @@ grid-template-areas:
 				</section>
 
 				<section>
-					<img src="./assets/feature-network.svg">
-					<h1>NETWORK</h1>
-				</section>
-
-				<section data-panel=network>
-					Rewritten in React & Redux - Photon design
-				</section>
-
-				<section data-panel=network>
-					MDN Links
-				</section>
-
-				<section data-panel=network>
-					Stacktrace
-				</section>
-
-				<section data-panel=network>
-					Pause network recording
-				</section>
-
-				<section data-panel=network>
-					Disable cache + Persist log
-				</section>
-
-				<section data-panel=network>
-					Filter autocomplete
-				</section>
-
-				<section data-panel=network>
-					Toggle column visibility
-				</section>
-
-				<section data-panel=network>
-					Transferred size
-				</section>
-
-				<section data-panel=network>
-					Parameters
-				</section>
-
-				<section data-panel=network>
-					Edit and resend
-				</section>
-
-				<section data-panel=network>
- 					JSON Viewer
-				</section>
-
-				<section>
-					<img src="./assets/feature-console.svg">
-					<h1>CONSOLE</h1>
-				</section>
-
-				<section data-panel=console>
- 					Rewritten in React & Redux - Photon design
-				</section>
-
-
-				<section data-panel=console>
- 					Network logs - shared component with network panel
-				</section>
-
-				<section data-panel=console>
- 					Network logs - MDN links
-				</section>
-
-				<section data-panel=console>
- 					Error - MDN links
-				</section>
-
-				<section data-panel=console>
- 					Inline object inspection
-				</section>
-
-				<section class="experimental" data-panel=console>
- 					Put object in a sidebar
-				</section>
-
-				<section data-panel=console>
- 					Persist logs
-				</section>
-
-				<section data-panel=console>
- 					Number of hidden messages
-				</section>
-
-				<section data-panel=console>
- 					Copy object:
-					 <ul>
-						 <li><code>copy()</code> helper</li>
-						 <li>Context menu</li>
-					 </ul>
-				</section>
-
-				<section data-panel=console>
- 					Sourcemaps
-				</section>
-
-				<section data-panel=console>
- 					Jump to definition
-				</section>
-
-				<section data-panel=console>
- 					Collapsible group + console.groupCollapsed()
-				</section>
-
-				<section data-panel=console>
- 					Styled group + message
-				</section>
-
-				<section data-panel=console>
- 					Better console.table
-				</section>
-
-				<section data-panel=console>
- 					console API cheat sheet
-					 <ul>
-						 <li>console.error</li>
-						 <li>console.warn</li>
-						 <li>console.log</li>
-						 <li>console.info</li>
-						 <li>console.debug</li>
-						 <hr>
-						 <li>console.group / console.groupEnd</li>
-						 <li>console.time / console.timeEnd</li>
-						 <li>console.count</li>
-						 <li>console.dir</li>
-						 <li>console.assert</li>
-						 <li>console.clear</li>
-					 </ul>
-				</section>
-
-				<section>
 					<img src="./assets/feature-debugger.svg">
 					<h1>DEBUGGER</h1>
 				</section>
 
 				<section data-panel=debugger>
- 					Rewritten React + Redux - New design
+ 						<h2>Rewritten React + Redux</h2>
+					 <img src="./assets/debugger-design.png">
 				</section>
 
 				<section data-panel=debugger>
@@ -547,13 +429,176 @@ grid-template-areas:
 				</section>
 
 				<section>
- 					Misc:
+					<img src="./assets/feature-console.svg">
+					<h1>CONSOLE</h1>
+				</section>
+
+				<section data-panel=console>
+ 					<p class=content>Rewritten in React & Redux</p>
+					 <img src="./assets/console-design.png">
+				</section>
+
+				<section data-panel=console>
+ 					Persist logs
+				</section>
+
+				<section data-panel=console>
+ 					Error - MDN links
+				</section>
+
+				<section data-panel=console>
+ 					Inline object inspection
+				</section>
+
+				<section class="experimental" data-panel=console>
+ 					Put object in a sidebar
+				</section>
+
+				<section data-panel=console>
+ 					Number of hidden messages
+				</section>
+
+				<section data-panel=console>
+ 					Copy object:
 					 <ul>
-						 <li>WebExtensions (React, Redux, Angular, …) support</li>
-						 <li>Firefox screenshot</li>
-						 <li>Containers</li>
+						 <li><code>copy()</code> helper</li>
+						 <li>Context menu</li>
 					 </ul>
 				</section>
+
+				<section data-panel=console>
+ 					Sourcemaps
+				</section>
+
+				<section data-panel=console>
+ 					Jump to definition
+				</section>
+
+				<section data-panel=console>
+ 					Collapsible group + console.groupCollapsed()
+				</section>
+
+				<section data-panel=console>
+ 					Styled group + message
+				</section>
+
+				<section data-panel=console>
+ 					Better console.table
+				</section>
+
+				<section data-panel=console>
+ 					console API cheat sheet
+					 <ul>
+						 <li>console.error</li>
+						 <li>console.warn</li>
+						 <li>console.log</li>
+						 <li>console.info</li>
+						 <li>console.debug</li>
+						 <hr>
+						 <li>console.group / console.groupEnd</li>
+						 <li>console.time / console.timeEnd</li>
+						 <li>console.count</li>
+						 <li>console.dir</li>
+						 <li>console.assert</li>
+						 <li>console.clear</li>
+					 </ul>
+				</section>
+
+				<section data-panel=console>
+ 					Network logs - shared component with network panel
+				</section>
+
+				<section data-panel=console>
+ 					Network logs - MDN links
+				</section>
+
+				<section>
+					<img src="./assets/feature-network.svg">
+					<h1>NETWORK</h1>
+				</section>
+
+				<section data-panel=network>
+					<img src="./assets/netmonitor-design.png">
+					<p class=content>Rewritten in React & Redux</p>
+				</section>
+
+				<section data-panel=network>
+					MDN Links
+				</section>
+
+				<section data-panel=network>
+					Stacktrace
+				</section>
+
+				<section data-panel=network>
+					Pause network recording
+				</section>
+
+				<section data-panel=network>
+					Disable cache + Persist log
+				</section>
+
+				<section data-panel=network>
+					Filter autocomplete
+				</section>
+
+				<section data-panel=network>
+					Toggle column visibility
+				</section>
+
+				<section data-panel=network>
+					Transferred size
+				</section>
+
+				<section data-panel=network>
+					Parameters
+				</section>
+
+				<section data-panel=network>
+					Edit and resend
+				</section>
+
+				<section data-panel=json>
+ 					<h2>Photon Design</h2>
+					 <img src="./assets/json-viewer-design.png">
+				</section>
+
+				<section data-panel=json>
+ 					<h2>Navigate across endpoints</h2>
+					 <video src="./assets/json-viewer-navigate.mp4">
+				</section>
+
+				<section data-panel="misc">
+ 					<h2>WebExtensions support</h2>
+					<img src="./assets/misc-react-devtools.png">
+					<span class=content>React, Redux, Angular, …</span>
+				</section>
+
+				<section data-panel="misc">
+ 					<h2>Firefox Screenshot</h2>
+					<video src="./assets/misc-screenshots.mp4"></video>
+				</section>
+
+				<section data-panel="misc">
+ 					<h2>Multi-Account Containers</h2>
+					<img src="./assets/misc-containers.png">
+				</section>
+
+				<section>
+					<h1>Please gives us feedback or ideas</h1>
+					<ul>
+						<li>IRC: #devtools</li>
+						<li><a href="https://devtools-html-slack.herokuapp.com/">Slack</a></li>
+						<li><a href="https://discourse.mozilla.org/c/devtools">Discourse</a></li>
+						<li>Twitter: <a href="https://twitter.com/FirefoxDevTools">@FirefoxDevTools</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Thanks</h1>
+					<a href="https://twitter.com/nicolaschevobbe">@nicolaschevobbe</a></li>
+				</section>
+
 
 			</div>
 
