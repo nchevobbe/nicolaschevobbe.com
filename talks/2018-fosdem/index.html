@@ -38,6 +38,35 @@
           <h1>What we've been up to in 2017&nbsp;?</h1>
         </section>
 
+        <section class=title id=features>
+          <ul class=hero style="display: grid;
+grid-template-columns: repeat(auto-fill, minmax(auto, 200px));
+list-style: none;
+font-size: 1.5em;">
+						<li>Animation easing curve</li>
+						<li>AST Breakpoint</li>
+						<li>Class toggle</li>
+						<li>Collapsible group</li>
+						<li>CSS Grid Inspector</li>
+						<li>Framework Stacktraces</li>
+						<li>Inline inspection</li>
+						<li>JSON Viewer</li>
+						<li>Netmonitor stacktrace</li>
+						<li>New Console</li>
+						<li>New Debugger</li>
+						<li>New Netmonitor</li>
+						<li>Outline View</li>
+						<li>Pause network monitoring</li>
+						<li>Photon Colors</li>
+						<li>Shape Editor</li>
+						<li>Sourcemap support</li>
+						<li>Stylable group</li>
+						<li>WASM Debugging</li>
+						<li>Whitespace only nodes</li>
+					</ul>
+					<h2>A lot</h2>
+        </section>
+
         <section data-panel class=smaller-center>
           <h2 class=nohyphen>bugs.firefox-dev.tools</h2>
           <img src="./assets/bug-finder-before.png">
@@ -630,6 +659,22 @@ console.log(
           video.play();
           video.addEventListener("ended", e => video.classList.remove("playing"))
         }
+
+				if (currentSlide.id === "features") {
+					currentSlide.querySelectorAll("li").forEach(li => setTimeout(() => {
+						console.log(li)
+						li.animate([
+						// keyframes
+						{ opacity: 0 },
+						{ opacity: 1 },
+					], {
+						// timing options
+						duration: 300,
+						iterations: 1,
+						fill: "forwards"
+					})
+					}, 1000 + Math.random() * 3000))
+				}
       } );
 
     </script>
