@@ -1,8 +1,18 @@
+@font-face {
+  font-family: 'ZillaBold';
+  src:  url('./ZillaSlab-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fira';
+  src:  url('./FiraCode-Regular.woff2') format('woff2');
+}
+
 body {
   background-color: #22293B;
   color: white;
   --accent-color: #02C2E9;
-  font-family: Fira Code;
+  font-family: 'Fira';
 }
 
 .reveal .controls button {
@@ -10,21 +20,19 @@ body {
 }
 
 .reveal section h1 {
-  font-family: 'Zilla Slab';
-  font-weight: bold;
+  font-family: 'ZillaBold';
   font-size: 5em;
   color: white;
   text-shadow: 3px 3px #22293B, 4px 4px var(--accent-color);
 }
 
 .reveal section h2 {
-  font-family: 'Zilla Slab';
+  font-family: 'ZillaBold';
   font-size: 4em;
   grid-column: -2 / -1;
   grid-row: 1 / 2;
   text-align: right;
   border-bottom: 20px solid;
-  font-weight: bold;
   hyphens: auto;
   padding-bottom: 5px;
 }
@@ -77,8 +85,7 @@ section .center code {
 section[data-panel]::before {
   display: block;
   text-align: center;
-  font-family: 'Zilla Slab';
-  font-weight: bold;
+  font-family: 'ZillaBold';
   font-size: 5em;
   color: white;
   text-shadow: 3px 3px #22293B, 4px 4px var(--accent-color);
