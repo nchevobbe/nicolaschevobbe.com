@@ -28,14 +28,20 @@
         <section class=title>
           <h1>A tour with Firefox DevTools</h1>
           <img src="./assets/firefox-logo-developer-edition.svg">
+          <aside class=notes>Hello everyone, my name is Nicolas Chevobbe, I am a member of
+            the Firefox devtools team, mostly working on the Console. Today I will talk you about
+            the Firefox DevTools and what we added in 2017.
+          </aside>
         </section>
 
         <section class=title>
           <h1>Team of ~15 people in Europe & North America</h1>
+          <aside class=notes>The DevTools team is rather, small, about 15 people spread across Europe and North America</aside>
         </section>
 
         <section class=title>
           <h1>What we've been up to in 2017&nbsp;?</h1>
+          <img src="./assets/otter-blue.svg">
         </section>
 
         <section class=title id=features>
@@ -65,12 +71,19 @@ font-size: 1.5em;">
 						<li>Whitespace only nodes</li>
 					</ul>
 					<h2>A lot</h2>
+          <aside class=notes>Well, a lot<. But let's try not to go through an endless list of
+          new thing that will make you asleep.</aside>
         </section>
 
         <section data-panel class=smaller-center>
           <h2 class=nohyphen>bugs.firefox-dev.tools</h2>
           <img src="./assets/bug-finder-before.png">
           <p class="content">Let's debug it using the Firefox DevTools</p>
+          <aside class=notes>We have this website we redirect contributors to when they are
+            looking for a first bug to work on, or simply looking for their next bug to tackle.
+            This site has a few issues that I would like to fix, using the Firefox DevTools.
+            So let's start with the design of it.
+          </aside>
         </section>
 
         <section class=title>
@@ -93,35 +106,67 @@ font-size: 1.5em;">
           <h2>Whitespace only text node</h2>
           <p class="content">See Patrick Brosset's post on <a href="https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33">whitespace only nodes</a></p>
           <img src="./assets/inspector-whitespace-only-text-node.png">
+          <aside class=notes>Here I have an unordered list of inline-blocks links, and I see there's
+            some space between links, wich I don't understand because I did not set any padding.
+            If I open the Inspector, I'll see a little dotted icon in the tree. And if I hover it,
+            it will tell me that it's a whitespace only node, and will highlight it in the content page.
+            So now I can see who's responsible for this 3.54px gap.</aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Animations</h2>
           <p class="content">Easing curve</p>
           <video src="./assets/inspector-animation-too-short.mp4" loop></video>
+          <aside class=notes>Another thing that bother me in this page is the look of the "loading" logo.
+            The page is said to be loading when we are fetching for the bug list . And here, in the animation panel,
+            we can see that we rotate the logo in a very linear way.
+            So let's try to get this better.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Toggle classes</h2>
           <p class="content">Easier to trigger the animation</p>
           <video src="./assets/inspector-toggle-class-loading.mp4"></video>
+          <aside class=notes>First, I need to actually trigger the animation. I can go and
+            select components, but it is a bit limited since the animation stops when the loading
+            is over. What I see, is that we add a "loading" class to the body of the page when
+            we load it.
+            So let's do that using the .cls button in the rule view. It allows me to easily add
+            a class, and then toggle it. This way, I can trigger the animation in a breeze.
+          </aside>
         </section data-panel=inspector>
 
         <section data-panel=inspector>
           <h2>Toggle classes</h2>
           <p class="content">Multiple classes</p>
           <video src="./assets/inspector-toggle-class-loading-dark.mp4"></video>
+          <aside class=notes>By the way, this UI is not restricted to only one class. So you
+            can add multiple ones and play with them. For example, here we have a dark mode,
+            and we can see how the page looks when it's loading, both in light and dark mode.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Animations</h2>
           <p class=content>Multiple properties and easing</p>
           <video src="./assets/inspector-animations.mp4" loop></video>
+          <aside class=notes>back to the animation, I made some changes tweaking the rules.
+            Now I have 2 separate properties animated, with different easing.
+            I can hover the curves to see the properties of the animation, and I also can
+            hover specific keyframe to check a given property value.
+            Now the animation looks fine to me, let's move on something else.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Landing page</h2>
           <img src="./assets/inspector-intro-blank.png">
+          <aside class=notes>One of the other issue I see on this page is that it could be
+            better for first time contributors.
+            The current look is a bit dull and the links are hard to spot. So let's try
+            to put up a landing page so users can have a better grasp what the page is about.
+          </aside>
         </section>
 
         <section data-panel=inspector class=smaller-center>
@@ -138,28 +183,44 @@ font-size: 1.5em;">
 }
           </code></pre>
           <img src="./assets/inspector-rule-autocomplete-css-variable.png">
+          <aside class=notes>First we want to have a nice, branded gradient background color.
+            I took some of the CSS custom properties, or CSS variables, of the Photon Design System.
+            Then I can go into the Rule view, and type my gradient, the variable names are autocompleted.
+          </aside>
         </section>
 
         <section data-panel=inspector class=smaller-center>
           <h2>CSS custom properties</h2>
           <p class=content>Preview value</p>
           <img src="./assets/inspector-rule-variable-value.png">
+          <aside class=notes>And then I can hover a specific variable to see its value. It is also shown in
+            the rule view, but this is more convenient.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Font</h2>
-          <p class=content>Fonts applied is underlined</p>
+          <p class=content>Applied fonts are underlined</p>
           <img src="./assets/inspector-rule-font.png">
+          <aside class=notes>A nice little touch in the Rule view that landed a few weeks ago
+            is that you can see the applied font on a given element. So if you are missing one font
+            on your system, or if a web font did not get downloaded, you can see that the fallback is being used.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Font panel - system</h2>
           <img src="./assets/inspector-font-panel-local.png">
+          <aside class=notes>Which makes me think that you can go the the Font panel, and check
+            the font properties. You can even enter a custom text to see what the font looks like .
+            Here it is a system font .
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Font panel - remote</h2>
           <img src="./assets/inspector-font-panel-remote.png">
+          <aside class=notes>And you can see other properties on remote font, like the font-face declaration</aside>
         </section>
 
         <section data-panel=inspector class=smaller-center>
@@ -176,12 +237,22 @@ font-size: 1.5em;">
             <li><a href="https://gridbyexample.com/">Rachel Andrew's "Grid by example"</a></li>
             <li><a href="https://cssgrid.io/">Wes Bos' free course</a></li>
           </ul>
+          <aside class=notes>Now let's get to the bigger part of the inspector.
+            CSS Grid is a set of new properties that let you declare layout in a very simple
+            way. If you are not familiar with it, you can check the work of Jen Simmons, Rachel Andrew and Wes Bos,
+            just to name a few, who put terrific resources to learn CSS grids.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Grid Inspector</h2>
           <p class="content">Set up a grid</p>
           <video src="./assets/inspector-grid-display.mp4"></video>
+          <aside class=notes>So I want to use it as well for my landing page. Let's put display: grid on the
+            container. And then, you can see there's a little button next to it, when clicked show
+            the boundaries of my grid elements.
+            The colors does not play nicely here, so let's change it to something more noticeable.
+          </aside>
         </section>
 
         <section class="experimental" data-panel=inspector>
@@ -193,62 +264,103 @@ font-size: 1.5em;">
 						devtools.inspector.split-sidebar-toggle &<br>
 						devtools.inspector.split-rule-enabled</p>
 					</main>
+          <aside class=notes>Then I am going to share a secret with you. We have been
+            working on a way to have 3 panels displayed on the inspector at the same time.
+            This way, you can see and set things even more easily.
+            So here I opened the 3rd panel and I can see both my rules, where I will set up
+            my grid properties, and the layout panel.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Grid Inspector</h2>
           <p class=content>Declare a grid template</p>
           <video src="./assets/inspector-grid-template-columns.mp4"></video>
+          <aside class=notes>So let's declare a simple grid template of 4 columns.
+            You can see that both the content and the layout panel are updated in real time.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Grid Inspector</h2>
           <p class=content>Title at the top</p>
           <video src="./assets/inspector-grid-title.mp4"></video>
+          <aside class=notes>Now I can place my title to take an entire row thanks to
+            the line indicators of the Grid inspector.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Grid Inspector</h2>
           <p class=content>Logo</p>
           <video src="./assets/inspector-grid-logo.mp4"></video>
+          <aside class=notes>Let's put the logo in second line, second column</aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Grid Inspector</h2>
           <p class=content>Links</p>
           <video src="./assets/inspector-grid-links.mp4"></video>
+          <aside class=notes>And the links in a new line. After that I apply whatever the
+            internet told me to use with flexbox so it looks nice.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Flexbox inspector</h2>
           <p class=content>Coming soon</p>
           <img src="./assets/inspector-flex.png">
+          <aside class=notes>And for those of you like me, we are working on a Flex inspector
+            so it's easier to understand what is going on with your flex items.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Named areas</h2>
           <img src="./assets/inspector-grid-template.png">
+          <aside class=notes>One last nice trick in the Grid inspector. In my CSS I declared
+            some areas so I can name areas instead of dealing with lines and column numbers.
+            And I can then display those names by checking the appropriate checkbox in the layout panel.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Shape path tool</h2>
           <video src="./assets/inspector-shape-circle.mp4">
+          <aside class=notes>Okay, so thigns are getting pretty good I think.
+            But I think we can do even better. So there's an experimental properties called
+            shape-outside which let's you define non boxy shapes for content to float against.
+            So basically, here I have a float div, with a shape outside set to circle.
+            And there's a button I can click which will show me the actual shape.
+            And I can manipulate it in the page and see how content react to that.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Shape path tool</h2>
           <video src="./assets/inspector-shape-polygon.mp4">
+          <aside class=notes>There are other types of shapes, like polygon for example. And you can also
+            manipulate it using this tool.
+          </aside>
         </section>
 
         <section class=title>
           <img src="./assets/feature-debugger.svg">
           <h1>DEBUGGER</h1>
+          <aside class=notes>Okay, so now we have a good looking landing page. What's next ?
+            Well, I heard of an obscure library made by a small company. It's react, heard of it ?
+            Okay, so let's try it out on our new website. And because we're building something new
+            using JS, we'll probably have bugs and have to use the debugger.
+          </aside>
         </section>
 
         <section data-panel=debugger>
           <h2>Photon colors</h2>
           <p class=content>Rewritten using React & Redux</p>
           <img src="./assets/debugger-design.png">
+          <aside class=notes>So last year we shipped a brand new debuggger, using React & Redux,
+            which allowed us to iterate quickly.
+          </aside>
         </section>
 
         <section data-panel=debugger>
@@ -258,13 +370,19 @@ font-size: 1.5em;">
           <aside class=notes>There's a little button on the UI to show a panel containing
             all the shortcuts of the debugger.
           </aside>
+          <aside class=notes>So as expected, something in my page isn't working. I can't
+            have the bug list reloaded when I click on a different tool. I opened the debugger
+            and I am a bit list. Luckily, there's an help icon that when clicked, show me all the
+            shortcut I can use to interact with the debugger.
+          </aside>
         </section>
 
         <section data-panel=debugger>
            <h2>File search</h2>
            <p class=content>Cmd/Ctrl + P</p>
            <img src="./assets/debugger-file-search.png">
-          <aside class=notes>So let's try to search for a given file.
+          <aside class=notes>So let's try to search for a given file. But then I remember
+            I don't know what file I put the code in.
           </aside>
         </section>
 
@@ -272,8 +390,8 @@ font-size: 1.5em;">
            <h2>Project search</h2>
           <p class=content>Cmd/Ctrl + Shift + F</p>
           <img src="./assets/debugger-project-search.png">
-          <aside class=notes>And if you don't know which file to have a look at, you can
-            still search in all files with
+          <aside class=notes>Okay, so there was something about input, let's do a project search for that.
+            Well, there are results, but I don't know which one is the good one.
           </aside>
         </section>
 
@@ -281,8 +399,10 @@ font-size: 1.5em;">
            <h2>Event bubble</h2>
           <p class=content>Show delegated event at the "correct" node</p>
           <img src="./assets/inspector-event-bubble.png">
-          <aside class=notes>It shows regular event listener on nodes, as well as
-						delegated ones for some libraries like React or jQuery.
+          <aside class=notes>Okay, one other way to see what's happening for events is
+            to look at the inspector and spot the event bubbles on nodes.
+            So if I choose the input , I can see there is something, and I can navigate to
+            the file in the debugger. Nice !
 					</aside>
         </section>
 
@@ -292,7 +412,11 @@ font-size: 1.5em;">
            <img src="./assets/debugger-sources.png">
 
            <aside class="notes">
-             You can expand all the children of a node by doing Alt + Click on it.
+             I am now in the debugger, and I can see the source tree. We use to have only a list
+             of scripts which was painful to navigate. Here it looks more like your usual
+             code editor. We can see that even if I bundle all my JS in a single bundle file,
+             I can still see my original files under the webpack node, which is handy.
+             Oh, and by the way, You can expand all the children of a node by doing Alt + Click on it.
              We also have the same shortcut in the inspector.
             </aside>
         </section>
@@ -301,17 +425,19 @@ font-size: 1.5em;">
           <h2>Outline view</h2>
           <video src="./assets/debugger-outline.mp4" loop></video>
           <p class=content>Functions and ES6 classes' methods</p>
-           <aside class="notes">
-             So here we can jump to onComponentChange
+           <aside class="notes">So now that I'm in the file, I can look at the outline view
+             which gives me a summary of what's in the file. Here I see I have a class and some
+             methods, and I can navigate to a given file by clicking on it.
             </aside>
         </section>
 
         <section data-panel=debugger>
            <h2>Source-map</h2>
           <img src="./assets/debugger-jsx.png">
-          <p class=content>JSX, typescript, C, … highighting</p>
+          <p class=content>JSX, typescript, coffeescript, C, … highlighting</p>
            <aside class="notes">
-             My code is nicely highlited, even jsx parts. It also works on typescript, coffescript,
+             By the way, did you saw that my code is nicely highlited, even jsx parts.
+              It also works on typescript, coffescript,
 						 and even C files, which you might be able to see when doing WASM debugging.
             </aside>
         </section>
@@ -320,8 +446,8 @@ font-size: 1.5em;">
            <h2>Source-map</h2>
           <p class=content>Link to generated location</p>
           <video src="./assets/debugger-link-to-bundle.mp4"></video>
-          <aside class=notes>Either for the whole file, or on a specific function.
-            Here you can see how JSx is interpreted.
+          <aside class=notes>And I can even see the generated location in the bundle file.
+            So here you can see how JSx is interpreted for example.
           </aside>
         </section>
 
@@ -329,7 +455,8 @@ font-size: 1.5em;">
 					<h2>Collapsed frames</h2>
 					<video src="./assets/debugger-stack-collapse.mp4" loop></video>
           <p class=content>Grouped frames by library</p>
-					<aside class=notes>Here we are paused and we can see the stacktrace.
+					<aside class=notes>Okay, back to the faulty function> I set up a breakpoint in it,
+            and noew we are paused and we can see the stacktrace.
 						But instead of having all the React internals calls, they are nicely grouped,
 						and, if I want to, I can expand it.
 						This way, I can focus only on the parts that matters.
@@ -337,26 +464,27 @@ font-size: 1.5em;">
         </section>
 
         <section data-panel=debugger>
-           <h2>Blackbox sources</h2>
-           <p class=content>Stepping will not go into those sources.
-             Useful for libraries / framework</p>
-        </section>
-
-        <section data-panel=debugger>
           <h2>Vars mapping</h2>
 					<img src="./assets/debugger-mapping.png"></video>
 					<p class=content>Evaluate original names, even on ugglified files.</p>
-					<aside class=notes>Even if I'm in an original file, and the event inspector-rule-autocomplete-css-variable
-						has been renamed to e, I can still evaluate event and access properties on it.
+					<aside class=notes>Another nice thing is that, even if I'm in an original file,
+            and the event variable has been renamed to e,
+            I can still evaluate event and access properties on it.
 					</aside>
         </section>
 
         <section data-panel=debugger>
            <h2>Continue to here</h2>
 					 <img src="./assets/debugger-continue-to.png">
-					<aside class=notes>Instead of stepping multiple times to get where I want,
-						or adding another single-use breakpoint, I can simply right click on the line
+					<aside class=notes>So, usually, when you debug something, it involves a lot of clicks
+            on step over, step-in, step-out function so you can get to the actual faulty line.
+            I sometime even do add a breakpoint 5 lines after the paused line so I don't haveto click multiple times.
+            Now in the debugger it's even simpler because I can right click on the line
 						I want to go to, and select "continue to here".
+            In my case, I did not even had to do that, because it was the first line that was faulty
+            with "this" being undefined.
+            And I know why it is undefined, it's because I did not bound this to my method, like
+            React ask you too.
 					</aside>
         </section>
 
@@ -364,59 +492,86 @@ font-size: 1.5em;">
            <h2>AST breakpoints</h2>
 					 <video src="./assets/debugger-ast-breakpoint.mp4"></video>
 					 <p class=content>Let the debugger handle your breakpoints</p>
-					 <aside class=notes>I know what my error is. I need to bind my method to This
-						 so I don't have context issues. SO I do this in the constructor, and reload my page.
+					 <aside class=notes>So, here  I added a constructor to bind my method, and I reloaded my page.
 						 Do you see what happened ?
+             Even if I added 4 lines, the debugger is still where I want it to be, on the assignment
+             to searchBugs.
+             It's because the debugger has what we call AST breakpoints. Which means, breakpoints are
+             not only referenced by their line, but also by an ast location. Here it is searchBug assignment
+             in the onComponentchange method. I find this very useful because you can tweak your
+             code and not have to deal with your breakpoints being on a whole other expression you don't care about.
 					 </aside>
-        </section>
-
-        <section data-panel=debugger>
-           <h2>Copy function</h2>
         </section>
 
         <section data-panel=debugger>
           <h2>WASM</h2>
 					<p class=content>See and step through original code (C, Rust, …)</p>
+          <aside class=notes>I tried to find a way to integrate WASM on this website but I felt short of ideas.
+            So I just put a nice picture of a C fibonacci function running in the browser.
+          </aside>
+        </section>
+
+        <section data-panel class=smaller-center>
+          <img src="./assets/bug-finder-before.png">
+          <p class="content">Contributors</p>
+          <aside class=notes>So I finally fixed my React bug (or maybe not because I was rushing to finish my slides)
+            Now one thing that I want to fix is the contributor list. For now, it only shows
+            the people who fixed a bug in Bugzilla in the last 30 days. But we do have code
+            outside of mozilla repo, on Github, and it would be nice if contribution there could be
+            displayed as well.
+            So we need to fetch all the repos under the devtools-html orgs on github, and then, well,
+            that's where I'm stucked at,
+          </aside>
         </section>
 
         <section class=title>
           <img src="./assets/feature-console.svg">
           <h1>CONSOLE</h1>
+          <aside class=notes>
+            so let's see what we can do with the console to better understand
+            what need to be done.
+          </aside>
         </section>
 
         <section data-panel=console>
           <h2>Photon colors</h2>
            <p class=content>Cleaner design</p>
           <img src="./assets/console-design.png">
-          <aside class=notes>Emphasis on the logs. The persist log option was moved directly
-            in the panel.
+          <aside class=notes>Last year we also shipped on new console, with a cleaner design,
+            which put the emphasis on the logs.
+            You can also see the persist log option was moved directly in the panel. So your log
+            won't disappear if you reload the page.
           </aside>
-        </section>
-
-        <section data-panel=console>
-          <h2>Inline object inspection</h2>
-					<img src="./assets/console-object-expand.png">
-           <p class=content>Yes, like Chrome, but…</p>
-        </section>
-
-        <section class="experimental" data-panel=console>
-           <h2>Sidebar</h2>
-					 <main class=hero>
-						<img src="./assets/console-object-sidebar.png">
-						<p class=content>Like the good old days. Flip<br>devtools.webconsole.sidebarToggle</p>
-					 </main>
         </section>
 
         <section data-panel=console>
           <h2>Filtering</h2>
 					<img src="./assets/console-hidden-messages.png">
            <p class=content>Number of hidden messages</p>
+           <aside class=notes>So here I am not interested in Error messages so I toggle the filter
+             off, and you can see that the UI tells me that I may be missing something because
+             the filter is off. I can then click the button to set the filter to their default state.
+           </aside>
         </section>
 
         <section data-panel=console>
            <h2>Error</h2>
 					 <img src="./assets/console-sourcemap.png">
-          <p class=content>Link to MDN pages for most common errors. Sourcemapped stacktrace</p>
+           <p class=content>Sourcemap - MDN Link</p>
+          <aside class=notes>Which could have been helpful previously with my React bug !
+            Here you can see there was an error message linking me to the correct jsx script.
+            And there is a net [Learn More] Link to MDN page, which is the case for  all the most common errors
+            </p>
+        </section>
+
+        <section data-panel=console>
+           <h2>Styled group</h2>
+					 <img src="./assets/console-group-styled.png">
+          <p class=content>Used by Redux logger</p>
+          <aside class=notes>Since I added redux-logger to my app, I can see my actions
+            being dispatched in a nice way thanks to the conjunction of 2 things we added
+            in the new console.
+          </aside>
         </section>
 
         <section data-panel=console class=smaller-center>
@@ -430,12 +585,11 @@ console.groupEnd();
 console.groupEnd()
 					 </code></pre>
            <img class=content src="./assets/console-group.png">
-        </section>
-
-        <section data-panel=console>
-           <h2>Styled group</h2>
-					 <img src="./assets/console-group-styled.png">
-          <p class=content>Used by Redux logger</p>
+           <aside class=notes>console.group was already supported in the old console, but
+             you could't collapse a group, which was making them almost useless.
+             Now you can expand and collapse them as you wish. This allowed us to fully
+             support console.groupCollapsed, which start a group in a collapsed state.
+           </aside>
         </section>
 
         <section data-panel=console class=smaller-center>
@@ -448,16 +602,60 @@ console.log(
   "color: blue"
 )
            </code></pre>
+           <aside class=notes>The second thing we added was styled console.group. We already
+             have styled console.log, but not for group. This is now fixed.
+             If you don't know styled console message, it's a nice little thing that let
+             you style parts of your message using a whitelist of CSS properties. The way you
+             do this is by declaring a style unit, with %c, and css properties on the last arguments
+             of console.log calls. This way you can build fun helper function to have rainbow logs.
+           </aside>
         </section>
 
+
         <section data-panel=console>
-           <h2>Jump to definition</h2>
-					 <video src="./assets/console-jump-definition.mp4"></video>
+          <h2>Inline object inspection</h2>
+					<img src="./assets/console-object-expand.png">
+           <p class=content>Yes, like Chrome, but…</p>
+           <aside class=notes>So I made a call to the Github API to get all the repos of the
+             devtools-html org. I paused in the debugger when the XHR call was over so I can
+             inspect what was returned to me.
+             The first thing you may have noticed is that you can inspect the object direction in the output.
+             Yes, like Chrome does.
+           </aside>
+        </section>
+
+        <section class="experimental" data-panel=console>
+           <h2>Sidebar</h2>
+					 <main class=hero>
+						<img src="./assets/console-object-sidebar.png">
+						<p class=content>Like the good old days. Flip<br>devtools.webconsole.sidebarToggle</p>
+					 </main>
+           <aside class=notes>But we are also working on bringing the console sidebar back, so
+             you can pin an object and still see the messages flowing through the console.
+           </aside>
         </section>
 
         <section data-panel=console>
            <h2>console.table</h2>
 					 <img src="./assets/console-table.png">
+           <aside class=notes>The inline inspection is nice. But since we have a big set of data,
+             let's try to console.table it so we have a better view of it.
+           </aside>
+        </section>
+
+        <section data-panel=console>
+           <h2>Copy object</h2>
+					 <video src="./assets/console-copy.mp4"></video>
+           <ul class=content>
+             <li><code data-trim>copy()</code> helper</li>
+             <li>Context menu</li>
+           </ul>
+           <aside class=notes>That's not perfect either. So what I like to do in those cases,
+             is copy the object, either using the copy helper in the console output, or by
+             using the context menu entry.
+             it will copy the JSON stringified version of the object, if possible, in your clipboard,
+             You can then paste it where you want to analyze it.
+           </aside>
         </section>
 
         <section data-panel=console>
@@ -483,129 +681,203 @@ console.log(
 
              console.clear();
           </code></pre>
+          <aside class=notes>Since we talked about some console API function, let's have
+            a recap of what you can do with it.
+          </aside>
         </section>
 
         <section data-panel=console class=smaller-center>
           <h2>Log tricks</h2>
           <ul class=content>
+            <li>inspect() console helper === console.dir()</li>
 						<li>Concatenate: console.log(a, b)</li>
 						<li>Using ES6 shorthand: console.log({a, b})</li>
 						<li>Conditional Breakpoint: console.log returns undefined and won't trigger the breakpoint</li>
 					</ul>
-        </section>
-
-        <section data-panel=console>
-           <h2>Copy object</h2>
-					 <video src="./assets/console-copy.mp4"></video>
-           <ul class=content>
-             <li><code data-trim>copy()</code> helper</li>
-             <li>Context menu</li>
-           </ul>
+          <aside class=notes>And some tricks that might be useful</aside>
         </section>
 
         <section data-panel=console>
           <h2>Network logs</h2>
           <img src="./assets/console-net.png">
            <p class=content>Status code MDN link. Shared components with the Netmonitor</p>
+           <aside class=notes>One last thing I wanted to show you in the console is that we
+             can display network logs. We share the same components with the netmonitors so you
+             should have a consistent experience using those 2 tools.
+            One thing is different though, you can click on the status code in the console
+            to get to the MDN page of said status code, in case you wonder what the 200 code means.
+           </aside>
         </section>
 
         <section class=title>
           <img src="./assets/feature-network.svg">
           <h1>NETWORK</h1>
+          <aside class=notes>So I saw the xhr call to Github, let's switch to the netmonitor
+            to fully inspect it.
+          </aside>
         </section>
 
         <section data-panel=network>
           <img src="./assets/netmonitor-design.png">
 					<h2>Photon colors</h2>
           <p class=content>Rewritten in React & Redux. Disable cache + Persist log</p>
+          <aside class=notes>The netmonitor was also rewritten in React and Redux and got these nicelyPhoton colors.
+            There were some tweaks in the UI, so you can disable the cache and persist log right into the panel.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Headers</h2>
           <p class=content>Links to MDN for status code and Headers</p>
           <img src="./assets/netmonitor-header-learn-more.png" >
+          <aside class=notes>When clicking on a network entry, you get what we call the
+            detail panel which let you inspect it more deeply.
+            Here you can see all the request and response headers, with links to the approriate
+            MDN pages when they exists.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Stacktrace</h2>
 					<p class=content>Sourcemapped, open the debugger when clicked</p>
 					<img src="./assets/netmonitor-stacktrace.png" >
+          <aside class=notes>You can also see a soucemapped stacktrace to know where this
+            network call was made from.
+          </aside>
         </section>
 
         <section data-panel=network>
-					<h2>Pause monitoring</h2>
+					<h2>Pause</h2>
           <img src="./assets/netmonitor-pause.png">
+          <aside class=notes>And if you already found what you were looking for and are disturbed by new
+            logs coming in, you can simply pause the network recording. Network calls will
+            still be made by the browser, but they won't show up in the netmonitor.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Filters</h2>
 					<img src="./assets/netmonitor-filter-domain.png">
 					<p class=content>Autocomplete</p>
+          <aside class=notes>So here I want to inspect my github call. What I can do is use
+            the filter input to filter on a specific domain, github.com. You can see that the
+            input has a helpful autocokpletion with the different domains available.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Filters</h2>
 					<p class=content>Negative</p>
 					<img src="./assets/netmonitor-filter-negative.png">
+          <aside class=notes>I can also filter by negative filters. This is helpful for tracking
+            3rd parties calls on a website with -domain: newyorktimes.com for example.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Filters</h2>
 					<p class=content>Combine</p>
 					<img src="./assets/netmonitor-filter-multiples.png">
-        </section>
-
-        <section data-panel=network>
-          <h2>Columns</h2>
-					<img src="./assets/netmonitor-columns.png">
+          <aside class=notes>And if you still have issues finding what you want
+            you can go deeper by combining filters, for example github domain and triggered
+            by a fetch call.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Parameters</h2>
 					<img src="./assets/netmonitor-params.png">
+          <aside class=notes>Of course you can see the parameters of the request in a nice way.
+            You can see that repeated parameters are grouped so you can easily inspect them.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Response</h2>
 					<p class=content>Inspect JSON</p>
 					<img src="./assets/netmonitor-response.png">
+          <aside class=notes>And the most important thing I'm interested in for my github
+            request: the response. Here, since the resposne has the proper json header, I can directly inspect
+            it as in the console, which is really helpful.
+          </aside>
         </section>
 
         <section data-panel=network>
 					<h2>Edit and resend</h2>
 					<video src="./assets/netmonitor-edit-and-resend.mp4"></video>
+          <aside class=notes>Doing this, I wondered how many Github repos the mozilla org
+            had. So I used the edit and resend features. Basically, it gives you a little UI
+            so you can tweak the URL and the parameters, and send a new request.
+            Here I can then see all the mozilla repos, and there are quite q few.
+          </aside>
         </section>
 
         <section data-panel=network>
           <h2>Open in new tab</h2>
 					<img src="./assets/netmonitor-open-in-new-tab.png">
+          <aside class=notes>So let's open the request in a new tab to properly inspect it</aside>
         </section>
 
         <section data-panel=json>
            <h2>Photon Colors</h2>
 					 <p class=content>Theme you defined in your devtools settings</p>
            <img src="./assets/json-viewer-design.png">
+           <aside class=notes>Which gives us the JSON viewer. This view is activated each
+             time you try to see a JSON file, either a direct .json file, or a response with
+             a correct JSON header content type. It should have the same style you set up
+             in your devtools so you won't damage your eyes if you are used to the dark mode.
+             It is pretty awesome as it gives you a full page JSON explorer, so you don't lack
+             space and have a better overview of what's in the file response.
+           </aside>
         </section>
 
         <section data-panel=json>
            <h2>Navigate across endpoints</h2>
            <video src="./assets/json-viewer-navigate.mp4">
+           <aside class=notes>The other nice thing, especially when dealing with github apis,
+             is that since links are automatically transformed to actual html links, you can navigate
+             across endpoints.
+           </aside>
+        </section>
+
+        <section class=title>
+          <h1>That's it !</h1>
+          <p>Almost</p>
+          <aside class=notes>So that's it. Well aslmost. I want to highlight a few things
+            that wer not made by the DevTools team but that can help developers doing their jobs.
+          </aside>
         </section>
 
         <section data-panel="misc">
            <h2>WebExtensions support</h2>
           <img src="./assets/misc-react-devtools.png">
           <span class=content>React, Redux, Angular, …</span>
+          <aside class=notes>First is devtools webextensions support. the extension team, with
+            sometime some help from us, did a tremedeous job so we can benefit from all the
+            chrome extensions that are already out there. So things like React Devtools, Redux Devtools, Angular
+            works directly in Firefox. here is a screenshot with the website I almost successfully switched to React.
+          </aside>
         </section>
 
         <section data-panel="misc">
            <h2>Firefox Screenshot</h2>
           <video src="./assets/misc-screenshots.mp4"></video>
+          <aside class=notes>Second is Firefox Screenshot. This you don't need to install, it
+            is baked-in Firefox. It tries to find the container when you mouse over something, and you
+            can then save locally, to your clipboard or to the cloud where you can assign it a life span.
+            My favorite workflow is copy to clipboard then paste into Slack or Sketch. No more temp files
+            everywhere in your Desktop.
+          </aside>
         </section>
 
         <section data-panel="misc">
            <h2>Multi-Account Containers</h2>
           <img src="./assets/misc-containers.png">
+          <aside class=notes>And the last shout-out is for the Multi Account containers extension.
+            It let you have multiple "identitites" in the same browser. It is very useful if
+            you are working on a site with different user roles. So here you can set them as container,
+            and not have to log out and log in again with a user with the correct role. Super helpful.
+          </aside>
         </section>
 
         <section class=smaller-center>
@@ -620,6 +892,12 @@ console.log(
             <li><a href="https://discourse.mozilla.org/c/devtools">Discourse</a></li>
             <li>Twitter: <a href="https://twitter.com/FirefoxDevTools">@FirefoxDevTools</a></li>
           </ul>
+          <aside class=notes>This time that was really it. Thank you for listening to me while being hungry, I
+            know it is difficult. Please come and see us today and give us your bugs or ideas.
+            Lots of things were added because a user asked for.
+            You can also reach us on mozilla's IRC, on slack, discourse or twitter.
+            Thanks !
+          </aside>
         </section>
 
       </div>
