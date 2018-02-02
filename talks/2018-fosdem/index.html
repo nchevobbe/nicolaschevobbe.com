@@ -25,8 +25,8 @@
 
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-        <section class=title>
-          <h1>A tour with Firefox DevTools</h1>
+        <section>
+          <h2>A tour with Firefox DevTools</h2>
           <img src="./assets/firefox-logo-developer-edition.svg">
           <aside class=notes>Hello everyone, my name is Nicolas Chevobbe, I am a member of
             the Firefox DevTools team, mostly working on the Console. Today I will talk you about
@@ -34,13 +34,31 @@
           </aside>
         </section>
 
-        <section class=title>
-          <h1>Team of ~15 people in Europe & North America</h1>
+        <section>
+          <h2>Nicolas Chevobbe</h2>
+          <img src="./assets/avatar.jpg">
+					<ul class=content>
+						<li>French</li>
+						<li>Working on the console for ~2 years</li>
+						<li>~1 year as a mozilla employee.</li>
+					</ul>
+          <aside class=notes>Hello everyone, my name is Nicolas Chevobbe, I am a member of
+            the Firefox DevTools team.
+						I am working on the console for almost 2 year now, but a bit less than one as
+						a mozilla employee.
+						Today I will talk you about the Firefox DevTools and what we added in 2017.
+          </aside>
+        </section>
+
+        <section>
+					<h2>DevTools</h2>
+					<img src="./assets/group.jpg">
+          <p class=content>Team of ~15 people in Europe & North America</h1>
           <aside class=notes>The DevTools team is rather, small, about 15 people spread across Europe and North America</aside>
         </section>
 
-        <section class=title>
-          <h1>What we've been up to in 2017&nbsp;?</h1>
+        <section>
+          <h2>What we've been up to in 2017&nbsp;?</h2>
           <img src="./assets/otter-blue.svg">
         </section>
 
@@ -94,12 +112,6 @@ font-size: 1.5em;">
         <section data-panel=inspector>
           <h2>Photon Colors</h2>
           <img src="./assets/inspector-design.png">
-        </section>
-
-        <section data-panel=inspector>
-          <h2>Toggle node visibility</h2>
-          <p class="content"><kbd>⌘/Ctrl + H</kbd></p>
-          <video src="./assets/inspector-toggle-visibility.mp4"></video>
         </section>
 
         <section data-panel=inspector>
@@ -182,7 +194,7 @@ font-size: 1.5em;">
   --white: #ffffff;
 }
           </code></pre>
-          <img src="./assets/inspector-rule-autocomplete-css-variable.png">
+          <img class=center src="./assets/inspector-rule-autocomplete-css-variable.png">
           <aside class=notes>First we want to have a nice, branded gradient background color.
             I took some of the CSS custom properties, or CSS variables, of the Photon Design System.
             Then I can go into the Rule view, and type my gradient, the variable names are autocompleted.
@@ -192,7 +204,7 @@ font-size: 1.5em;">
         <section data-panel=inspector class=smaller-center>
           <h2>CSS custom properties</h2>
           <p class=content>Preview value</p>
-          <img src="./assets/inspector-rule-variable-value.png">
+          <img class=center  src="./assets/inspector-rule-variable-value.png">
           <aside class=notes>And then I can hover a specific variable to see its value. It is also shown in
             the rule view, but this is more convenient.
           </aside>
@@ -201,7 +213,7 @@ font-size: 1.5em;">
         <section data-panel=inspector>
           <h2>Font</h2>
           <p class=content>Applied fonts are underlined</p>
-          <img src="./assets/inspector-rule-font.png">
+          <img class=center  src="./assets/inspector-rule-font.png">
           <aside class=notes>A nice little touch in the Rule view that landed a few weeks ago
             is that you can see the applied font on a given element. So if you are missing one font
             on your system, or if a web font did not get downloaded, you can see that the fallback is being used.
@@ -364,14 +376,19 @@ font-size: 1.5em;">
         </section>
 
         <section data-panel=debugger>
+          <h2>Bug</h2>
+          <p class=content>List not loading</p>
+          <img src="./assets/debugger-help.png">
+          <aside class=notes>So as expected, something in my page isn't working. I can't
+            have the bug list reloaded when I click on a different tool.
+          </aside>
+        </section>
+
+        <section data-panel=debugger>
           <h2>Help Modal</h2>
           <p class=content>Existing shortcuts</p>
           <img src="./assets/debugger-help.png">
-          <aside class=notes>There's a little button on the UI to show a panel containing
-            all the shortcuts of the debugger.
-          </aside>
-          <aside class=notes>So as expected, something in my page isn't working. I can't
-            have the bug list reloaded when I click on a different tool. I opened the debugger
+          <aside class=notes>I opened the debugger
             and I am a bit list. Luckily, there's an help icon that when clicked, show me all the
             shortcut I can use to interact with the debugger.
           </aside>

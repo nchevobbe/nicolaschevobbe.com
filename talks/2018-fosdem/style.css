@@ -161,7 +161,7 @@ section.title img {
 section code {
   text-align: start;
   background-color: transparent !important;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 section ul li + li {
