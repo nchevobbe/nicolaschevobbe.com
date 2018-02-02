@@ -13,6 +13,10 @@ body {
   color: white;
   --accent-color: #02C2E9;
   font-family: 'Fira';
+  background-image: url("./assets/mozilla.svg");
+  background-repeat: no-repeat;
+  background-size: 15vw;
+  background-position: bottom right;
 }
 
 .reveal .controls button {
