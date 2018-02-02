@@ -163,3 +163,7 @@ section code {
 .break {
   word-wrap: break-word;
 }
+
+#features li {
+  opacity: 0;
+}
