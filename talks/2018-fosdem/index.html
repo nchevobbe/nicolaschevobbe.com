@@ -466,7 +466,7 @@ font-size: 1.5em;">
         <section data-panel=debugger>
           <h2>Vars mapping</h2>
 					<img src="./assets/debugger-mapping.png"></video>
-					<p class=content>Evaluate original names, even on ugglified files.</p>
+					<p class=content>Evaluate original names, even on uglified files.</p>
 					<aside class=notes>Another nice thing is that, even if I'm in an original file,
             and the event variable has been renamed to e,
             I can still evaluate event and access properties on it.
@@ -490,7 +490,7 @@ font-size: 1.5em;">
 
         <section data-panel=debugger>
            <h2>AST breakpoints</h2>
-					 <video src="./assets/debugger-ast-breakpoint.mp4"></video>
+					 <video src="./assets/debugger-ast-breakpoint.mp4" loop></video>
 					 <p class=content>Let the debugger handle your breakpoints</p>
 					 <aside class=notes>So, here  I added a constructor to bind my method, and I reloaded my page.
 						 Do you see what happened ?
@@ -506,6 +506,7 @@ font-size: 1.5em;">
         <section data-panel=debugger>
           <h2>WASM</h2>
 					<p class=content>See and step through original code (C, Rust, …)</p>
+          <img src="./assets/debugger-wasm.png">
           <aside class=notes>I tried to find a way to integrate WASM on this website but I felt short of ideas.
             So I just put a nice picture of a C fibonacci function running in the browser.
           </aside>
@@ -513,7 +514,8 @@ font-size: 1.5em;">
 
         <section data-panel class=smaller-center>
           <img src="./assets/bug-finder-before.png">
-          <p class="content">Contributors</p>
+          <h2>Contributors</h2>
+          <p class=content>bugzilla only</p>
           <aside class=notes>So I finally fixed my React bug (or maybe not because I was rushing to finish my slides)
             Now one thing that I want to fix is the contributor list. For now, it only shows
             the people who fixed a bug in Bugzilla in the last 30 days. But we do have code
@@ -566,7 +568,7 @@ font-size: 1.5em;">
 
         <section data-panel=console>
            <h2>Styled group</h2>
-					 <img src="./assets/console-group-styled.png">
+					 <img class=center src="./assets/console-group-styled.png">
           <p class=content>Used by Redux logger</p>
           <aside class=notes>Since I added redux-logger to my app, I can see my actions
             being dispatched in a nice way thanks to the conjunction of 2 things we added
@@ -576,7 +578,7 @@ font-size: 1.5em;">
 
         <section data-panel=console class=smaller-center>
            <h2>console.group</h2>
-					 <pre class=hero style="font-size: 1.5em;"><code data-trim>
+					 <pre class=center style="font-size: 1.5em;"><code data-trim>
 console.group("A");
 console.log("My log");
 console.groupCollapsed("B");
@@ -635,9 +637,10 @@ console.log(
            </aside>
         </section>
 
-        <section data-panel=console>
+        <section data-panel=console class=smaller-center>
            <h2>console.table</h2>
-					 <img src="./assets/console-table.png">
+					 <img class=center src="./assets/console-table.png">
+           <p class=content>Inspect large datasets in a nicer way</p>
            <aside class=notes>The inline inspection is nice. But since we have a big set of data,
              let's try to console.table it so we have a better view of it.
            </aside>
@@ -660,7 +663,7 @@ console.log(
 
         <section data-panel=console>
            <h2>console API</h2>
-          <pre class=center><code data-trim>
+          <pre class=hero><code data-trim>
              console.error();
              console.warn();
              console.log();
@@ -687,7 +690,7 @@ console.log(
         </section>
 
         <section data-panel=console class=smaller-center>
-          <h2>Log tricks</h2>
+          <h2>Logging tricks</h2>
           <ul class=content>
             <li>inspect() console helper === console.dir()</li>
 						<li>Concatenate: console.log(a, b)</li>
@@ -748,7 +751,8 @@ console.log(
 
         <section data-panel=network>
 					<h2>Pause</h2>
-          <img src="./assets/netmonitor-pause.png">
+          <img class=center src="./assets/netmonitor-pause.png">
+          <p class=content>Pause / Resume network recording</p>
           <aside class=notes>And if you already found what you were looking for and are disturbed by new
             logs coming in, you can simply pause the network recording. Network calls will
             still be made by the browser, but they won't show up in the netmonitor.
@@ -832,17 +836,18 @@ console.log(
         </section>
 
         <section data-panel=json>
-           <h2>Navigate across endpoints</h2>
-           <video src="./assets/json-viewer-navigate.mp4">
+           <h2>Links</h2>
+           <p class=content>Navigate across endpoints</p>
+           <video class=center src="./assets/json-viewer-navigate.mp4">
            <aside class=notes>The other nice thing, especially when dealing with github apis,
              is that since links are automatically transformed to actual html links, you can navigate
              across endpoints.
            </aside>
         </section>
 
-        <section class=title>
-          <h1>That's it !</h1>
-          <p>Almost</p>
+        <section class=smaller-center>
+          <h2>That's it&nbsp;!</h2>
+          <p class=content>Almost</p>
           <aside class=notes>So that's it. Well aslmost. I want to highlight a few things
             that wer not made by the DevTools team but that can help developers doing their jobs.
           </aside>
