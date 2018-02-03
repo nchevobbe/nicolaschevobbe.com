@@ -34,10 +34,10 @@
           </aside>
         </section>
 
-        <section>
+        <section class=smaller-center>
           <h2>Nicolas Chevobbe</h2>
           <img src="./assets/avatar.jpg">
-					<ul class=content>
+					<ul class=content style="list-style:none">
 						<li>French</li>
 						<li>Working on the console for ~2 years</li>
 						<li>~1 year as a mozilla employee.</li>
@@ -50,14 +50,14 @@
           </aside>
         </section>
 
-        <section>
+        <section class=smaller-center>
 					<h2>DevTools</h2>
 					<img src="./assets/group.jpg">
           <p class=content>Team of ~15 people in Europe & North America</h1>
           <aside class=notes>The DevTools team is rather, small, about 15 people spread across Europe and North America</aside>
         </section>
 
-        <section>
+        <section class=smaller-center>
           <h2>What we've been up to in 2017&nbsp;?</h2>
           <img src="./assets/otter-blue.svg">
         </section>
@@ -114,7 +114,7 @@ font-size: 1.5em;">
           <img src="./assets/inspector-design.png">
         </section>
 
-        <section data-panel=inspector>
+        <section data-panel=inspector  class=smaller-center>
           <h2>Whitespace only text node</h2>
           <p class="content">See Patrick Brosset's post on <a href="https://medium.com/@patrickbrosset/when-does-white-space-matter-in-html-b90e8a7cdd33">whitespace only nodes</a></p>
           <img src="./assets/inspector-whitespace-only-text-node.png">
@@ -378,7 +378,7 @@ font-size: 1.5em;">
         <section data-panel=debugger>
           <h2>Bug</h2>
           <p class=content>List not loading</p>
-          <img src="./assets/debugger-help.png">
+          <img src="./assets/debugger-bug.png">
           <aside class=notes>So as expected, something in my page isn't working. I can't
             have the bug list reloaded when I click on a different tool.
           </aside>
@@ -440,7 +440,7 @@ font-size: 1.5em;">
 
         <section data-panel=debugger>
           <h2>Outline view</h2>
-          <video src="./assets/debugger-outline.mp4" loop></video>
+          <video class=center src="./assets/debugger-outline.mp4" loop></video>
           <p class=content>Functions and ES6 classes' methods</p>
            <aside class="notes">So now that I'm in the file, I can look at the outline view
              which gives me a summary of what's in the file. Here I see I have a class and some
@@ -523,14 +523,14 @@ font-size: 1.5em;">
         <section data-panel=debugger>
           <h2>WASM</h2>
 					<p class=content>See and step through original code (C, Rust, …)</p>
-          <img src="./assets/debugger-wasm.png">
+          <img  class=center src="./assets/debugger-wasm.png">
           <aside class=notes>I tried to find a way to integrate WASM on this website but I felt short of ideas.
             So I just put a nice picture of a C fibonacci function running in the browser.
           </aside>
         </section>
 
         <section data-panel class=smaller-center>
-          <img src="./assets/bug-finder-before.png">
+          <img  class=center src="./assets/bug-finder-before.png">
           <h2>Contributors</h2>
           <p class=content>bugzilla only</p>
           <aside class=notes>So I finally fixed my React bug (or maybe not because I was rushing to finish my slides)
@@ -594,7 +594,7 @@ font-size: 1.5em;">
         </section>
 
         <section data-panel=console class=smaller-center>
-           <h2>console.group</h2>
+           <h2 style="hyphens: none;">console<br>.group</h2>
 					 <pre class=center style="font-size: 1.5em;"><code data-trim>
 console.group("A");
 console.log("My log");
@@ -612,7 +612,7 @@ console.groupEnd()
         </section>
 
         <section data-panel=console class=smaller-center>
-           <h2>Styled message</h2>
+           <h2>Styled<br>message</h2>
           <img src="./assets/console-style.png">
           <pre class=content><code data-trim>
 console.log(
@@ -664,7 +664,7 @@ console.log(
         </section>
 
         <section data-panel=console>
-           <h2>Copy object</h2>
+           <h2>Copy<br>object</h2>
 					 <video src="./assets/console-copy.mp4"></video>
            <ul class=content>
              <li><code data-trim>copy()</code> helper</li>
@@ -680,7 +680,7 @@ console.log(
 
         <section data-panel=console>
            <h2>console API</h2>
-          <pre class=hero><code data-trim>
+          <pre class=hero style="font-size: 1.5em;"><code data-trim>
              console.error();
              console.warn();
              console.log();
@@ -710,7 +710,7 @@ console.log(
           <h2>Logging tricks</h2>
           <ul class=content>
             <li>inspect() console helper === console.dir()</li>
-						<li>Concatenate: console.log(a, b)</li>
+						<li>Concatenate: console.log("a: ", a, "b: ", b)</li>
 						<li>Using ES6 shorthand: console.log({a, b})</li>
 						<li>Conditional Breakpoint: console.log returns undefined and won't trigger the breakpoint</li>
 					</ul>
@@ -864,6 +864,7 @@ console.log(
 
         <section class=smaller-center>
           <h2>That's it&nbsp;!</h2>
+					<img class=center src="./assets/thats-all.png">
           <p class=content>Almost</p>
           <aside class=notes>So that's it. Well aslmost. I want to highlight a few things
             that wer not made by the DevTools team but that can help developers doing their jobs.
