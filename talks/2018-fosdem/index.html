@@ -28,10 +28,6 @@
         <section>
           <h2>A tour with Firefox DevTools</h2>
           <img src="./assets/firefox-logo-developer-edition.svg">
-          <aside class=notes>Hello everyone, my name is Nicolas Chevobbe, I am a member of
-            the Firefox DevTools team, mostly working on the Console. Today I will talk you about
-            the Firefox DevTools and what we added in 2017.
-          </aside>
         </section>
 
         <section class=smaller-center>
@@ -89,29 +85,38 @@ font-size: 1.5em;">
 						<li>Whitespace only nodes</li>
 					</ul>
 					<h2>A lot</h2>
-          <aside class=notes>Well, a lot<. But let's try not to go through an endless list of
-          new thing that will make you asleep.</aside>
+          <aside class=notes>Well, a lot. But let's try not to go through an endless list of
+          new features that will make you fall asleep.</aside>
         </section>
 
         <section data-panel class=smaller-center>
           <h2 class=nohyphen>bugs.firefox-dev.tools</h2>
           <img src="./assets/bug-finder-before.png">
           <p class="content">Let's debug it using the Firefox DevTools</p>
-          <aside class=notes>We have this website we redirect contributors to when they are
-            looking for a first bug to work on, or simply looking for their next bug to tackle.
+          <aside class=notes>We have this website we send contributors to when they are
+            looking for a first bug to work on.
+						On this site you can get a list of bugs in the Firefox DevTools, and filter them
+						by tool, andd see if they are easy and/or there is someone willing to mentor
+						contributor working on the bug.
             This site has a few issues that I would like to fix, using the Firefox DevTools.
-            So let's start with the design of it.
           </aside>
         </section>
 
         <section class=title>
           <img src="./assets/feature-inspector.svg">
           <h1>INSPECTOR</h1>
+          <aside class=notes>
+            So let's start with the design of this site.
+          </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Photon Colors</h2>
           <img src="./assets/inspector-design.png">
+          <aside class=notes>
+            First thing you notice when you open the inspector is the new colors, using the
+						Photon Design System which is the one powering Firefox Quantum.
+          </aside>
         </section>
 
         <section data-panel=inspector  class=smaller-center>
@@ -122,7 +127,8 @@ font-size: 1.5em;">
             some space between links, wich I don't understand because I did not set any padding.
             If I open the Inspector, I'll see a little dotted icon in the tree. And if I hover it,
             it will tell me that it's a whitespace only node, and will highlight it in the content page.
-            So now I can see who's responsible for this 3.54px gap.</aside>
+            So now I can see who's responsible for this 3.54px gap, which designers might be really
+						interested to know about.</aside>
         </section>
 
         <section data-panel=inspector>
@@ -130,7 +136,7 @@ font-size: 1.5em;">
           <p class="content">Easing curve</p>
           <video src="./assets/inspector-animation-too-short.mp4" loop></video>
           <aside class=notes>Another thing that bother me in this page is the look of the "loading" logo.
-            The page is said to be loading when we are fetching for the bug list . And here, in the animation panel,
+            The page is said to be loading when we are fetching for a list of bugs . And here, in the animation panel,
             we can see that we rotate the logo in a very linear way.
             So let's try to get this better.
           </aside>
@@ -141,10 +147,11 @@ font-size: 1.5em;">
           <p class="content">Easier to trigger the animation</p>
           <video src="./assets/inspector-toggle-class-loading.mp4"></video>
           <aside class=notes>First, I need to actually trigger the animation. I can go and
-            select components, but it is a bit limited since the animation stops when the loading
-            is over. What I see, is that we add a "loading" class to the body of the page when
+            select a different tool on the left panel, but it is a bit limited since the
+						animation stops when the loading is over.
+						What I see, is that we add a "loading" class to the body of the page when
             we load it.
-            So let's do that using the .cls button in the rule view. It allows me to easily add
+            So let's do that using the ".cls" button in the rule view. It allows me to easily add
             a class, and then toggle it. This way, I can trigger the animation in a breeze.
           </aside>
         </section data-panel=inspector>
@@ -153,8 +160,8 @@ font-size: 1.5em;">
           <h2>Toggle classes</h2>
           <p class="content">Multiple classes</p>
           <video src="./assets/inspector-toggle-class-loading-dark.mp4"></video>
-          <aside class=notes>By the way, this UI is not restricted to only one class. So you
-            can add multiple ones and play with them. For example, here we have a dark mode,
+          <aside class=notes>By the way, this UI is not restricted to only one class. You
+            can add multiple ones and play with them. For example, we have a dark mode on this page,
             and we can see how the page looks when it's loading, both in light and dark mode.
           </aside>
         </section>
@@ -163,21 +170,30 @@ font-size: 1.5em;">
           <h2>Animations</h2>
           <p class=content>Multiple properties and easing</p>
           <video src="./assets/inspector-animations.mp4" loop></video>
-          <aside class=notes>back to the animation, I made some changes tweaking the rules.
-            Now I have 2 separate properties animated, with different easing.
+          <aside class=notes>Let's go back to the animation, I made some changes tweaking the rules.
+            Now I have 2 separate properties animated, "transform:scale", and "opacity",
+						with different easing.
             I can hover the curves to see the properties of the animation, and I also can
             hover specific keyframe to check a given property value.
             Now the animation looks fine to me, let's move on something else.
           </aside>
         </section>
 
+        <section data-panel class=smaller-center>
+          <img src="./assets/bug-finder-before.png">
+          <aside class=notes>One of the other issue I see on this page is that it could be
+            better for first time contributors.
+            The current look is a bit dull and the links are hard to spot.
+          </aside>
+        </section>
+
         <section data-panel=inspector>
           <h2>Landing page</h2>
           <img src="./assets/inspector-intro-blank.png">
-          <aside class=notes>One of the other issue I see on this page is that it could be
-            better for first time contributors.
-            The current look is a bit dull and the links are hard to spot. So let's try
-            to put up a landing page so users can have a better grasp what the page is about.
+          <aside class=notes>
+						So let's try to put up a landing page so users can have a better grasp what the page is about.
+						Here you can see what the page looks like unstyled, and we are going to set up some rules in
+						the inspector to make it look better.
           </aside>
         </section>
 
@@ -214,9 +230,13 @@ font-size: 1.5em;">
           <h2>Font</h2>
           <p class=content>Applied fonts are underlined</p>
           <img class=center  src="./assets/inspector-rule-font.png">
-          <aside class=notes>A nice little touch in the Rule view that landed a few weeks ago
+          <aside class=notes>
+						For a more branded look, I want to use the Zilla font on this page, for the title.
+						Zilla is the font used in the new mozilla logo.
+						A nice little touch in the Rule view that landed a few weeks ago
             is that you can see the applied font on a given element. So if you are missing one font
-            on your system, or if a web font did not get downloaded, you can see that the fallback is being used.
+            on your computer, or if a web font did not get downloaded,
+						you can see that the fallback is being used.
           </aside>
         </section>
 
@@ -225,14 +245,14 @@ font-size: 1.5em;">
           <img src="./assets/inspector-font-panel-local.png">
           <aside class=notes>Which makes me think that you can go the the Font panel, and check
             the font properties. You can even enter a custom text to see what the font looks like .
-            Here it is a system font .
+            Here it is for a system font, installed on my computer .
           </aside>
         </section>
 
         <section data-panel=inspector>
           <h2>Font panel - remote</h2>
           <img src="./assets/inspector-font-panel-remote.png">
-          <aside class=notes>And you can see other properties on remote font, like the font-face declaration</aside>
+          <aside class=notes>And you can see other properties on remote fonts, like the font-face declaration</aside>
         </section>
 
         <section data-panel=inspector class=smaller-center>
@@ -253,6 +273,7 @@ font-size: 1.5em;">
             CSS Grid is a set of new properties that let you declare layout in a very simple
             way. If you are not familiar with it, you can check the work of Jen Simmons, Rachel Andrew and Wes Bos,
             just to name a few, who put terrific resources to learn CSS grids.
+						By the way, this very page is using CSS grid.
           </aside>
         </section>
 
@@ -261,9 +282,9 @@ font-size: 1.5em;">
           <p class="content">Set up a grid</p>
           <video src="./assets/inspector-grid-display.mp4"></video>
           <aside class=notes>So I want to use it as well for my landing page. Let's put display: grid on the
-            container. And then, you can see there's a little button next to it, when clicked show
+            container. And then, you can see there's a little button next to it. When it is clicked it shows
             the boundaries of my grid elements.
-            The colors does not play nicely here, so let's change it to something more noticeable.
+            The colors does not play nicely here, so let's change it to something more noticeable. White should be good.
           </aside>
         </section>
 
@@ -339,7 +360,7 @@ font-size: 1.5em;">
         <section data-panel=inspector>
           <h2>Shape path tool</h2>
           <video src="./assets/inspector-shape-circle.mp4">
-          <aside class=notes>Okay, so thigns are getting pretty good I think.
+          <aside class=notes>Okay, so things are getting pretty good I think.
             But I think we can do even better. So there's an experimental properties called
             shape-outside which let's you define non boxy shapes for content to float against.
             So basically, here I have a float div, with a shape outside set to circle.
@@ -360,9 +381,9 @@ font-size: 1.5em;">
           <img src="./assets/feature-debugger.svg">
           <h1>DEBUGGER</h1>
           <aside class=notes>Okay, so now we have a good looking landing page. What's next ?
-            Well, I heard of an obscure library made by a small company. It's react, heard of it ?
-            Okay, so let's try it out on our new website. And because we're building something new
-            using JS, we'll probably have bugs and have to use the debugger.
+            Well, I heard of small library made by a small company. It's called React.
+            Okay, so let's try to use it to build our website. And because we're building something new
+            using javascript, we'll probably have bugs and have to use the debugger.
           </aside>
         </section>
 
@@ -370,7 +391,7 @@ font-size: 1.5em;">
           <h2>Photon colors</h2>
           <p class=content>Rewritten using React & Redux</p>
           <img src="./assets/debugger-design.png">
-          <aside class=notes>So last year we shipped a brand new debuggger, using React & Redux,
+          <aside class=notes>Last year we shipped a brand new debuggger, using React & Redux,
             which allowed us to iterate quickly.
           </aside>
         </section>
@@ -389,7 +410,7 @@ font-size: 1.5em;">
           <p class=content>Existing shortcuts</p>
           <img src="./assets/debugger-help.png">
           <aside class=notes>I opened the debugger
-            and I am a bit list. Luckily, there's an help icon that when clicked, show me all the
+            and I am a bit lost. Luckily, there's an help icon that when clicked, show me all the
             shortcut I can use to interact with the debugger.
           </aside>
         </section>
@@ -407,7 +428,7 @@ font-size: 1.5em;">
            <h2>Project search</h2>
           <p class=content>Cmd/Ctrl + Shift + F</p>
           <img src="./assets/debugger-project-search.png">
-          <aside class=notes>Okay, so there was something about input, let's do a project search for that.
+          <aside class=notes>Okay, so there is something wrong on an input, let's do a project search for that.
             Well, there are results, but I don't know which one is the good one.
           </aside>
         </section>
@@ -444,7 +465,7 @@ font-size: 1.5em;">
           <p class=content>Functions and ES6 classes' methods</p>
            <aside class="notes">So now that I'm in the file, I can look at the outline view
              which gives me a summary of what's in the file. Here I see I have a class and some
-             methods, and I can navigate to a given file by clicking on it.
+             methods, and I can navigate to a given function by clicking on it.
             </aside>
         </section>
 
@@ -463,8 +484,8 @@ font-size: 1.5em;">
            <h2>Source-map</h2>
           <p class=content>Link to generated location</p>
           <video src="./assets/debugger-link-to-bundle.mp4"></video>
-          <aside class=notes>And I can even see the generated location in the bundle file.
-            So here you can see how JSx is interpreted for example.
+          <aside class=notes>
+						And I can even see the generated location in the bundle file.
           </aside>
         </section>
 
@@ -472,11 +493,12 @@ font-size: 1.5em;">
 					<h2>Collapsed frames</h2>
 					<video src="./assets/debugger-stack-collapse.mp4" loop></video>
           <p class=content>Grouped frames by library</p>
-					<aside class=notes>Okay, back to the faulty function> I set up a breakpoint in it,
-            and noew we are paused and we can see the stacktrace.
+					<aside class=notes>Okay, back to the faulty function. I set up a breakpoint in it,
+						selected a tool,and now we are paused and we can see the stacktrace.
 						But instead of having all the React internals calls, they are nicely grouped,
 						and, if I want to, I can expand it.
 						This way, I can focus only on the parts that matters.
+						This is not working only for React by the way, but for many libraries.
 					</aside>
         </section>
 
@@ -511,11 +533,12 @@ font-size: 1.5em;">
 					 <p class=content>Let the debugger handle your breakpoints</p>
 					 <aside class=notes>So, here  I added a constructor to bind my method, and I reloaded my page.
 						 Do you see what happened ?
-             Even if I added 4 lines, the debugger is still where I want it to be, on the assignment
-             to searchBugs.
+             Even if I added 4 lines, the debugger is still where I want it to be, on the "searchBugs"
+						 variable assignment.
              It's because the debugger has what we call AST breakpoints. Which means, breakpoints are
-             not only referenced by their line, but also by an ast location. Here it is searchBug assignment
-             in the onComponentchange method. I find this very useful because you can tweak your
+             not only referenced by a file and a line number, but also by an ast location.
+						 Here it is the "searchBug" variable  assignment
+             in the onComponentChange method. I find this very useful because you can tweak your
              code and not have to deal with your breakpoints being on a whole other expression you don't care about.
 					 </aside>
         </section>
@@ -526,6 +549,7 @@ font-size: 1.5em;">
           <img  class=center src="./assets/debugger-wasm.png">
           <aside class=notes>I tried to find a way to integrate WASM on this website but I felt short of ideas.
             So I just put a nice picture of a C fibonacci function running in the browser.
+						And it's nicely highlighted and you can even pause in it.
           </aside>
         </section>
 
@@ -539,7 +563,7 @@ font-size: 1.5em;">
             outside of mozilla repo, on Github, and it would be nice if contribution there could be
             displayed as well.
             So we need to fetch all the repos under the devtools-html orgs on github, and then, well,
-            that's where I'm stucked at,
+            that's where I'm blocked. I don't really know how to handle the results of the API call.
           </aside>
         </section>
 
@@ -556,7 +580,7 @@ font-size: 1.5em;">
           <h2>Photon colors</h2>
            <p class=content>Cleaner design</p>
           <img src="./assets/console-design.png">
-          <aside class=notes>Last year we also shipped on new console, with a cleaner design,
+          <aside class=notes>Last year we also shipped a new console, with a cleaner design,
             which put the emphasis on the logs.
             You can also see the persist log option was moved directly in the panel. So your log
             won't disappear if you reload the page.
@@ -567,8 +591,8 @@ font-size: 1.5em;">
           <h2>Filtering</h2>
 					<img src="./assets/console-hidden-messages.png">
            <p class=content>Number of hidden messages</p>
-           <aside class=notes>So here I am not interested in Error messages so I toggle the filter
-             off, and you can see that the UI tells me that I may be missing something because
+           <aside class=notes>So previously I had filtered-off Error messages.
+             And you can see that the UI tells me that I may be missing something because
              the filter is off. I can then click the button to set the filter to their default state.
            </aside>
         </section>
@@ -579,7 +603,7 @@ font-size: 1.5em;">
            <p class=content>Sourcemap - MDN Link</p>
           <aside class=notes>Which could have been helpful previously with my React bug !
             Here you can see there was an error message linking me to the correct jsx script.
-            And there is a net [Learn More] Link to MDN page, which is the case for  all the most common errors
+            And there is a [Learn More] Link to MDN page, in case I'm not sure what the error means.
             </p>
         </section>
 
@@ -622,7 +646,7 @@ console.log(
 )
            </code></pre>
            <aside class=notes>The second thing we added was styled console.group. We already
-             have styled console.log, but not for group. This is now fixed.
+             have styled console.log, but not styled group. This is now fixed.
              If you don't know styled console message, it's a nice little thing that let
              you style parts of your message using a whitelist of CSS properties. The way you
              do this is by declaring a style unit, with %c, and css properties on the last arguments
@@ -674,7 +698,7 @@ console.log(
              is copy the object, either using the copy helper in the console output, or by
              using the context menu entry.
              it will copy the JSON stringified version of the object, if possible, in your clipboard,
-             You can then paste it where you want to analyze it.
+             You can then paste it where you want to analyze it, for example in your code editor.
            </aside>
         </section>
 
@@ -710,7 +734,7 @@ console.log(
           <h2>Logging tricks</h2>
           <ul class=content>
             <li>inspect() console helper === console.dir()</li>
-						<li>Concatenate: console.log("a: ", a, "b: ", b)</li>
+						<li>Concatenate: console.log("a", a, "b", b)</li>
 						<li>Using ES6 shorthand: console.log({a, b})</li>
 						<li>Conditional Breakpoint: console.log returns undefined and won't trigger the breakpoint</li>
 					</ul>
@@ -741,8 +765,9 @@ console.log(
           <img src="./assets/netmonitor-design.png">
 					<h2>Photon colors</h2>
           <p class=content>Rewritten in React & Redux. Disable cache + Persist log</p>
-          <aside class=notes>The netmonitor was also rewritten in React and Redux and got these nicelyPhoton colors.
-            There were some tweaks in the UI, so you can disable the cache and persist log right into the panel.
+          <aside class=notes>The netmonitor was also rewritten in React and Redux
+						and got these nice Photon colors as well.
+            There were some improvements in the UI, so you can disable the cache and persist log right into the panel.
           </aside>
         </section>
 
@@ -836,14 +861,17 @@ console.log(
         <section data-panel=network>
           <h2>Open in new tab</h2>
 					<img src="./assets/netmonitor-open-in-new-tab.png">
-          <aside class=notes>So let's open the request in a new tab to properly inspect it</aside>
+          <aside class=notes>So let's open the request in a new tab to properly inspect it,
+						which is done by doing a right-click on a log entry,
+						and select the well named "open in a new tab"
+					</aside>
         </section>
 
         <section data-panel=json>
            <h2>Photon Colors</h2>
 					 <p class=content>Theme you defined in your DevTools settings</p>
            <img src="./assets/json-viewer-design.png">
-           <aside class=notes>Which gives us the JSON viewer. This view is activated each
+           <aside class=notes>Which takes us the JSON viewer. This view is activated each
              time you try to see a JSON file, either a direct .json file, or a response with
              a correct JSON header content type. It should have the same style you set up
              in your DevTools so you won't damage your eyes if you are used to the dark mode.
