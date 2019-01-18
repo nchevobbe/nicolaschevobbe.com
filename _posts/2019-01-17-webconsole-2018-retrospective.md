@@ -19,6 +19,7 @@ date: 2019-01-17
     background-color: currentColor;
     transform: translateY(-50%);
     z-index: -1;
+    position: relative;
   }
 
   h2#winter::after {
