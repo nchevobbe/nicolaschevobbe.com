@@ -58,25 +58,24 @@ what to expect in 2019.
 
 ## Winter
 
-As said in the intro, we rewrote and shipped the new frontend by the end of 2017. But there was still a place where the old frontend was used: the Browser Console.
+As said in the intro, we rewrote and shipped the new frontend by the end of 2017. But there was still a place where the old frontend was used: [the Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console).
 
-The Browser Console gather all the messages spawned by the different tabs of a Firefox instance, WebExtension logs and messages from Firefox code  itself (what's called `Chrome`, i.e. everything that is not a content page, not to be confused with the Chrome browser).
+The Browser Console gather all the messages spawned by the different tabs of a Firefox instance, WebExtension logs and messages from Firefox code itself (what's called `Chrome`, i.e. everything that is not a content page, not to be confused with the Chrome browser).
 
 As you can imagine, this involves more work than only showing messages from one given place, which is why it didn't land at the same time as the "simple" WebConsole.
 
-The old frontend had a hecka-lot-of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was done by the end of Winter, with the help of a lot of colleagues from the DevTools team. Success!
+The old frontend had a hecka lot of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was __DONE__ by the end of Winter, with the help of a lot of colleagues from the DevTools team. Success!
 
 With all the test migrated, and the Browser Console using the new frontend, we can now creates the most satisfying patch: delete the whole old-frontend codebase. Farewell!
 
 ## Spring
 
-Logan Smyth, from the debugger team, uses the information provided by
-sourcemaps to rewrite expression evaluated in the console so they are still properly evaluated by the Javascript engine.
-Let's say you have a `hello` variable, but your build/minification process renames it to `a`, you can now still do `console.log(hello)`. Under the hood, we transform it to `console.log(a)` so you're still getting what you need. Handy!
+[Logan Smyth](https://twitter.com/loganfsmyth?lang=en), from the debugger team, made it so the console uses the information provided by sourcemaps to rewrite evaluated expression on the fly so they are still properly evaluated by the Javascript engine. Let's look at an example.
+Say you have a `hello` variable, but your build/minification step renames it to `a`, you can now still do `console.log(hello)` and see the value of `hello`, even if, from a browser perspective, `hello` does not exist. Under the hood, we transform the expression to `console.log(a)` so you're still getting what you need.
 
 ---
 
-Around the same time, J. Ryan Stinnett is working on emitting CSS warnings only if the user has the CSS filter enabled. Those warnings can be very verbose and could affect the performance of our tools, so it made a lot of sense to only report them if the user wanted them.
+Around the same time, [J. Ryan Stinnett](https://twitter.com/jryans?lang=en) is working on emitting CSS warnings only if the user has the CSS filter enabled. Those warnings can be very verbose and could affect the performance of our tools, so it made a lot of sense to only report them if the user wanted them.
 
 ---
 
@@ -122,7 +121,7 @@ console.count("cpt"); // cpt: 1
 
 ---
 
-Finally, we add one more interaction with the Debugger. When logging a function, an icon is displayed after it so you can jump to its declaration and checkout its code and maybe add a breakpoint.
+Finally, we add one more interaction with the Debugger. When logging a function, an icon is displayed after it so you can jump to its declaration and check out its content.
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/jump_definition.mp4" alt="Jump to definition screencast"  autoplay mute loop/>
@@ -133,13 +132,13 @@ Finally, we add one more interaction with the Debugger. When logging a function,
 
 The DevTools team wants to remove <abbr title="Graphic Command Line Interface">GCLI</abbr>, which is not used widely and relies on old technologies that will be removed of Firefox in the future (<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL"><abbr title="XML User Interface Language">XUL</abbr></a>). The GCLI exposed commands that user could run. The most used one was the `screenshot` command, which let you grab a part or the full view of a website, and save it to an image file on your disk.
 As we did want to keep this feature for users who enjoyed it, we decided to migrate it in the console.
-Yulia Startsev did most of the work here to deliver a `:screenshot` command, which you can read about in [this nice article by Eric Meyer](https://meyerweb.com/eric/thoughts/2018/08/24/firefoxs-screenshot-command-2018/).
+[Yulia Startsev](https://twitter.com/ioctaptceb) did most of the work here to deliver a `:screenshot` command, which you can read about in [this nice article by Eric Meyer](https://meyerweb.com/eric/thoughts/2018/08/24/firefoxs-screenshot-command-2018/).
 
 This was a good opportunity to define what commands could look like in the WebConsole, and how to differentiate them from Javascript expression (hence the `:` at the beginning of those). We used it to create a second command, `:help` (previously existing as a JS `help()` function), that redirects the user to an MDN page listing all the existing helpers in the console.
 
 ---
 
-Brian Grinstead lands a patch to add syntax highlighting of the expression once the user evaluated them.
+As a follow-up of our syntax highlighting work, [Brian Grinstead](https://twitter.com/bgrins) lands a patch to add it to the expression, when it's displayed in the output.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/syntax_highlighting.png" alt="Syntax highlighting in console"/>
@@ -148,7 +147,7 @@ Brian Grinstead lands a patch to add syntax highlighting of the expression once 
 
 ---
 
-As we're revamping the console input experience, it makes sense to work on an essential feature of any code editor, the Autocomplete popup. We add a wide range of issues in it and tried our best to fix them all in order to make it not confusing:
+As we're revamping the console input experience, it makes sense to work on an essential feature of any code editor, the Autocomplete popup. We had a wide range of issues with it and tried our best to fix them all in order to make it less confusing:
   - We aligned its style with the rest of the UI, using the [Photon design system](https://design.firefox.com/photon/).
   - We tried to make it as fast as possible
   - We don't reverse the items anymore.
@@ -222,7 +221,7 @@ Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted
 
 ---
 
-Closing the gap with Chrome DevTools meant implementing top-level await expression support. At the moment, `await` expression are only valid in async functions and generators (even if [there's a tc39 proposal to change that](https://github.com/tc39/proposal-top-level-await)). So we had to be creative in order to support it in the console. Jason Laster kick-off and landed a first version that then motivated me in pushing it other the finish line.
+Closing the gap with Chrome DevTools meant implementing top-level await expression support. At the moment, `await` expression are only valid in async functions and generators (even if [there's a tc39 proposal to change that](https://github.com/tc39/proposal-top-level-await)). So we had to be creative in order to support it in the console. [Jason Laster](https://twitter.com/jasonlaster11) kick-off and lands a first version, that then motivated me in pushing it other the finish line.
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/await.mp4" alt="Screencast of top-level await expressions being evaluated in the console"  autoplay mute loop/>
@@ -242,7 +241,7 @@ It's a great feature to have in order to quickly prototype in the console.
 
 ---
 
-In Spring, we had a work week in Paris with Jason Laster and Patrick Brosset, and one of the main theme was to evaluate what it would take for the console to re-use the awesome callstack component used in the Debugger. The Debugger community built this callstack where all successive framework/library frames are grouped, and collapsed, so the user has a shorter stack trace to look at, highlighting the app code, not the framework one.
+In Spring, we had a work week in Paris with [Jason Laster](https://twitter.com/jasonlaster11) and [Patrick Brosset](https://twitter.com/patrickbrosset), and one of the main theme was to evaluate what it would take for the console to re-use the awesome callstack component used in the Debugger. The Debugger community built this callstack where all successive framework/library frames are grouped, and collapsed, so the user has a shorter stack trace to look at, highlighting the app code, not the framework one.
 
 As always, the initial implementation is easy, but the devil's in the detail, and they were many things to think about, mainly because the design of the debugger call stack panel, and what we wanted the console stack trace to look like are quite different. Also, this stacktrace component should be used everywhere we possibly show traces (`console.trace`, exceptions and error objects), and handle sourcemap. This led us to fix one last standing issue we had with them in the console (not using them for logged Error object), which is great because we now honor sourcemap everywhere, and people using build steps should have a better time working with our tools.
 
@@ -268,7 +267,7 @@ As we start the new year, we already have 2 feature in mind for the first half o
 
 The first one is grouping warning messages from the same category. We know some warnings can be verbose and clutter the console, making the user **not** pay attention to those. So we are going to identify those messages and group them, while trying to find a way for the user to be notified.
 
-The second one is to revive the old-trusty Firebox Editor mode. Basically, we want the console input to feel more like a playground, with more room to play with it. The editor will probably be put on the left on the screen, with the output on the right, and won't clear on execution so one can quickly iterate writing a snippet.
+The second one is to revive the old-trusty Firebox Editor mode. Basically, we want the console input to feel more like a playground, with more room to play with it. The editor will probably be on the left side on the screen, with the output on the right, and won't clear on execution so one can quickly iterate writing a code snippet.
 
 There's also other ideas floating around, like how to ease the communication with other tools (and more specifically the debugger), but nothing clear yet.
 
