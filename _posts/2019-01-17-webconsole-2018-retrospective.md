@@ -52,7 +52,7 @@ date: 2019-01-17
   }
 </style>
 
-In 2017, we rewrote and shipped the WebConsole frontend using React. But our work wasn't done, it was only the stepping stone for where we wanted the WebConsole to be: close the gap with Chrome and ship unique features that would make users more productive.
+In 2017, we rewrote and shipped the WebConsole using React. But our work wasn't done, it was only the stepping stone for where we wanted the WebConsole to be: close the gap with Chrome and ship unique features that would make users more productive.
 
 <video src="/images/posts_assets/2019-01-17/2018.mp4" alt="Screencast of 2018 ASCII art appearing in the console" autoplay=true muted=true loop=true/>
 
@@ -61,15 +61,15 @@ what to expect in 2019.
 
 ## Winter
 
-As said in the intro, we rewrote and shipped the new frontend by the end of 2017. But there was still a place where the old frontend was used: [the Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console).
+As said in the intro, we rewrote and shipped the new WebConsole by the end of 2017. But there was still a place where the old code was used: [the Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console).
 
 The Browser Console gather all the messages spawned by the different tabs of a Firefox instance, WebExtension logs and messages from Firefox code itself (what's called `Chrome`, i.e. everything that is not a content page, not to be confused with the Chrome browser).
 
 As you can imagine, this involves more work than only showing messages from one given place, which is why it didn't land at the same time as the "simple" WebConsole.
 
-The old frontend had a hecka lot of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was __DONE__ by the end of Winter, with the help of a lot of colleagues from the DevTools team. Success!
+The old WebConsole had a hecka lot of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was __DONE__ by the end of Winter, with the help of a lot of colleagues from the DevTools team. Success!
 
-With all the test migrated, and the Browser Console using the new frontend, we can now creates the most satisfying patch: delete the whole old-frontend codebase. Farewell!
+With all the test migrated, and the Browser Console using the new code, we can now creates the most satisfying patch: delete the whole old WebConsole codebase. Farewell!
 
 ## Spring
 
@@ -86,7 +86,7 @@ Late May, we roll-out one of our most visible changes: the console input now has
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/syntax_highlighting.mp4" alt="Screencast of syntax highlighting in the console" autoplay=true muted=true loop=true/>
-  <figcaption>Jump to function declaration</figcaption>
+  <figcaption>Colors!</figcaption>
 </figure>
 
 Doing this also required quite some refactoring through the summer, as most of our codebase assumed we were working with a simple HTML `<textarea>`, where we now have to integrate with CodeMirror <abbr>API</abbr>s.
@@ -124,11 +124,11 @@ console.count("cpt"); // cpt: 1
 
 ---
 
-Finally, we add one more interaction with the Debugger. When logging a function, an icon is displayed after it so you can jump to its declaration and check out its content.
+Finally, we add one more interaction with the Debugger. When logging a function, an icon is displayed after it so you can jump to its definition and check out its content.
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/jump_definition.mp4" alt="Jump to definition screencast"  autoplay=true muted=true loop=true/>
-  <figcaption>Jump to function declaration</figcaption>
+  <figcaption>Jump to function definition</figcaption>
 </figure>
 
 ## Summer
@@ -168,7 +168,7 @@ As we're revamping the console input experience, it makes sense to work on an es
 
 ---
 
-Last year a [Florens](https://twitter.com/fvsch) started doing awesome contributions to the whole DevTools codebase, with no exception to the console. They identified some visual flaws, misalignments and not-that-ideal colors in the output and came up with a wonderful fix for all those.
+Last year [Florens](https://twitter.com/fvsch) started doing awesome contributions to the whole DevTools codebase, with no exception to the console. They identified some visual flaws, misalignments and less-than-ideal colors in the output, and came up with a wonderful fixes for all those.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/redesign.png" alt="New design in the console">
@@ -190,7 +190,7 @@ Thank you Florens for this terrific job!
 
 Well rested from our Summer holidays, we can now full-steam ahead.
 
-One of the biggest complain we had about the Console was that it's input was small and at the very bottom of the screen, even if the output was empty.
+One of the biggest complain we had about the Console was that its input was small and at the very bottom of the screen, even if the output was empty.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/old_console.png" alt="Screenshot of the console where the input is at the very bottom of the screen, even if there's nothing in the output">
@@ -220,11 +220,11 @@ Since we were going terminal-like, we thought why not implementing one of the mo
   <figcaption>This is something I wanted for ages</figcaption>
 </figure>
 
-Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted the browser shortcut to still work (e.g. on Windows, Ctrl+R reloads the page), we had to look for the leftovers, which left us with F9. We're working on putting a button in the UI to toggle it so it's more discoverable than it is today.
+Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted the browser shortcuts to still work (e.g. on Windows, Ctrl+R reloads the page), we had to look for the leftovers, which left us with F9. We're working on putting a button in the UI to toggle it so it's more discoverable than it is today.
 
 ---
 
-Closing the gap with Chrome DevTools meant implementing top-level await expression support. At the moment, `await` expression are only valid in async functions and generators (even if [there's a tc39 proposal to change that](https://github.com/tc39/proposal-top-level-await)). So we had to be creative in order to support it in the console. [Jason Laster](https://twitter.com/jasonlaster11) kick-off and lands a first version, that then motivated me in pushing it other the finish line.
+Closing the gap with Chrome DevTools meant implementing top-level await expression support. At the moment, `await` expression are only valid in async functions and generators (even if [there's a tc39 proposal to change that](https://github.com/tc39/proposal-top-level-await)). So we had to be creative in order to support it in the console. [Jason Laster](https://twitter.com/jasonlaster11) kick-off and lands a first version, that then motivated me in pushing it over the finish line.
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/await.mp4" alt="Screencast of top-level await expressions being evaluated in the console"  autoplay=true muted=true loop=true/>
@@ -235,7 +235,7 @@ It's a great feature to have in order to quickly prototype in the console.
 
 ---
 
-`console.trace` is super useful when you need to know from where a given function was called. But it could be a bit hard to tell at a first glance from where the stacktrace printed on your screen came from. Also, you may need additional information like the value of the parameters or variable, which previously required people to simply drop an additional `console.log` to get those. We made it so that `console.trace` now takes multiple arguments, so you can save the superflous `console.log`.
+`console.trace` is super useful when you need to know from where a given function was called. But it could be a bit hard to tell at a first glance from where the stacktrace printed on your screen came from. Also, you may need additional information like the value of the parameters or variables, which previously required people to simply drop an additional `console.log` to get those. We made it so that `console.trace` now takes multiple arguments, so you can save the superfluous `console.log`.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/console_trace.png" alt="console.trace calls with multiple arguments">
@@ -244,7 +244,7 @@ It's a great feature to have in order to quickly prototype in the console.
 
 ---
 
-In Spring, we had a work week in Paris with [Jason Laster](https://twitter.com/jasonlaster11) and [Patrick Brosset](https://twitter.com/patrickbrosset), and one of the main theme was to evaluate what it would take for the console to re-use the awesome callstack component used in the Debugger. The Debugger community built this callstack where all successive framework/library frames are grouped, and collapsed, so the user has a shorter stack trace to look at, highlighting the app code, not the framework one.
+In Spring, we had a work week in Paris with [Jason Laster](https://twitter.com/jasonlaster11) and [Patrick Brosset](https://twitter.com/patrickbrosset), and one of the main themes was to evaluate what it would take for the console to re-use the awesome callstack component used in the Debugger. The Debugger community built this callstack where all successive framework/library frames are grouped, and collapsed, so the user has a shorter stack trace to look at, highlighting the app code, not the framework one.
 
 As always, the initial implementation is easy, but the devil's in the detail, and they were many things to think about, mainly because the design of the debugger call stack panel, and what we wanted the console stack trace to look like are quite different. Also, this stacktrace component should be used everywhere we possibly show traces (`console.trace`, exceptions and error objects), and handle sourcemap. This led us to fix one last standing issue we had with them in the console (not using them for logged Error object), which is great because we now honor sourcemap everywhere, and people using build steps should have a better time working with our tools.
 
@@ -270,7 +270,7 @@ As we start the new year, we already have 2 feature in mind for the first half o
 
 The first one is grouping warning messages from the same category. We know some warnings can be verbose and clutter the console, making the user **not** pay attention to those. So we are going to identify those messages and group them, while trying to find a way for the user to be notified.
 
-The second one is to revive the old-trusty Firebox Editor mode. Basically, we want the console input to feel more like a playground, with more room to play with it. The editor will probably be on the left side on the screen, with the output on the right, and won't clear on execution so one can quickly iterate writing a code snippet.
+The second one is to revive the old-trusty Firebug Editor mode. Basically, we want the console input to feel more like a playground, with more room to play with it. The editor will probably be on the left side on the screen, with the output on the right, and won't clear on execution so one can quickly iterate writing a code snippet.
 
 There's also other ideas floating around, like how to ease the communication with other tools (and more specifically the debugger), but nothing clear yet.
 
