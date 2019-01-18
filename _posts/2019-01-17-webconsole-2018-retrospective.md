@@ -104,7 +104,7 @@ console.timeEnd("hello", "final measure");
 ```
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/console_timeLog.png" alt="console.timeLog examples">
+  <img src="/images/posts_assets/2019-01-17/console_timeLog.jpg" alt="console.timeLog examples">
   <figcaption>`console.timeLog` is super handy to get multiple intermediate measures</figcaption>
 </figure>
 
@@ -120,7 +120,7 @@ console.count("cpt"); // cpt: 1
 ```
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/console_countReset.png" alt="console.countReset example">
+  <img src="/images/posts_assets/2019-01-17/console_countReset.jpg" alt="console.countReset example">
   <figcaption>`console.countReset`</figcaption>
 </figure>
 
@@ -146,7 +146,7 @@ This was a good opportunity to define what commands could look like in the WebCo
 As a follow-up of our syntax highlighting work, [Brian Grinstead](https://twitter.com/bgrins) lands a patch to add it to the expression, when it's displayed in the output.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/syntax_highlighting.png" alt="Syntax highlighting in console"/>
+  <img src="/images/posts_assets/2019-01-17/syntax_highlighting.jpg" alt="Syntax highlighting in console"/>
   <figcaption>🌈🌈🌈🌈</figcaption>
 </figure>
 
@@ -164,7 +164,7 @@ As we're revamping the console input experience, it makes sense to work on an es
   - It now works with `$_` and `$0`.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/autocomplete_popup.png" alt="autocomplete popup in console input">
+  <img src="/images/posts_assets/2019-01-17/autocomplete_popup.jpg" alt="autocomplete popup in console input">
   <figcaption>Completion on `$0` with an opening bracket</figcaption>
 </figure>
 
@@ -173,7 +173,7 @@ As we're revamping the console input experience, it makes sense to work on an es
 Last year [Florens](https://twitter.com/fvsch) started doing awesome contributions to the whole DevTools codebase, with no exception to the console. They identified some visual flaws, misalignments and less-than-ideal colors in the output, and came up with a wonderful fixes for all those.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/redesign.png" alt="New design in the console">
+  <img src="/images/posts_assets/2019-01-17/redesign.jpg" alt="New design in the console">
   <figcaption>Sharp!</figcaption>
 </figure>
 
@@ -182,7 +182,7 @@ Last year [Florens](https://twitter.com/fvsch) started doing awesome contributio
 <abbr title="Cross-origin resource sharing">CORS</abbr> is hard, and errors are legion. We rewrote some CORS error messages and added `Learn More` links next to it that point to MDN pages where you can get your head around what's going on.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/cors_learn_more.png" alt="Learn More link in CORS error messages">
+  <img src="/images/posts_assets/2019-01-17/cors_learn_more.jpg" alt="Learn More link in CORS error messages">
   <figcaption>Direct access to the infinite knowledge of MDN</figcaption>
 </figure>
 
@@ -193,7 +193,7 @@ Well rested from our Summer holidays, we can now full-steam ahead.
 One of the biggest complain we had about the Console was that its input was small and at the very bottom of the screen, even if the output was empty.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/old_console.png" alt="Screenshot of the console where the input is at the very bottom of the screen, even if there's nothing in the output">
+  <img src="/images/posts_assets/2019-01-17/old_console.jpg" alt="Screenshot of the console where the input is at the very bottom of the screen, even if there's nothing in the output">
   <figcaption>Wasted space!</figcaption>
 </figure>
 
@@ -201,13 +201,13 @@ Sure it was always focused, and entering multiline expressions would make it gro
 To address that, we implemented a terminal-like UI, where the input takes as much height as it can, and shrinks as the output gets filled-in.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/in-line.png" alt="Screenshot of the console where the input takes the whole available vertical space">
+  <img src="/images/posts_assets/2019-01-17/in-line.jpg" alt="Screenshot of the console where the input takes the whole available vertical space">
 </figure>
 
 We didn't want to go all the way into Chrome direction though. There, the console input is alway _after_ all the messages, meaning that if you scroll up, you can see it anymore (even though it's still focused and a keystroke will get you back to it). Our design make it so the input is always visible, so even if you scrolled way backup to look for an object shape, the input is always at sight for you to interact with it.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/sticky.png" alt="Screenshot of the console where the input is stuck at the bottom of the screen when the output is scrolled up">
+  <img src="/images/posts_assets/2019-01-17/sticky.jpg" alt="Screenshot of the console where the input is stuck at the bottom of the screen when the output is scrolled up">
   <figcaption>The input is always visible, and expands if needed</figcaption>
 </figure>
 
@@ -238,7 +238,7 @@ It's a great feature to have in order to quickly prototype in the console.
 `console.trace` is super useful when you need to know from where a given function was called. But it could be a bit hard to tell at a first glance from where the stacktrace printed on your screen came from. Also, you may need additional information like the value of the parameters or variables, which previously required people to simply drop an additional `console.log` to get those. We made it so that `console.trace` now takes multiple arguments, so you can save the superfluous `console.log`.
 
 <figure>
-  <img src="/images/posts_assets/2019-01-17/console_trace.png" alt="console.trace calls with multiple arguments">
+  <img src="/images/posts_assets/2019-01-17/console_trace.jpg" alt="console.trace calls with multiple arguments">
   <figcaption>No need for an extra console.log now</figcaption>
 </figure>
 
