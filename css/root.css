@@ -217,6 +217,7 @@ pre, code {
 pre > code {
   background-color: transparent !important;
   font-family: monospace;
+  padding-left: 0;
 }
 
 img, iframe {
