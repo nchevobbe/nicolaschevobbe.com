@@ -54,6 +54,8 @@ date: 2019-01-17
 
 In 2017, we rewrote and shipped the WebConsole frontend using React. But our work wasn't done, it was only the stepping stone for where we wanted the WebConsole to be: close the gap with Chrome and ship unique features that would make users more productive.
 
+<video src="/images/posts_assets/2019-01-17/2018.mp4" alt="Screencast of 2018 ASCII art appearing in the console" autoplay=true muted=true loop=true/>
+
 So join me for a tour of what happened in the console in 2018, and
 what to expect in 2019.
 
