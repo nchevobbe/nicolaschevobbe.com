@@ -177,8 +177,6 @@ Last year [Florens](https://twitter.com/fvsch) started doing awesome contributio
   <figcaption>Sharp!</figcaption>
 </figure>
 
-Thank you Florens for this terrific job!
-
 ---
 
 <abbr title="Cross-origin resource sharing">CORS</abbr> is hard, and errors are legion. We rewrote some CORS error messages and added `Learn More` links next to it that point to MDN pages where you can get your head around what's going on.
@@ -267,6 +265,8 @@ Getters are widely supported in browsers and heavily used in frameworks like vue
 ## 2019
 
 Pheew, 2018 was quite a ride. I think we are now seeing the result of all of our 2016 & 2017 hard work, which makes us work on features more efficiently.
+
+I also wanted to give a special thank to [Victoria](https://twitter.com/violasong), [Florens](https://twitter.com/fvsch) and [Matt Croud](https://twitter.com/Octavector). They helped us through the year, making design analysis and providing detailed mockups on complex problems. The console wouldn't be the same without their terrific work.
 
 As we start the new year, we already have 2 feature in mind for the first half of the year.
 
