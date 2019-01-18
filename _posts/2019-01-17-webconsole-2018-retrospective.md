@@ -54,7 +54,9 @@ date: 2019-01-17
 
 In 2017, we rewrote and shipped the WebConsole using React. But our work wasn't done, it was only the stepping stone for where we wanted the WebConsole to be: close the gap with Chrome and ship unique features that would make users more productive.
 
-<video src="/images/posts_assets/2019-01-17/2018.mp4" alt="Screencast of 2018 ASCII art appearing in the console" autoplay=true muted=true loop=true/>
+<figure>
+  <video src="/images/posts_assets/2019-01-17/2018.mp4" alt="Screencast of 2018 ASCII art appearing in the console" autoplay="true" muted="true" loop="true" />
+</figure>
 
 So join me for a tour of what happened in the console in 2018, and
 what to expect in 2019.
@@ -85,7 +87,7 @@ Around the same time, [J. Ryan Stinnett](https://twitter.com/jryans?lang=en) is 
 Late May, we roll-out one of our most visible changes: the console input now has syntax highlighting, using a CodeMirror instance under the hood.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/syntax_highlighting.mp4" alt="Screencast of syntax highlighting in the console" autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/syntax_highlighting.mp4" alt="Screencast of syntax highlighting in the console" autoplay="true" muted="true" loop="true" />
   <figcaption>Colors!</figcaption>
 </figure>
 
@@ -127,7 +129,7 @@ console.count("cpt"); // cpt: 1
 Finally, we add one more interaction with the Debugger. When logging a function, an icon is displayed after it so you can jump to its definition and check out its content.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/jump_definition.mp4" alt="Jump to definition screencast"  autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/jump_definition.mp4" alt="Jump to definition screencast"  autoplay="true" muted="true" loop="true" />
   <figcaption>Jump to function definition</figcaption>
 </figure>
 
@@ -216,7 +218,7 @@ We didn't want to go all the way into Chrome direction though. There, the consol
 Since we were going terminal-like, we thought why not implementing one of the most useful feature a terminal can offer: reverse history search. So you can now do F9 or (Ctrl+R on OSX) to display a search field that will look into your commands history. Retrieving that so-cool 1-month-old snippet is now blazingly fast.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/reverse-search.mp4" alt="Screencast Reverse Search UI in the console" autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/reverse-search.mp4" alt="Screencast Reverse Search UI in the console" autoplay="true" muted="true" loop="true" />
   <figcaption>This is something I wanted for ages</figcaption>
 </figure>
 
@@ -227,7 +229,7 @@ Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted
 Closing the gap with Chrome DevTools meant implementing top-level await expression support. At the moment, `await` expression are only valid in async functions and generators (even if [there's a tc39 proposal to change that](https://github.com/tc39/proposal-top-level-await)). So we had to be creative in order to support it in the console. [Jason Laster](https://twitter.com/jasonlaster11) kick-off and lands a first version, that then motivated me in pushing it over the finish line.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/await.mp4" alt="Screencast of top-level await expressions being evaluated in the console"  autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/await.mp4" alt="Screencast of top-level await expressions being evaluated in the console"  autoplay="true" muted="true" loop="true" />
   <figcaption>`await` <abbr title="For The Win">FTW</abbr></figcaption>
 </figure>
 
@@ -249,7 +251,7 @@ In Spring, we had a work week in Paris with [Jason Laster](https://twitter.com/j
 As always, the initial implementation is easy, but the devil's in the detail, and they were many things to think about, mainly because the design of the debugger call stack panel, and what we wanted the console stack trace to look like are quite different. Also, this stacktrace component should be used everywhere we possibly show traces (`console.trace`, exceptions and error objects), and handle sourcemap. This led us to fix one last standing issue we had with them in the console (not using them for logged Error object), which is great because we now honor sourcemap everywhere, and people using build steps should have a better time working with our tools.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/smart_trace.mp4" alt="Screencast of smart callstack in the console" autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/smart_trace.mp4" alt="Screencast of smart callstack in the console" autoplay="true" muted="true" loop="true" />
   <figcaption>Focus is on _your_ code</figcaption>
 </figure>
 
@@ -258,7 +260,7 @@ As always, the initial implementation is easy, but the devil's in the detail, an
 Getters are widely supported in browsers and heavily used in frameworks like vue.js for computed properties. When inspected in DevTools, getters reference their function, not the return value. This is because we can't evaluate anything on your behalf, since it may cause side-effects on your page/app (for example if you're modifying a state in the getter, or adding a class to a DOM element). But at least, we can provide a way for the user to invoke the getter in order to get the return value.
 
 <figure>
-  <video src="/images/posts_assets/2019-01-17/invoke_getter.mp4" alt="Screencast of getter being invoked in the console" autoplay=true muted=true loop=true/>
+  <video src="/images/posts_assets/2019-01-17/invoke_getter.mp4" alt="Screencast of getter being invoked in the console" autoplay="true" muted="true" loop="true" />
   <figcaption>At last!</figcaption>
 </figure>
 
