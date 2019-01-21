@@ -65,17 +65,17 @@ what to expect in 2019.
 
 As said in the intro, we rewrote and shipped the new WebConsole by the end of 2017. But there was still a place where the old code was used: [the Browser Console](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console).
 
-The Browser Console gather all the messages spawned by the different tabs of a Firefox instance, WebExtension logs and messages from Firefox code itself (what's called `Chrome`, i.e. everything that is not a content page, not to be confused with the Chrome browser).
+The Browser Console gathers all the messages spawned by the different tabs of a Firefox instance, WebExtension logs and messages from Firefox code itself (what's called `Chrome`, i.e. everything that is not content page, not to be confused with the Chrome browser).
 
 As you can imagine, this involves more work than only showing messages from one given place, which is why it didn't land at the same time as the "simple" WebConsole.
 
-The old WebConsole had a hecka lot of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was __DONE__ by the end of Winter, with the help of a lot of colleagues from the DevTools team. Success!
+The old WebConsole had a hecka lot of tests that we couldn't simply dismiss. In 2017, we started a journey to evaluate and then remove or migrate all the existing tests in the codebase. This tasks continued in the beginning of 2018 for all the Browser Console tests and was __DONE__ by the end of Winter, with the help of a lot of people from the DevTools team. Success!
 
-With all the test migrated, and the Browser Console using the new code, we can now creates the most satisfying patch: delete the whole old WebConsole codebase. Farewell!
+With all the test migrated, and the Browser Console using the new code, we can now create the most satisfying patch: delete the whole old WebConsole codebase. Farewell!
 
 ## Spring
 
-[Logan Smyth](https://twitter.com/loganfsmyth?lang=en), from the debugger team, made it so the console uses the information provided by sourcemaps to rewrite evaluated expression on the fly so they are still properly evaluated by the Javascript engine. Let's look at an example.
+[Logan Smyth](https://twitter.com/loganfsmyth?lang=en), from the debugger team, made it so the console uses the information provided by sourcemaps to rewrite evaluated expressions on the fly so they are still properly evaluated by the Javascript engine. Let's look at an example.
 Say you have a `hello` variable, but your build/minification step renames it to `a`, you can now still do `console.log(hello)` and see the value of `hello`, even if, from a browser perspective, `hello` does not exist. Under the hood, we transform the expression to `console.log(a)` so you're still getting what you need.
 
 ---
@@ -95,7 +95,7 @@ Doing this also required quite some refactoring through the summer, as most of o
 
 ---
 
-On a smaller note, `console.timeLog` is [specced](https://console.spec.whatwg.org/#timelog) and implemented in Firefox. It allows the user to print intermediate measures for a given timer.
+On a smaller note, `console.timeLog` is [specced](https://console.spec.whatwg.org/#timelog) and implemented in Firefox. It allows users to print intermediate measures for a given timer.
 ```
 console.time("hello");
 console.timeLog("hello", "1st measure");
@@ -110,7 +110,7 @@ console.timeEnd("hello", "final measure");
 
 ---
 
-Another console API is also implemented, `console.countReset` ([See the spec](https://console.spec.whatwg.org/#countreset)). As indicated by its name, using it resets a given counter created with `console.count`.
+Another console API is also implemented, `console.countReset` ([See the spec](https://console.spec.whatwg.org/#countreset)). As stated by its name, using it resets a given counter created with `console.count`.
 ```
 console.count("cpt"); // cpt: 1
 console.count("cpt"); // cpt: 2
@@ -135,15 +135,15 @@ Finally, we add one more interaction with the Debugger. When logging a function,
 
 ## Summer
 
-The DevTools team wants to remove <abbr title="Graphic Command Line Interface">GCLI</abbr>, which is not used widely and relies on old technologies that will be removed of Firefox in the future (<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL"><abbr title="XML User Interface Language">XUL</abbr></a>). The GCLI exposed commands that user could run. The most used one was the `screenshot` command, which let you grab a part or the full view of a website, and save it to an image file on your disk.
-As we did want to keep this feature for users who enjoyed it, we decided to migrate it in the console.
+The DevTools team wants to remove <abbr title="Graphic Command Line Interface">GCLI</abbr>, which is not widely used  and relies on old technologies that will be removed from Firefox in the future (<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL"><abbr title="XML User Interface Language">XUL</abbr></a>). The GCLI exposed commands that user could run, the most popular one being the `screenshot` command. It let you grab a part, or the full view, of a website and save it to an image file on your disk.
+As we did want to keep this feature for users who need it, we decided to migrate it in the console.
 [Yulia Startsev](https://twitter.com/ioctaptceb) did most of the work here to deliver a `:screenshot` command, which you can read about in [this nice article by Eric Meyer](https://meyerweb.com/eric/thoughts/2018/08/24/firefoxs-screenshot-command-2018/).
 
 This was a good opportunity to define what commands could look like in the WebConsole, and how to differentiate them from Javascript expression (hence the `:` at the beginning of those). We used it to create a second command, `:help` (previously existing as a JS `help()` function), that redirects the user to an MDN page listing all the existing helpers in the console.
 
 ---
 
-As a follow-up of our syntax highlighting work, [Brian Grinstead](https://twitter.com/bgrins) lands a patch to add it to the expression, when it's displayed in the output.
+As a follow-up of our syntax highlighting work, [Brian Grinstead](https://twitter.com/bgrins) lands a patch to add it to the expression when displayed in the output.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/syntax_highlighting.jpg" alt="Syntax highlighting in console"/>
@@ -170,7 +170,7 @@ As we're revamping the console input experience, it makes sense to work on an es
 
 ---
 
-Last year [Florens](https://twitter.com/fvsch) started doing awesome contributions to the whole DevTools codebase, with no exception to the console. They identified some visual flaws, misalignments and less-than-ideal colors in the output, and came up with a wonderful fixes for all those.
+Last year [Florens](https://twitter.com/fvsch) started doing awesome contributions to the whole DevTools codebase, with no exception to the console. They identified some visual flaws, misalignments and less-than-ideal colors in the output, and came up with wonderful fixes for all those.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/redesign.jpg" alt="New design in the console">
@@ -179,7 +179,7 @@ Last year [Florens](https://twitter.com/fvsch) started doing awesome contributio
 
 ---
 
-<abbr title="Cross-origin resource sharing">CORS</abbr> is hard, and errors are legion. We rewrote some CORS error messages and added `Learn More` links next to it that point to MDN pages where you can get your head around what's going on.
+<abbr title="Cross-origin resource sharing">CORS</abbr> is hard, and errors are legion. We rephrased some CORS error messages and added `Learn More` links next to them that point to MDN pages where you can get your head around what's going on.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/cors_learn_more.jpg" alt="Learn More link in CORS error messages">
@@ -188,7 +188,7 @@ Last year [Florens](https://twitter.com/fvsch) started doing awesome contributio
 
 ## Autumn
 
-Well rested from our Summer holidays, we can now full-steam ahead.
+Well rested from our Summer holidays, we can now go full-steam ahead.
 
 One of the biggest complain we had about the Console was that its input was small and at the very bottom of the screen, even if the output was empty.
 
@@ -204,7 +204,7 @@ To address that, we implemented a terminal-like UI, where the input takes as muc
   <img src="/images/posts_assets/2019-01-17/in-line.jpg" alt="Screenshot of the console where the input takes the whole available vertical space">
 </figure>
 
-We didn't want to go all the way into Chrome direction though. There, the console input is alway _after_ all the messages, meaning that if you scroll up, you can see it anymore (even though it's still focused and a keystroke will get you back to it). Our design make it so the input is always visible, so even if you scrolled way backup to look for an object shape, the input is always at sight for you to interact with it.
+We didn't want to go all the way into Chrome direction though. There, the console input is alway _after_ all the messages, meaning that if you scroll up, you can't see it anymore (even though it's still focused and a keystroke will get you back to it). Our design make it so the input is always visible, so even if you scrolled way back up to look for an object, the input is always at sight for you to interact with it.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/sticky.jpg" alt="Screenshot of the console where the input is stuck at the bottom of the screen when the output is scrolled up">
@@ -220,7 +220,7 @@ Since we were going terminal-like, we thought why not implementing one of the mo
   <figcaption>This is something I wanted for ages</figcaption>
 </figure>
 
-Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted the browser shortcuts to still work (e.g. on Windows, Ctrl+R reloads the page), we had to look for the leftovers, which left us with F9. We're working on putting a button in the UI to toggle it so it's more discoverable than it is today.
+Finding a good shortcut to trigger the UI was surprisingly hard. Since we wanted the browser shortcuts to still work (e.g. on Windows, Ctrl+R reloads the page), we had to look for leftovers, which left us with F9. We're working on putting a button in the UI to toggle it so it's more discoverable than it is today.
 
 ---
 
@@ -235,7 +235,7 @@ It's a great feature to have in order to quickly prototype in the console.
 
 ---
 
-`console.trace` is super useful when you need to know from where a given function was called. But it could be a bit hard to tell at a first glance from where the stacktrace printed on your screen came from. Also, you may need additional information like the value of the parameters or variables, which previously required people to simply drop an additional `console.log` to get those. We made it so that `console.trace` now takes multiple arguments, so you can save the superfluous `console.log`.
+`console.trace` is super useful when you need to know from where a given function was called. But it could be a bit hard to tell at a first glance from where the stacktrace printed on your screen came from. Also, you may need additional information like the value of the parameters or variables, which previously required people to simply drop an additional `console.log` to get those. `console.trace` now takes multiple arguments, so you can save the superfluous `console.log`.
 
 <figure>
   <img src="/images/posts_assets/2019-01-17/console_trace.jpg" alt="console.trace calls with multiple arguments">
@@ -246,7 +246,7 @@ It's a great feature to have in order to quickly prototype in the console.
 
 In Spring, we had a work week in Paris with [Jason Laster](https://twitter.com/jasonlaster11) and [Patrick Brosset](https://twitter.com/patrickbrosset), and one of the main themes was to evaluate what it would take for the console to re-use the awesome callstack component used in the Debugger. The Debugger community built this callstack where all successive framework/library frames are grouped, and collapsed, so the user has a shorter stack trace to look at, highlighting the app code, not the framework one.
 
-As always, the initial implementation is easy, but the devil's in the detail, and they were many things to think about, mainly because the design of the debugger call stack panel, and what we wanted the console stack trace to look like are quite different. Also, this stacktrace component should be used everywhere we possibly show traces (`console.trace`, exceptions and error objects), and handle sourcemap. This led us to fix one last standing issue we had with them in the console (not using them for logged Error object), which is great because we now honor sourcemap everywhere, and people using build steps should have a better time working with our tools.
+As always, the initial implementation is easy, but the devil's in the detail, and there were many things to think about, mainly because the design of the debugger call stack panel, and what we wanted the console stack trace to look like are quite different. Also, this stacktrace component should be used everywhere we possibly show traces (`console.trace`, exceptions and error objects), and handle sourcemap. This led us to fix one last standing issue we had with them in the console (not using them for logged Error object), which is great because we now honor sourcemap everywhere, and people using build steps should have a better time working with our tools.
 
 <figure>
   <video src="/images/posts_assets/2019-01-17/smart_trace.mp4" alt="Screencast of smart callstack in the console" autoplay="true" muted="true" loop="true" />
@@ -268,7 +268,7 @@ Pheew, 2018 was quite a ride. I think we are now seeing the result of all of our
 
 I also wanted to give a special thank to [Victoria](https://twitter.com/violasong), [Florens](https://twitter.com/fvsch) and [Matt Croud](https://twitter.com/Octavector). They helped us through the year, making design analysis and providing detailed mockups on complex problems. The console wouldn't be the same without their terrific work.
 
-As we start the new year, we already have 2 feature in mind for the first half of the year.
+As we start the new year, we already have 2 features in mind for the first half of the year.
 
 The first one is grouping warning messages from the same category. We know some warnings can be verbose and clutter the console, making the user **not** pay attention to those. So we are going to identify those messages and group them, while trying to find a way for the user to be notified.
 
