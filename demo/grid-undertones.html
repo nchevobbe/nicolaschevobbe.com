@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nicolas Chevobbe - Undertones CSS grid</title>
+    <meta charset="UTF-8" />
+    <!--FAVICON-->
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="57x57"
+      href="/images/favicon/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="114x114"
+      href="/images/favicon/apple-touch-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="72x72"
+      href="/images/favicon/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+      href="/images/favicon/apple-touch-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="60x60"
+      href="/images/favicon/apple-touch-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="120x120"
+      href="/images/favicon/apple-touch-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="76x76"
+      href="/images/favicon/apple-touch-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="152x152"
+      href="/images/favicon/apple-touch-icon-152x152.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-196x196.png"
+      sizes="196x196"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-128.png"
+      sizes="128x128"
+    />
+    <meta name="application-name" content="Nicolas Chevobbe" />
+    <meta name="msapplication-TileColor" content="#2F374" />
+    <meta
+      name="msapplication-TileImage"
+      content="/images/favicon/mstile-144x144.png"
+    />
+    <meta
+      name="msapplication-square70x70logo"
+      content="/images/favicon/mstile-70x70.png"
+    />
+    <meta
+      name="msapplication-square150x150logo"
+      content="/images/favicon/mstile-150x150.png"
+    />
+    <meta
+      name="msapplication-wide310x150logo"
+      content="/images/favicon/mstile-310x150.png"
+    />
+    <meta
+      name="msapplication-square310x310logo"
+      content="/images/favicon/mstile-310x310.png"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Montserrat:700|Signika+Negative:600");
+
+      body,
+      html {
+        margin: 0;
+        background-color: #d2d8cc;
+      }
+
+      body {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+      }
+
+      main {
+        font-family: "Signika Negative", sans-serif;
+        grid-column: 2 / 3;
+        max-width: 800px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(50px, 200px));
+        grid-template-rows: repeat(4, auto);
+        grid-column-gap: 2em;
+        grid-row-gap: 5vmin;
+      }
+
+      p {
+        color: #b70911;
+      }
+
+      h2 {
+        font-size: calc(65px + (100 - 65) * (100vw - 200px) / (600));
+        color: #0c1313;
+        grid-row: 3 / 4;
+        grid-column: 1 / -1;
+        opacity: calc(1 - (var(--index) / 19));
+        transform-origin: left 5%;
+        padding: 0;
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        animation: 2.5s cubic-bezier(0.07, 0.95, 0, 1) rotate;
+        animation-fill-mode: forwards;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+      }
+
+      h2.spacer {
+        writing-mode: vertical-lr;
+        padding: 0.5em;
+        visibility: hidden;
+      }
+
+      footer {
+        grid-column: -2 / -1;
+        grid-row: 3 / 4;
+        color: #b70911;
+        align-self: end;
+      }
+
+      a,
+      a:visited {
+        color: currentColor;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0);
+        }
+        30% {
+          transform: rotate(0);
+        }
+        70% {
+          transform: rotate(calc(var(--index) * 5deg));
+        }
+        100% {
+          transform: rotate(calc(var(--index) * 5deg));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>straight music presents the undertone</p>
+      <p>victoria hall hanley<br />stoke-on-trent, england</p>
+      <p>advance ticket: £2.00<br />at the door: £2.50</p>
+      <p>with special guests the chords</p>
+      <p>tuesday<br />june 5 1979, 7:30pm</p>
+
+      <h2>Undertones</h2>
+      <h2 style="--index: 1;">Undertones</h2>
+      <h2 style="--index: 2;">Undertones</h2>
+      <h2 style="--index: 3;">Undertones</h2>
+      <h2 style="--index: 4;">Undertones</h2>
+      <h2 style="--index: 5;">Undertones</h2>
+      <h2 style="--index: 6;">Undertones</h2>
+      <h2 style="--index: 7;">Undertones</h2>
+      <h2 style="--index: 8;">Undertones</h2>
+      <h2 style="--index: 9;">Undertones</h2>
+      <h2 style="--index: 10;">Undertones</h2>
+      <h2 style="--index: 11;">Undertones</h2>
+      <h2 style="--index: 12;">Undertones</h2>
+      <h2 style="--index: 13;">Undertones</h2>
+      <h2 style="--index: 14;">Undertones</h2>
+      <h2 style="--index: 15;">Undertones</h2>
+      <h2 style="--index: 16;">Undertones</h2>
+      <h2 style="--index: 17;">Undertones</h2>
+      <h2 style="--index: 18;">Undertones</h2>
+      <h2 class="spacer">Undertones</h2>
+      <footer>
+        Based on
+        <a href="https://www.swissted.com/products/the-undertones-1979"
+          >Swissted</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nicolas Chevobbe - Undertones CSS grid</title>
+    <meta charset="UTF-8" />
+    <!--FAVICON-->
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="57x57"
+      href="/images/favicon/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="114x114"
+      href="/images/favicon/apple-touch-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="72x72"
+      href="/images/favicon/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+      href="/images/favicon/apple-touch-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="60x60"
+      href="/images/favicon/apple-touch-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="120x120"
+      href="/images/favicon/apple-touch-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="76x76"
+      href="/images/favicon/apple-touch-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="152x152"
+      href="/images/favicon/apple-touch-icon-152x152.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-196x196.png"
+      sizes="196x196"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-16x16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon/favicon-128.png"
+      sizes="128x128"
+    />
+    <meta name="application-name" content="Nicolas Chevobbe" />
+    <meta name="msapplication-TileColor" content="#2F374" />
+    <meta
+      name="msapplication-TileImage"
+      content="/images/favicon/mstile-144x144.png"
+    />
+    <meta
+      name="msapplication-square70x70logo"
+      content="/images/favicon/mstile-70x70.png"
+    />
+    <meta
+      name="msapplication-square150x150logo"
+      content="/images/favicon/mstile-150x150.png"
+    />
+    <meta
+      name="msapplication-wide310x150logo"
+      content="/images/favicon/mstile-310x150.png"
+    />
+    <meta
+      name="msapplication-square310x310logo"
+      content="/images/favicon/mstile-310x310.png"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      body {
+        font-family: Helvetica, Arial;
+        background-color: #121116;
+        color: #d4e5f6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: end;
+        max-width: 100vw;
+        overflow: hidden;
+      }
+
+      main {
+        display: grid;
+        transform: rotate(45deg);
+        grid-template-columns: repeat(20, 2.5rem);
+        grid-template-rows: auto repeat(3, 5rem 10px) auto;
+        /*! grid-gap: 10px */
+      }
+
+      span:not(.big) {
+        font-size: 10px;
+      }
+
+      .big {
+        font-size: 7.2rem;
+        letter-spacing: -0.07em;
+        /*! line-height: 0.85; */
+      }
+
+      .bold {
+        font-weight: bolder;
+      }
+
+      .accent {
+        color: #da4522;
+      }
+
+      .vertical {
+        /* transform: rotate(-90deg) */
+      }
+
+      .the {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        align-self: end;
+        line-height: 0.6;
+      }
+      .national {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        /*! line-height: 0.7; */
+        text-align: end;
+      }
+      .theatre {
+        grid-column-start: 1;
+        grid-column-end: 14;
+        grid-row-start: 4;
+        grid-row-end: 6;
+        text-align: end;
+      }
+      .edward {
+        grid-column-start: 1;
+        grid-column-end: 15;
+        grid-row-start: 6;
+        grid-row-end: 8;
+        text-align: end;
+      }
+      .at {
+        grid-column-start: 7;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg) translateY(-27px);
+        line-height: 0.77;
+        /*! text-align: center; */
+      }
+
+      .desc {
+        grid-column-start: 13;
+        /*! grid-column-end: 12; */
+        grid-row-start: 2;
+        grid-row-end: 4;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        padding-block-start: 20px;
+      }
+
+      .seats {
+        grid-column-start: 14;
+        /*! grid-column-end: 8; */
+        grid-row-start: 4;
+        grid-row-end: 6;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        padding-block-start: 20px;
+      }
+
+      .seats span + span {
+        padding-block-start: 20px;
+        display: block;
+      }
+      .at:before {
+        content: "";
+        padding-inline-start: 20px;
+      }
+
+      .author {
+        grid-column-start: 15;
+
+        grid-row-start: 6;
+        grid-row-end: 8;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        padding-block-start: 20px;
+        padding-inline-end: 1px;
+      }
+
+      .praise {
+        grid-column-start: 19;
+        grid-column-end: 22;
+        grid-row-start: 6;
+        grid-row-end: 8;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+      }
+
+      img {
+        grid-column-start: 1;
+        grid-column-end: 16;
+        grid-row-start: 8;
+        grid-row-end: 9;
+        writing-mode: vertical-rl;
+        justify-self: end;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="the big bold">The</span>
+      <span class="national big bold">National</span>
+      <span class="theatre big bold">Theatre</span>
+      <span class="edward big bold accent">Edward ⅠⅠ</span>
+      <span class="at big bold vertical">at the<br />Old Vic</span>
+      <span class="desc accent"
+        >The National Theatre works in association with the art council of Great
+        Britain</span
+      >
+      <span class="seats accent bold">
+        <span>Seats from "/- to 32/6</span>
+        <span>95 for sale on the day</span>
+      </span>
+      <span class="author accent">
+        <span class="bold">Bertoit Brecht</span> after Marlowe Translated by
+        William E Smith &amp; Ralph Manheim
+      </span>
+      <span class="praise bold accent"
+        >“…among the very best and most surprising things the National Theatre
+        has done to date”</span
+      >
+      <img
+        src="https://cdn.glitch.com/bd9062f2-b064-46fe-a290-f297ea5e8215%2Factor.jpg?1509106697337"
+      />
+      <p>
+        Design by
+        <a
+          class="accent"
+          href="http://www.eyemagazine.com/blog/post/ken-briggs-1931-2013"
+          >Ken Briggs</a
+        >
+      </p>
+    </main>
+  </body>
+</html>
