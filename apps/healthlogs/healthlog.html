@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Health Log</title>
+        <link href="style.css" rel="stylesheet">
+        <script src="app.js" defer></script>
+    </head>
+
+    <body>
+        <section class="login">
+            <form>
+                <label>Secret: <input type="password" name="secret"></label>
+                <button>OK</button>
+            </form>
+        </section>
+        <section class="home hidden">
+            <div class="dashboard"></div>
+            <ul class="logs"></ul>
+        </section>
+        <section class="day hidden">
+            <form>
+                <div class="form-row"><label>Jour: <input name="day" type="date" readonly></label></div>
+                <div class="form-row"><label>Poids: <input name="weight" type="number" step="0.1"></label></div>
+                <div class="form-row"><label>Drinks: <input name="drinks" type="number"></label></div>
+                <div class="form-row">
+                    <label for="yoga-enable">Yoga</label>
+                    <input id="yoga-enable" name="yoga-enable" type="checkbox" class="toggle" autocomplete="off" />
+                    <div class="sport-inputs-container">
+                        <label>
+                            <input name="yoga-time" class="time" type="number" disabled>mn
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="skate-enable">Skate</label>
+                    <input id="skate-enable" name="skate-enable" type="checkbox" class="toggle" autocomplete="off">
+                    <div class="sport-inputs-container">
+                        <label>
+                            <input name="skate-time" class="time" type="number" disabled>mn
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="rameur-enable">Rameur</label>
+                    <input id="rameur-enable" name="rameur-enable" type="checkbox" class="toggle" autocomplete="off">
+                    <div class="sport-inputs-container">
+                        <label>
+                            <input name="rameur-time" class="time" type="number" disabled>mn
+                        </label>
+                        <label>
+                            <input name="rameur-distance" class="distance" type="number" disabled>m
+                        </label>
+                    </div>
+                </div>
+                <button>OK</button>
+            </form>
+        </section>
+    </body>
+</html>
