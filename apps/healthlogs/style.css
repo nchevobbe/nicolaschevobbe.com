@@ -1,21 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(255, 213, 48);
+}
+
+body > section {
+    height: 100vh;
+    max-height: 100vh;
+    padding: 1em;
+}
+
+.login {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+input, button {
+    font-size: 24px;
+}  
+
 .date {
-    background-color: rgb(222, 227, 232);
+    background-color: white;
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 4px 0 0 0;
 }
 
 li {
     list-style: none;
 }
 
-.logs>li {
-    border: 1px solid #eee;
-    border-radius: 4px;
-    padding: 1em;
+.logs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 2em;
 }
 
-.logs>li+li {
-    margin-top: 1em;
+.logs > li {
+    border: 1px solid #eee;
+    border-radius: 4px;
 }
 
 .hidden {
@@ -28,4 +58,13 @@ li {
 
 .sport-inputs-container {
     display: inline-block;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+.form-row + .form-row {
+    margin-top: 10px;
 }
