@@ -7,52 +7,120 @@ html, body {
     padding: 0;
 }
 
+/* App structure */
+
 body {
     background-color: rgb(255, 213, 48);
-}
-
-body > section {
+    font-family: sans-serif;
     height: 100vh;
     max-height: 100vh;
-    padding: 1em;
+    display: grid;
+    /* header + content */
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
 }
 
-.login {
-    display: grid;
-    align-content: center;
-    justify-content: center;
+header {
+    font-size: 2rem;
+    padding-block: 0.5em;
+    text-align: center;
+    background-color: #ff4330;
+    color: white;
+    border-bottom: 5px solid #d40000;
+}
+
+main {
+    overflow: auto;
+}
+
+main>section {
+    padding: 1em;
 }
 
 input, button {
     font-size: 24px;
-}  
-
-.date {
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 4px 0 0 0;
 }
 
 li {
     list-style: none;
 }
 
-.logs {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-gap: 2em;
-}
-
-.logs > li {
-    border: 1px solid #eee;
-    border-radius: 4px;
-}
-
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.toggle:not(:checked) + .sport-inputs-container {
+/* Login section */
+
+.login {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.login form {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+/* Logs section */
+
+.logs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 2em;
+    margin: 0;
+    padding: 2em;
+}
+
+.day .date {
+    color: #222;
+    border-bottom: 2px solid;
+    display: block;
+    padding-bottom: 4px;
+    font-size: 1.2em;
+}
+
+.day-detail {
+    margin: 0 0 1em 0;
+    padding: 10px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.day-detail li {
+    display: inline-block;
+    padding: 4px 1em;
+    border-radius: 2em;
+}
+
+.day-detail .weight {
+    background-color: #fff;
+}
+
+.day-detail .yoga {
+    background-color: #2fd38e;
+}
+
+.day-detail .skate {
+    background-color: #071c22;
+    color: white;
+}
+
+.day-detail .rameur {
+    background-color: #2a8ebf;
+    color: white;
+}
+
+.day-detail .drink {
+    background-color: #d32f2f;
+    color: white;
+}
+
+/* Day form section */
+
+.toggle:not(:checked)+.sport-inputs-container {
     display: none;
 }
 
@@ -65,6 +133,6 @@ li {
     align-items: center;
 }
 
-.form-row + .form-row {
+.form-row+.form-row {
     margin-top: 10px;
 }

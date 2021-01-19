@@ -1,6 +1,7 @@
 var logsData = {};
 const loginSectionEl = document.querySelector("section.login");
 const loginFormEl = loginSectionEl.querySelector("form");
+const headerEl = document.querySelector("header");
 const homeSectionEl = document.querySelector("section.home");
 const logsEl = homeSectionEl.querySelector("ul.logs");
 const daySectionEl = document.querySelector("section.day");
@@ -12,6 +13,12 @@ dayFormEl.addEventListener("submit", onSubmitDayForm)
 for (const checkbox of dayFormEl.querySelectorAll("input.toggle")) {
     checkbox.addEventListener("input", onSportCheckboxToggle);
 }
+
+const dateFormatter = new Intl.DateTimeFormat("fr", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+});
 
 function onSubmitLoginForm(e) {
     e.stopPropagation();
@@ -28,6 +35,11 @@ function showDayForm(e) {
     homeSectionEl.classList.add("hidden");
 
     const day = e.currentTarget.dataset.date;
+
+    headerEl.originalTextContent = headerEl.textContent;
+    headerEl.textContent = day;
+    dateFormatter.format(new Date(day))
+
     const dayData = logsData[day];
     dayFormEl.querySelector(`[name=day]`).value = day;
 
@@ -56,6 +68,7 @@ function onSubmitDayForm(e) {
     e.preventDefault();
     daySectionEl.classList.add("hidden");
     homeSectionEl.classList.remove("hidden");
+    headerEl.textContent = headerEl.originalTextContent;
 
     const formData = Object.fromEntries(new FormData(dayFormEl));
     logsData[formData.day] = {
@@ -132,11 +145,13 @@ function buildDaySectionElements() {
 
         const li = document.createElement("li");
         li.setAttribute("data-date", day);
+        li.classList.add("day");
         const date = document.createElement("span");
         date.classList.add("date");
-        date.textContent = day;
+        date.textContent = dateFormatter.format(new Date(day));
 
         const dataUl = document.createElement("ul");
+        dataUl.classList.add("day-detail");
 
         li.append(date, dataUl);
         li.addEventListener("click", showDayForm);
@@ -179,7 +194,7 @@ function populateDay(day) {
         }] of Object.entries(dayData.sports)) {
             const sportLi = document.createElement("li");
             sportLi.classList.add("sport", sport);
-            sportLi.textContent = `${sport}: ${time}mn${distance ? ` ${distance}m` : ""}`;
+            sportLi.textContent = `${time}mn${distance ? ` ${distance}m` : ""}`;
             dataUl.append(sportLi);
         }
     }
@@ -187,7 +202,7 @@ function populateDay(day) {
     if (dayData.drinks) {
         const drinkLi = document.createElement("li");
         drinkLi.classList.add("drink");
-        drinkLi.textContent = `Alcool: ${dayData.drinks} dose`;
+        drinkLi.textContent = dayData.drinks;
         dataUl.append(drinkLi);
     }
 }
