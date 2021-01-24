@@ -170,6 +170,9 @@ async function populateHome() {
     }
 }
 
+let maxPaces = {};
+let minPaces = {};
+
 function populateDay(day) {
     const dayData = logsData[day];
     const li = document.querySelector(`li[data-date="${day}"]`);
@@ -196,6 +199,20 @@ function populateDay(day) {
             sportLi.classList.add("sport", sport);
             sportLi.textContent = `${time}mn${distance ? ` ${distance}m` : ""}`;
             dataUl.append(sportLi);
+
+            if (distance && time) {
+                const pace = distance / time;
+                sportLi.style.setProperty("--pace", pace);
+
+                if (!maxPaces[sport] || pace > maxPaces[sport]) {
+                    maxPaces[sport] = pace;
+                    homeSectionEl.style.setProperty(`--${sport}-max-pace`, pace);
+                }
+                if (!minPaces[sport] || pace < minPaces[sport]) {
+                    minPaces[sport] = pace;
+                    homeSectionEl.style.setProperty(`--${sport}-min-pace`, pace);
+                }
+            }
         }
     }
 

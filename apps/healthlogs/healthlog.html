@@ -24,37 +24,37 @@
             <section class="day hidden">
                 <form>
                     <input name="day" type="hidden" readonly>
-                    <label class="form-row">Poids: <input name="weight" type="number" step="0.1"></label>
-                    <label class="form-row">Drinks: <input name="drinks" type="number"></label>
+                    <label class="form-row">
+                        <span class="line-label">Poids</span>
+                        <input name="weight" type="number" step="0.1">
+                    </label>
+                    <label class="form-row">
+                        <span class="line-label">Verres</span>
+                        <input name="drinks" type="number">
+                    </label>
                     <div class="form-row">
-                        <label for="yoga-enable">Yoga</label>
                         <input id="yoga-enable" name="yoga-enable" type="checkbox" class="toggle" autocomplete="off" />
-                        <div class="sport-inputs-container">
-                            <label>
-                                <input name="yoga-time" class="time" type="number" disabled>mn
-                            </label>
-                        </div>
+                        <label for="yoga-enable" class="line-label">Yoga</label>
+                        <label>
+                            <input name="yoga-time" class="time" type="number" disabled>mn
+                        </label>
                     </div>
                     <div class="form-row">
-                        <label for="skate-enable">Skate</label>
                         <input id="skate-enable" name="skate-enable" type="checkbox" class="toggle" autocomplete="off">
-                        <div class="sport-inputs-container">
-                            <label>
-                                <input name="skate-time" class="time" type="number" disabled>mn
-                            </label>
-                        </div>
+                        <label for="skate-enable" class="line-label">Skate</label>
+                        <label>
+                            <input name="skate-time" class="time" type="number" disabled>mn
+                        </label>
                     </div>
                     <div class="form-row">
-                        <label for="rameur-enable">Rameur</label>
                         <input id="rameur-enable" name="rameur-enable" type="checkbox" class="toggle" autocomplete="off">
-                        <div class="sport-inputs-container">
-                            <label>
-                                <input name="rameur-time" class="time" type="number" disabled>mn
-                            </label>
-                            <label>
-                                <input name="rameur-distance" class="distance" type="number" disabled>m
-                            </label>
-                        </div>
+                        <label for="rameur-enable" class="line-label">Rameur</label>
+                        <label>
+                            <input name="rameur-time" class="time" type="number" disabled>mn
+                        </label>
+                        <label>
+                            <input name="rameur-distance" class="distance" type="number" disabled>m
+                        </label>
                     </div>
                     <button>OK</button>
                 </form>

@@ -18,13 +18,14 @@ body {
     /* header + content */
     grid-template-rows: auto 1fr;
     overflow: hidden;
+    --secondary-color: hsl(5.5, 100%, 59.4%);
 }
 
 header {
     font-size: 2rem;
     padding-block: 0.5em;
     text-align: center;
-    background-color: #ff4330;
+    background-color: var(--secondary-color);
     color: white;
     border-bottom: 5px solid #d40000;
 }
@@ -61,6 +62,18 @@ li {
 .login form {
     display: grid;
     grid-template-rows: auto auto;
+    border: 4px solid var(--secondary-color);
+}
+
+.login form input, .login form button {
+    border: none;
+    padding: 5px;
+}
+
+.login form button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding-top: 10px;
 }
 
 /* Logs section */
@@ -91,7 +104,7 @@ li {
 
 .day-detail li {
     display: inline-block;
-    padding: 4px 1em;
+    padding: 6px 1em 4px;
     border-radius: 2em;
 }
 
@@ -109,7 +122,7 @@ li {
 }
 
 .day-detail .rameur {
-    background-color: #2a8ebf;
+    background-color: hsl( 200, 65%, calc( 50% + -20% * ( (var(--pace) - var(--rameur-min-pace)) / (var(--rameur-max-pace) - var(--rameur-min-pace)))));
     color: white;
 }
 
@@ -120,19 +133,53 @@ li {
 
 /* Day form section */
 
-.toggle:not(:checked)+.sport-inputs-container {
-    display: none;
-}
-
-.sport-inputs-container {
-    display: inline-block;
+.day form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(6, minmax(50px, auto));
+    gap: 10px;
 }
 
 .form-row {
-    display: flex;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     align-items: center;
+    padding-inline: 1em;
 }
 
-.form-row+.form-row {
-    margin-top: 10px;
+.form-row .line-label {
+    grid-column: 1 / 2;
+}
+
+.form-row label:not(.line-label) {
+    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-row label:not(.line-label) input {
+    flex: 1;
+}
+
+.toggle {
+    display: none;
+    ;
+}
+
+.toggle:not(:checked)~label.line-label {
+    opacity: 0.5;
+}
+
+.toggle:not(:checked)~label:not(.line-label) {
+    display: none;
+}
+
+.day form button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    grid-column: 1 / -1;
+    padding: 0.5em;
 }
