@@ -135,7 +135,7 @@ li {
 
 .day form {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(10px, 1fr);
     grid-template-rows: repeat(6, minmax(50px, auto));
     gap: 10px;
 }
@@ -146,6 +146,7 @@ li {
     grid-template-columns: subgrid;
     align-items: center;
     padding-inline: 1em;
+    gap: 10px;
 }
 
 .form-row .line-label {
@@ -160,7 +161,8 @@ li {
 }
 
 .form-row label:not(.line-label) input {
-    flex: 1;
+    flex: 1 1 0;
+    width: 100%;
 }
 
 .toggle {
