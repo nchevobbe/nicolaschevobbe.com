@@ -117,7 +117,7 @@ function onSubmitDayForm(e) {
 
 function onSportCheckboxToggle(e) {
     const checked = e.target.checked;
-    const inputs = e.target.parentNode.querySelectorAll(".sport-inputs-container input");
+    const inputs = e.target.parentNode.querySelectorAll("input:not(.toggle)");
     for (const input of inputs) {
         if (checked) {
             input.removeAttribute("disabled");
