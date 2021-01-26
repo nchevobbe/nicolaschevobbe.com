@@ -3,6 +3,7 @@ const loginSectionEl = document.querySelector("section.login");
 const loginFormEl = loginSectionEl.querySelector("form");
 const headerEl = document.querySelector("header");
 const homeSectionEl = document.querySelector("section.home");
+const dashboardSvgEl = homeSectionEl.querySelector(".dashboard svg");
 const logsEl = homeSectionEl.querySelector("ul.logs");
 const daySectionEl = document.querySelector("section.day");
 const dayFormEl = daySectionEl.querySelector("form");
@@ -134,14 +135,48 @@ async function fetchDataFromJsonBin(secret) {
         }
     })
     logsData = await res.json()
+    computeMaxData();
     return logsData;
+}
+
+let logsDataRange = {};
+function computeMaxData() {
+    for (const dayData of Object.values(logsData)) {
+        if (dayData.drinks && (!logsDataRange?.drinks || dayData.drinks > logsDataRange?.drinks)) {
+            logsDataRange.drinks = dayData.drinks;
+        }
+
+        if (dayData.weight && (!logsDataRange?.maxWeight || dayData.weight > logsDataRange?.maxWeight)) {
+            logsDataRange.maxWeight = dayData.weight;
+        }
+
+        if (dayData.weight && (!logsDataRange?.minWeight || dayData.weight < logsDataRange?.minWeight)) {
+            logsDataRange.minWeight = dayData.weight;
+        }
+
+        const time = (Object.values(dayData.sports || {})).reduce((acc, current) => acc + parseInt(current.time), 0);
+        if (time && (!logsDataRange?.time || time > logsDataRange?.time)) {
+            logsDataRange.time = time;
+        }
+    }
+    console.log(logsDataRange);
 }
 
 function buildDaySectionElements() {
     let d = new Date();
-    const lis = [];
+    const days = [];
     while (!(d.getMonth() == 0 && d.getDate() == 3)) {
         const day = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart("2", "0")}-${(d.getDate()).toString().padStart("2", "0")}`;
+        days.push(day);
+        d.setDate(d.getDate() - 1);
+    }
+
+    const dashboardDaysNumber = 28;
+    const lis = [];
+    const viewBoxX = 300;
+    let previousWeightPoint;
+    for (let i = 0; i < days.length; i++) {
+        const day = days[i];
 
         const li = document.createElement("li");
         li.setAttribute("data-date", day);
@@ -157,9 +192,76 @@ function buildDaySectionElements() {
         li.addEventListener("click", showDayForm);
         lis.push(li);
 
-        d.setDate(d.getDate() - 1);
+
+        if (i > dashboardDaysNumber) {
+            continue;
+        }
+
+        // Dashboard
+        const dayData = logsData[day];
+        const dayRange = viewBoxX / Math.min(dashboardDaysNumber, days.length);
+        const x = viewBoxX - (dayRange * i) - (dayRange / 2);
+        const y = 100;
+        let stackY = y;
+        const sportsData = Object.entries((dayData.sports || [])).sort(([sportA], [sportB]) => sportB > sportA);
+        for (const [sport, { time }] of sportsData) {
+            const height = (time / logsDataRange.time) * 95;
+            const line = createSVGElement("line", {
+                class: `fat-line ${sport}`,
+                x1: x,
+                x2: x,
+                y1: stackY,
+                y2: stackY - height,
+                title: `${day}: ${time} minutes`
+            });
+            stackY = stackY - height;
+            dashboardSvgEl.append(line);
+        }
+
+        const drinks = (dayData?.drinks || 0);
+        if (drinks) {
+            const margin = 5;
+            const startY = y + margin;
+            const height = ((parseInt(drinks, 10) / logsDataRange.drinks)) * 10;
+            const line = createSVGElement("line", {
+                class: "fat-line drinks",
+                x1: x,
+                x2: x,
+                y1: startY,
+                y2: startY + height,
+                title: `${day}: ${drinks}`
+            });
+            dashboardSvgEl.append(line);
+        }
+
+        const weight = dayData?.weight;
+        if (weight) {
+            const margin = 5;
+            const percent = (weight - logsDataRange.minWeight) / (logsDataRange.maxWeight - logsDataRange.minWeight);
+            const weightY = y - margin - (percent * 90);
+            if (previousWeightPoint) {
+                const line = createSVGElement("line", {
+                    class: "weight",
+                    x1: previousWeightPoint[0],
+                    x2: x,
+                    y1: previousWeightPoint[1],
+                    y2: weightY,
+                    title: `${day}: ${weight}kg`
+                });
+                dashboardSvgEl.append(line);
+            }
+            previousWeightPoint = [x, weightY];
+        }
     }
     logsEl.append(...lis)
+}
+
+function createSVGElement(tagName, attributes) {
+    let el = document.createElementNS("http://www.w3.org/2000/svg", tagName);
+    for (let key in attributes) {
+        el.setAttribute(key, attributes[key]);
+    }
+    return el;
 }
 
 async function populateHome() {

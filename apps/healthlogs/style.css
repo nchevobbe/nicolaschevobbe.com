@@ -76,6 +76,44 @@ li {
     padding-top: 10px;
 }
 
+/* Home */
+
+section.home {
+    --weight-color: #fff;
+    --yoga-color: #2fd38e;
+    --skate-color: #071c22;
+    --rameur-color: hsl( 200, 65%, calc( 50% + -20% * ( (var(--pace, var(--rameur-min-pace)) - var(--rameur-min-pace)) / (var(--rameur-max-pace) - var(--rameur-min-pace)))));
+    --drink-color: #d32f2f;
+}
+
+.dashboard .fat-line {
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.dashboard line.weight {
+    stroke: var(--weight-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    opacity: 0.6;
+}
+
+.dashboard line.drinks {
+    stroke: var(--drink-color);
+}
+
+.dashboard line.yoga {
+    stroke: var(--yoga-color);
+}
+
+.dashboard line.rameur {
+    stroke: var(--rameur-color);
+}
+
+.dashboard line.skate {
+    stroke: var(--skate-color);
+}
+
 /* Logs section */
 
 .logs {
@@ -109,25 +147,26 @@ li {
 }
 
 .day-detail .weight {
-    background-color: #fff;
+    background-color: var(--weight-color);
+    ;
 }
 
 .day-detail .yoga {
-    background-color: #2fd38e;
+    background-color: var(--yoga-color);
 }
 
 .day-detail .skate {
-    background-color: #071c22;
+    background-color: var(--skate-color);
     color: white;
 }
 
 .day-detail .rameur {
-    background-color: hsl( 200, 65%, calc( 50% + -20% * ( (var(--pace) - var(--rameur-min-pace)) / (var(--rameur-max-pace) - var(--rameur-min-pace)))));
+    background-color: var(--rameur-color);
     color: white;
 }
 
 .day-detail .drink {
-    background-color: #d32f2f;
+    background-color: var(--drink-color);
     color: white;
 }
 
