@@ -203,7 +203,7 @@ function buildDaySectionElements() {
         const x = viewBoxX - (dayRange * i) - (dayRange / 2);
         const y = 100;
         let stackY = y;
-        const sportsData = Object.entries((dayData.sports || [])).sort(([sportA], [sportB]) => sportB > sportA);
+        const sportsData = Object.entries((dayData?.sports || [])).sort(([sportA], [sportB]) => sportB > sportA);
         for (const [sport, { time }] of sportsData) {
             const height = (time / logsDataRange.time) * 95;
             const line = createSVGElement("line", {
