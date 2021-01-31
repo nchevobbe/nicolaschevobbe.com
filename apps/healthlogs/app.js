@@ -194,6 +194,7 @@ function buildDaysDashboard() {
         const y = 100;
         let stackY = y;
         const sportsData = Object.entries((dayData?.sports || [])).sort(([sportA], [sportB]) => sportB > sportA);
+        const lines = [];
         for (const [sport, { time }] of sportsData) {
             const height = (time / logsDataRange.time) * 95;
             const line = createSVGElement("line", {
@@ -205,8 +206,9 @@ function buildDaysDashboard() {
                 title: `${day}: ${time} minutes`
             });
             stackY = stackY - height;
-            dashboardSvgEl.append(line);
+            lines.push(line)
         }
+        dashboardSvgEl.append(...lines.reverse());
 
         const drinks = (dayData?.drinks || 0);
         if (drinks) {
