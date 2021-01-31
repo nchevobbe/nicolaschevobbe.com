@@ -114,6 +114,7 @@ function onSubmitDayForm(e) {
     })
 
     populateDay(formData.day);
+    buildDaysDashboard();
 }
 
 function onSportCheckboxToggle(e) {
@@ -135,34 +136,10 @@ async function fetchDataFromJsonBin(secret) {
         }
     })
     logsData = await res.json()
-    computeMaxData();
     return logsData;
 }
 
-let logsDataRange = {};
-function computeMaxData() {
-    for (const dayData of Object.values(logsData)) {
-        if (dayData.drinks && (!logsDataRange?.drinks || dayData.drinks > logsDataRange?.drinks)) {
-            logsDataRange.drinks = dayData.drinks;
-        }
-
-        if (dayData.weight && (!logsDataRange?.maxWeight || dayData.weight > logsDataRange?.maxWeight)) {
-            logsDataRange.maxWeight = dayData.weight;
-        }
-
-        if (dayData.weight && (!logsDataRange?.minWeight || dayData.weight < logsDataRange?.minWeight)) {
-            logsDataRange.minWeight = dayData.weight;
-        }
-
-        const time = (Object.values(dayData.sports || {})).reduce((acc, current) => acc + parseInt(current.time), 0);
-        if (time && (!logsDataRange?.time || time > logsDataRange?.time)) {
-            logsDataRange.time = time;
-        }
-    }
-    console.log(logsDataRange);
-}
-
-function buildDaySectionElements() {
+function getDaysSinceBeginning() {
     let d = new Date();
     const days = [];
     while (!(d.getMonth() == 0 && d.getDate() == 3)) {
@@ -170,11 +147,12 @@ function buildDaySectionElements() {
         days.push(day);
         d.setDate(d.getDate() - 1);
     }
+    return days;
+}
 
-    const dashboardDaysNumber = 28;
+function buildDaySectionElements() {
+    const days = getDaysSinceBeginning();
     const lis = [];
-    const viewBoxX = 300;
-    let previousWeightPoint;
     for (let i = 0; i < days.length; i++) {
         const day = days[i];
 
@@ -191,13 +169,25 @@ function buildDaySectionElements() {
         li.append(date, dataUl);
         li.addEventListener("click", showDayForm);
         lis.push(li);
+    }
+    logsEl.append(...lis)
+}
 
+function buildDaysDashboard() {
+    dashboardSvgEl.innerHTML = "";
+    const logsDataRange = getLogsDataRange();
+    const days = getDaysSinceBeginning();
+
+    const dashboardDaysNumber = 28;
+    const viewBoxX = 300;
+    let previousWeightPoint;
+    for (let i = 0; i < days.length; i++) {
+        const day = days[i];
 
         if (i > dashboardDaysNumber) {
             continue;
         }
 
-        // Dashboard
         const dayData = logsData[day];
         const dayRange = viewBoxX / Math.min(dashboardDaysNumber, days.length);
         const x = viewBoxX - (dayRange * i) - (dayRange / 2);
@@ -253,7 +243,29 @@ function buildDaySectionElements() {
             previousWeightPoint = [x, weightY];
         }
     }
-    logsEl.append(...lis)
+}
+
+function getLogsDataRange() {
+    const logsDataRange = {};
+    for (const dayData of Object.values(logsData)) {
+        if (dayData.drinks && (!logsDataRange?.drinks || dayData.drinks > logsDataRange?.drinks)) {
+            logsDataRange.drinks = dayData.drinks;
+        }
+
+        if (dayData.weight && (!logsDataRange?.maxWeight || dayData.weight > logsDataRange?.maxWeight)) {
+            logsDataRange.maxWeight = dayData.weight;
+        }
+
+        if (dayData.weight && (!logsDataRange?.minWeight || dayData.weight < logsDataRange?.minWeight)) {
+            logsDataRange.minWeight = dayData.weight;
+        }
+
+        const time = (Object.values(dayData.sports || {})).reduce((acc, current) => acc + parseInt(current.time), 0);
+        if (time && (!logsDataRange?.time || time > logsDataRange?.time)) {
+            logsDataRange.time = time;
+        }
+    }
+    return logsDataRange;
 }
 
 function createSVGElement(tagName, attributes) {
@@ -265,6 +277,7 @@ function createSVGElement(tagName, attributes) {
 }
 
 async function populateHome() {
+    buildDaysDashboard();
     buildDaySectionElements();
     const ul = document.querySelector("ul");
     for (const day of Object.keys(logsData)) {
