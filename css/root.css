@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --accent-color: #FFD30D;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -37,7 +41,8 @@ h1 {
   padding: 0.5em;
   text-align: center;
   font-weight: 400;
-  background-color: #89172b;
+  background-color: var(--accent-color);
+  color: black;
 }
 
 h2 {
@@ -59,7 +64,7 @@ h3 {
 }
 
 a {
-  color : #FF4163;
+  color : var(--accent-color);
 }
 
 @media screen and (min-width: 1200px){
@@ -79,19 +84,11 @@ header  {
   font-family: 'Abril Fatface', cursive;
   font-size : 2.4em;
   line-height: 1em;
-  padding : 0.5rem 0;
-  border-bottom : 0.5rem solid #c01e3b;
   text-align: center;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
 }
 
 .bio {
   font-family: 'Signika';
-  background-color: #89172B;
   text-align: center;
   padding: 1em;
 }
@@ -102,53 +99,19 @@ header a {
 
 .posts {
   list-style: none;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
   max-width: 100%;
-  justify-content: space-between;
   padding: 0;
 }
 
 .posts li {
-  padding: 1em !important;
-  flex: 1 0 auto;
-  display: flex;
-  min-height: 100px;
-  justify-content: center;
+  padding-block-end: 0.5em;
   max-width: 100%;
 }
 
-.posts li a {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none !important;
+.posts li time {
+  margin-inline-end: 0.5em;
 }
 
-.posts li .title {
-  font-size: 2em;
-  font-weight: 400;
-  color: white;
-  line-height: 1em;
-  border-bottom: 1px solid;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.posts li .date {
-  display: inline-block;
-  font-size: 0.8em;
-  text-decoration: none;
-  background-color: #C01E3B;
-  color: white;
-  padding: 0.1em 0.5em;
-  opacity: 0.75;
-}
 
 .links ul {
   list-style: none;
