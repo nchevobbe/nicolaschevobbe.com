@@ -117,6 +117,7 @@ header a {
   display: flex;
   min-height: 100px;
   justify-content: center;
+  max-width: 100%;
 }
 
 .posts li a {
