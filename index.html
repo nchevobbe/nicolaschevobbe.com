@@ -37,12 +37,13 @@ title: Nicolas Chevobbe's Blog
     <header>
       Nicolas Chevobbe
     </header>
-    <section class="bio">Web Developer — Mozillian & Open Web lover — Avid learner</section>
+    <section class="bio">Web Developer — Mozillian & Open Web lover — Skateboarder</section>
 
     <ul class="posts">
       {% for post in site.posts %}
         <li>
-          <a href="{{ post.url }}" title="{{ post.title }}"><span class="title">{{ post.title }}</span><span class="date">{{ post.date | date:"%Y-%m-%d" }}</span></a>
+	  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+          <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
         </li>
 
       {% endfor %}
