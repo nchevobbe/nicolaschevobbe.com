@@ -140,6 +140,7 @@ header  {
 .container{
   width: 100%;
   max-width: 30em;
+  padding-inline: 1em;
 }
 
 p {
