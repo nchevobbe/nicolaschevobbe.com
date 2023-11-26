@@ -25,6 +25,11 @@ html {
   color : #f9f9f9;
   line-height: 1.5em;
   font-size : 20px;
+  
+  
+  @media screen and (min-width: 1200px){
+    font-size : 24px;
+  }
 }
 
 body {
@@ -67,17 +72,6 @@ a {
   color : var(--accent-color);
 }
 
-@media screen and (min-width: 1200px){
-  html {
-    font-size : 24px;
-  }
-}
-
-@media screen and (max-width: 800px){
-  body {
-    padding: 0.25rem;
-  }
-}
 
 /* HOMEPAGE */
 header  {
@@ -85,12 +79,15 @@ header  {
   font-size : 2.4em;
   line-height: 1em;
   text-align: center;
+  color: var(--accent-color);
 }
 
 .bio {
   font-family: 'Signika';
   text-align: center;
   padding: 1em;
+  background-color: var(--accent-color);
+  color: black;
 }
 
 .bio a {
@@ -101,11 +98,21 @@ header  {
   list-style: none;
   max-width: 100%;
   padding: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  container-type: inline-size;
 }
 
 .posts li {
   padding-block-end: 0.5em;
   max-width: 100%;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  
+  @container (width <=400px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .posts li time {
