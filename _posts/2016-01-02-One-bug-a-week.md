@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2016 : One bug a week"
+title: "2016&nbsp;: One bug a week"
 date: 2016-01-02
 tags: [2016-challenge]
 ---
