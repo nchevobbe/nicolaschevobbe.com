@@ -181,12 +181,16 @@ p.initial {
   text-align: center;
 }
 
+pre {
+ line-height: 1.1;
+}
+
 pre, code {
   background-color: rgba(0,0,0,0.5);
   padding: 0.2em 0.5em;
   font-size: 0.8em;
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   font-family: monospace;
 }
 
